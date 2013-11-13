@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+
+DOTFILES_ROOT="`pwd`"
+
+echo $DOTFILES_ROOT
+
+set -e
+
+echo ''
+
+info () {
+    printf " [\033[00;34mINFO\033[0m] $1\n"
+}
+
+user () {
+    printf " [ \033[0;33m??\033[0m ] $1\n"
+}
+
+success () {
+    printf " [ \033[00;32mOK\033[0m ] $1\n"
+}
+
+fail () {
+    printf " [\033[0;31mFAIL\033[0m] $1\n\n"
+    exit
+}
+
+link_files () {
+    ln -s $1 $2
+    success "linked $1 to $2"
+}
+
+install_dotfiles () {
+    info 'Installing dotfiles'
+
+    overwrite_all=false
+    backup_all=false
+    skip_all=false
+
+    for source in `find . -name _\* -type f`
+    do
+        # remove leading ./
+        source=${source#./}
+
+        # replace _ with .
+        dest="$HOME/${source//_/.}"
+
+        # make path to source absolute (to ensure ln works)
+        source="$DOTFILES_ROOT/$source"
+
+        # create directories if they don't exist
+        destdir="`dirname $dest`"
+        mkdir -p $destdir
+
+        if [ -f $dest ] || [ -d $dest ]
+        then
+
+            overwrite=false
+            backup=false
+            skip=false
+
+            if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+            then
+                user "File already exists: `basename $source`, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+                read -n 1 action
+
+                case "$action" in
+                    o )
+                        overwrite=true;;
+                    O )
+                        overwrite_all=true;;
+                    b )
+                        backup=true;;
+                    B )
+                        backup_all=true;;
+                    s )
+                        skip=true;;
+                    S )
+                        skip_all=true;;
+                    * )
+                        skip_all=true;; # default to skip all
+                esac
+            fi
+
+            if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
+            then
+                rm -rf $dest
+                success "removed $dest"
+            fi
+
+            if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
+            then
+                mv $dest $dest\.backup
+                success "moved $dest to $dest.backup"
+            fi
+
+            if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
+            then
+                link_files $source $dest
+            else
+                success "skipped $source"
+            fi
+
+        else
+            link_files $source $dest
+        fi
+
+    done
+
+    info 'All installed!'
+}
+
+info "Matt Lee's dotfiles"
+
+# fail if we're not actually in the dotfiles root
+if [ ! -f .dotfiles ]
+then
+    fail "This script must be run from the root of the dotfiles directory."
+fi
+
+install_dotfiles
