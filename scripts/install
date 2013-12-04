@@ -13,7 +13,7 @@ info () {
 }
 
 user () {
-    printf " [ \033[0;33m??\033[0m ] $1\n"
+    printf " [ \033[0;33m??\033[0m ] $1 "
 }
 
 success () {
@@ -61,8 +61,9 @@ install_dotfiles () {
 
             if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
             then
-                user "File already exists: `basename $source`, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+                user "File already exists: `basename $source`, what do you want to do?\n        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
                 read -n 1 action
+                echo ""
 
                 case "$action" in
                     o )
