@@ -2,8 +2,6 @@
 
 DOTFILES_ROOT="`pwd`"
 
-echo $DOTFILES_ROOT
-
 set -e
 
 echo ''
