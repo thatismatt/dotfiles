@@ -41,7 +41,7 @@ install_dotfiles () {
         source=${source#./}
 
         # replace _ with .
-        dest="$HOME/${source//_/.}"
+        dest="$HOME/.${source#_}"
 
         # make path to source absolute (to ensure ln works)
         source="$DOTFILES_ROOT/$source"
