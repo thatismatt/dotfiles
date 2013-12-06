@@ -7,15 +7,19 @@ set -e
 echo ''
 
 info () {
-    printf " [\033[00;34mINFO\033[0m] $1\n"
+    printf " [\033[0;34mINFO\033[0m] $1\n"
 }
 
 user () {
-    printf " [ \033[0;33m??\033[0m ] $1 "
+    printf " [ \033[0;36m??\033[0m ] $1 "
 }
 
 success () {
-    printf " [ \033[00;32mOK\033[0m ] $1\n"
+    printf " [ \033[0;32mOK\033[0m ] $1\n"
+}
+
+warn () {
+    printf " [\033[0;33mWARN\033[0m] $1\n"
 }
 
 fail () {
