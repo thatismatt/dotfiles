@@ -56,10 +56,11 @@ install_dotfiles () {
             overwrite=false
             backup=false
             skip=false
+            diff=false
 
             if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
             then
-                user "File already exists: `basename $source`, what do you want to do?\n        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+                user "File already exists: `basename $source`, what do you want to do?\n        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all, [d]iff?"
                 read -n 1 action
                 echo ""
 
@@ -76,9 +77,17 @@ install_dotfiles () {
                         skip=true;;
                     S )
                         skip_all=true;;
+                    d )
+                        diff=true;;
                     * )
                         skip_all=true;; # default to skip all
                 esac
+            fi
+
+            if [ "$diff" == "true" ]
+            then
+                diff -s $source $dest
+                continue
             fi
 
             if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
