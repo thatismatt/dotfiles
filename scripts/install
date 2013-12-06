@@ -25,7 +25,7 @@ fail () {
 
 link_files () {
     ln -s $1 $2
-    success "linked $1 to $2"
+    success "Linked $1 to $2"
 }
 
 install_dotfiles () {
@@ -37,6 +37,8 @@ install_dotfiles () {
 
     for source in `find . -name _\* -type f`
     do
+        echo ''
+
         # remove leading ./
         source=${source#./}
 
@@ -93,20 +95,20 @@ install_dotfiles () {
             if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
             then
                 rm -rf $dest
-                success "removed $dest"
+                success "Removed $dest"
             fi
 
             if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
             then
                 mv $dest $dest\.backup
-                success "moved $dest to $dest.backup"
+                success "Moved $dest to $dest.backup"
             fi
 
             if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
             then
                 link_files $source $dest
             else
-                success "skipped $source"
+                success "Skipped $source"
             fi
 
         else
