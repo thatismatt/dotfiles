@@ -9,8 +9,10 @@ path_add() {
 path_add /home/matt/bin
 path_add /home/matt/opt/sbt
 path_add /home/matt/opt/idea/latest/bin
-#path_add /home/matt/opt/node/latest/bin
+path_add /home/matt/opt/node/latest/bin
 
 alias l='ls -1'
+alias la="ls -la"
+
 alias emacs-daemon="emacs --daemon"
 alias e="emacsclient -n"
