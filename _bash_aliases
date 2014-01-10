@@ -14,5 +14,7 @@ path_add /home/matt/opt/node/latest/bin
 alias l='ls -1'
 alias la="ls -la"
 
+alias ..="cd .."
+
 alias emacs-daemon="emacs --daemon"
 alias e="emacsclient -n"
