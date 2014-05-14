@@ -39,15 +39,20 @@ install_dotfiles () {
     backup_all=false
     skip_all=false
 
-    for source in `find . -name _\* -type f`
+    for source in `find . -name _\* -o -path \*/bin/\* -type f`
     do
         echo ''
 
         # remove leading ./
         source=${source#./}
 
-        # replace _ with .
-        dest="$HOME/.${source#_}"
+        if [[ "$source" =~ ^_ ]]
+        then
+            # replace _ with .
+            source=".${source#_}"
+        fi
+
+        dest="$HOME/$source"
 
         # make path to source absolute (to ensure ln works)
         source="$DOTFILES_ROOT/$source"

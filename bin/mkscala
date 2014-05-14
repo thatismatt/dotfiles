@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+
+SCALA_VERSION="2.10.4"
+PACKAGE="com.example"
+
+NAME=$1
+MAIN=$NAME/src/main
+SRC=$MAIN/scala
+RES=$MAIN/resources
+PRJ=$NAME/project
+BUILD=$PRJ/${NAME^}Build.scala
+BUILDUTILS=$PRJ/Utils.scala
+MAINCLASS=$SRC/Main.scala
+LIBNAME=lib
+LIBCLASS=$SRC/${LIBNAME^}.scala
+APPCONF=$RES/application.conf
+
+echo "### MKSCALA ###"
+echo "Creating $NAME"
+
+mkdir -p $SRC
+mkdir -p $RES
+mkdir -p $PRJ
+
+cat > $BUILD <<EOF
+import sbt._
+import sbt.Keys._
+
+object ${NAME^}Build extends Build {
+
+  object B {
+    val name = "$NAME"
+    val version = "0.0.1"
+  }
+
+  lazy val root = Project(id = B.name, base = file("."))
+    .settings(
+      name := B.name,
+      version := B.version,
+      scalaVersion := "$SCALA_VERSION",
+      scalacOptions ++= Seq("-feature", "-deprecation"),
+      javaOptions in run += "-Xmx4096M",
+      javaOptions in Test ++= Seq("-Xms1024M", "-Xmx4096M"),
+      javacOptions in compile ++= Seq("-source", "1.7", "-target", "1.7", "-g"),
+      libraryDependencies ++= Seq(
+        "com.typesafe" % "config" % "1.2.0"
+        //"ch.qos.logback" % "logback-classic" % "1.0.13"
+      ),
+      resolvers ++= Seq(
+        Resolver.typesafeRepo("releases"),
+        Resolver.typesafeRepo("snapshots"),
+        Resolver.sonatypeRepo("releases"),
+        Resolver.sonatypeRepo("snapshots")),
+      fork in Test := false,
+      shellPrompt := Utils.shellPrompt)
+}
+EOF
+
+cat > $BUILDUTILS <<EOF
+import sbt._
+
+object Utils {
+  val shellPrompt = {
+    (state: State) => {
+      val currProject = Project.extract(state).currentProject.id
+      "%s%s%s: ".format(scala.Console.CYAN, currProject, scala.Console.RESET)
+    }
+  }
+}
+EOF
+
+cat > $MAINCLASS <<EOF
+package $PACKAGE.$NAME
+
+object Main {
+  def main(args: Array[String]) {
+    val $LIBNAME = ${LIBNAME^}.load
+    println("Hello World!")
+    println(s"This is \$this")
+    $LIBNAME.start
+  }
+}
+EOF
+
+cat > $LIBCLASS <<EOF
+package $PACKAGE.$NAME
+
+import com.typesafe.config.{Config, ConfigFactory}
+
+object ${LIBNAME^} {
+  def load = {
+    val config = ConfigFactory.load()
+    val ${LIBNAME}Config = config.getConfig("$NAME.$LIBNAME")
+    new ${LIBNAME^}(${LIBNAME}Config)
+  }
+}
+
+class ${LIBNAME^}(config: Config) {
+
+  val greeting = config.getString("greeting")
+
+  def start {
+    println(s"\$greeting World!")
+    println(s"This is \$this")
+  }
+}
+EOF
+
+cat > $APPCONF <<EOF
+$NAME {
+  $LIBNAME {
+    greeting = "Hi"
+  }
+}
+EOF
+
+cd $NAME
+
+sbt run
