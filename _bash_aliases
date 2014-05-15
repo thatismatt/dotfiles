@@ -16,6 +16,10 @@ alias l='ls -1'
 alias la="ls -la"
 
 alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+alias json="python -mjson.tool"
 
 alias emacs-daemon="emacs --daemon"
 alias e-d="emacs --daemon"
