@@ -152,8 +152,8 @@ tooltip_font = Liberation Sans normal 14
 # Mouse
 mouse_middle = close
 mouse_right = toggle
-mouse_scroll_up = toggle
-mouse_scroll_down = iconify
+mouse_scroll_up = iconify
+mouse_scroll_down = toggle
 
 # Battery
 battery = 1
