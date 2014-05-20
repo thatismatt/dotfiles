@@ -348,7 +348,7 @@
           <enabled>true</enabled>
           <name>Emacs</name>
         </startupnotify>
-        <command>emacsclient -a=</command>
+        <command>emacsclient -c -a=</command>
       </action>
     </keybind>
     <!-- Launch gnome-screenshot when Print is pressed -->
