@@ -4,8 +4,6 @@ DOTFILES_ROOT="`pwd`"
 
 set -e
 
-echo ''
-
 info () {
     printf " [\033[0;34mINFO\033[0m] $1\n"
 }
@@ -33,13 +31,23 @@ link_files () {
 }
 
 install_dotfiles () {
+
+    echo ''
+    info "Matt Lee's dotfiles"
     info 'Installing dotfiles'
 
     overwrite_all=false
     backup_all=false
     skip_all=false
 
-    for source in `find . -name _\* -o -path \*/bin/\* -type f`
+    # ! -name \*~         | not a backup file
+    # -a                  | and
+    # -type f -path ./_\* | is a file with path beginning ./_
+    # -o                  | or
+    # -path ./bin/\*      | is in the bin directory
+    sources=`find . ! -name \*~ -a -type f -path ./_\* -o -path \*/bin/\*`
+
+    for source in $sources
     do
         echo ''
 
@@ -49,10 +57,10 @@ install_dotfiles () {
         if [[ "$source" =~ ^_ ]]
         then
             # replace _ with .
-            source=".${source#_}"
+            dest="$HOME/.${source#_}"
+        else
+            dest="$HOME/$source"
         fi
-
-        dest="$HOME/$source"
 
         # make path to source absolute (to ensure ln works)
         source="$DOTFILES_ROOT/$source"
@@ -142,10 +150,9 @@ install_dotfiles () {
 
     done
 
-    info 'All installed!'
+    echo ''
+    info 'Done!'
 }
-
-info "Matt Lee's dotfiles"
 
 # fail if we're not actually in the dotfiles root
 if [ ! -f .dotfiles ]
