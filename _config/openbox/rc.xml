@@ -142,6 +142,12 @@
         <width>50%</width>
       </action>
     </keybind>
+    <keybind key="W-Up">
+      <action name="MaximizeFull"/>
+    </keybind>
+    <keybind key="W-Down">
+      <action name="UnmaximizeFull"/>
+    </keybind>
     <!-- Keybindings for desktop switching -->
     <keybind key="C-A-Left">
       <action name="GoToDesktop">
@@ -286,6 +292,15 @@
       </action>
     </keybind>
     <!-- Keybindings for running applications -->
+    <keybind key="W-f">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Thunar</name>
+        </startupnotify>
+        <command>thunar</command>
+      </action>
+    </keybind>
     <keybind key="W-e">
       <action name="Execute">
         <startupnotify>
@@ -302,6 +317,15 @@
           <name>Chrome</name>
         </startupnotify>
         <command>google-chrome</command>
+      </action>
+    </keybind>
+    <keybind key="W-t">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Terminator</name>
+        </startupnotify>
+        <command>terminator</command>
       </action>
     </keybind>
     <!-- Launch gnome-screenshot when Print is pressed -->
