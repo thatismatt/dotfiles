@@ -295,6 +295,15 @@
         <command>emacsclient -c -a=</command>
       </action>
     </keybind>
+    <keybind key="W-w">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Chrome</name>
+        </startupnotify>
+        <command>google-chrome</command>
+      </action>
+    </keybind>
     <!-- Launch gnome-screenshot when Print is pressed -->
     <keybind key="Print">
       <action name="Execute">
