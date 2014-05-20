@@ -14,7 +14,7 @@ path_add /home/matt/opt/node/latest/bin
 
 # rm alternative
 function mvt () {
-    mv $1 ~/tmp/`date +%Y%m%d-%H%M%S`-$1
+    mv $1 ~/tmp/`date +%Y%m%d-%H%M%S`-`basename $1`
 }
 
 alias l='ls -1'
