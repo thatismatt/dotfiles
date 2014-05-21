@@ -18,7 +18,12 @@ function bash-reload () {
 
 # rm alternative
 function mvt () {
-    mv $1 ~/tmp/`date +%Y%m%d-%H%M%S`-`basename $1`
+    if [[ -f $1 ]] || [[ -d $1 ]]
+    then
+        mv $1 ~/tmp/`date +%Y%m%d-%H%M%S`-`basename $1`
+    else
+        echo "mvt: missing file operand"
+    fi
 }
 
 alias l='ls -1'
