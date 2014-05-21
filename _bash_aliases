@@ -16,6 +16,15 @@ function bash-reload () {
     . ~/.bash_aliases
 }
 
+function todo () {
+    if [[ $1 == "?" ]]
+    then
+        cat ~/notes/todo.org | grep --color=never "\* TODO"
+    else
+        echo "* TODO $@" >> ~/notes/todo.org
+    fi
+}
+
 # rm alternative
 function mvt () {
     if [[ -f $1 ]] || [[ -d $1 ]]
