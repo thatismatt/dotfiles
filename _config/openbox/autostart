@@ -1,3 +1,5 @@
 tint2 &
 
 syndaemon -t &
+
+compton &
