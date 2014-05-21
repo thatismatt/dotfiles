@@ -33,6 +33,10 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
+alias agi="sudo apt-get install"
+alias acs="apt-cache show"
+alias acr="apt-cache search"
+
 alias json="python -mjson.tool"
 
 alias emacs-daemon="emacs --daemon"
