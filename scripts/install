@@ -45,7 +45,9 @@ install_dotfiles () {
     # -type f -path ./_\* | is a file with path beginning ./_
     # -o                  | or
     # -path ./bin/\*      | is in the bin directory
-    sources=`find . ! -name \*~ -a -type f -path ./_\* -o -path \*/bin/\*`
+    # -o                  | or
+    # -path ./opt/\*      | is in the opt directory
+    sources=`find . ! -name \*~ -a -type f -path ./_\* -o -path \*/bin/\* -o -path \*/opt/\*`
 
     for source in $sources
     do

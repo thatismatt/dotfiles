@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+OPTS="-Xms512M -Xmx4G -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=1G"
+SUSPEND="n" # y = wait for debugger to attach
+DEBUG_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=$SUSPEND,address=5005"
+
+if [[ "$1" == "-d" ]]
+then
+    shift
+    OPTS="$OPTS $DEBUG_OPTS"
+fi
+
+java $OPTS -jar `dirname $0`/sbt-launch.jar "$@"
