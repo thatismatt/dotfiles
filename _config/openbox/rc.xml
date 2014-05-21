@@ -144,6 +144,19 @@
     <keybind key="W-Down">
       <action name="UnmaximizeFull"/>
     </keybind>
+
+    <!-- Monitor switiching -->
+    <keybind key="W-A-Left">
+      <action name="MoveResizeTo">
+        <monitor>prev</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-A-Right">
+      <action name="MoveResizeTo">
+        <monitor>next</monitor>
+      </action>
+    </keybind>
+
     <!-- Keybindings for desktop switching -->
     <keybind key="C-A-Left">
       <action name="GoToDesktop">
