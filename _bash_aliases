@@ -12,6 +12,10 @@ path_add /home/matt/opt/sbt
 path_add /home/matt/opt/idea/latest/bin
 path_add /home/matt/opt/node/latest/bin
 
+function bash-reload () {
+    . ~/.bash_aliases
+}
+
 # rm alternative
 function mvt () {
     mv $1 ~/tmp/`date +%Y%m%d-%H%M%S`-`basename $1`
