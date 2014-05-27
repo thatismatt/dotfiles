@@ -2,4 +2,4 @@ tint2 &
 
 syndaemon -t &
 
-compton &
+compton -cGb -r10 -o0.3 -l-12 -t-12 -m0.9
