@@ -114,11 +114,10 @@ launcher_background_id = 0
 launcher_icon_size = 32
 # Specify icon theme names with launcher_icon_theme.
 # if you have an XSETTINGS manager running (like xfsettingsd), tint2 will follow your current theme.
-launcher_icon_theme = gnome-colors-statler
+launcher_icon_theme = Faenza
 # Each launcher_item_app must be a full path to a .desktop file
 launcher_item_app = /usr/share/applications/terminator.desktop
 launcher_item_app = /usr/share/applications/Thunar.desktop
-#launcher_item_app = /usr/share/applications/gedit.desktop
 launcher_item_app = /usr/share/applications/google-chrome.desktop
 
 # System Tray
