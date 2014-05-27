@@ -146,7 +146,7 @@ tooltip_show_timeout = 0.0
 tooltip_hide_timeout = 0.0
 tooltip_background_id = 7
 tooltip_font_color = #d8d8d8 100
-tooltip_font = Liberation Sans normal 14
+tooltip_font = Liberation Sans Narrow 14
 
 # Mouse
 mouse_middle = close
