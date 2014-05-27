@@ -20,7 +20,7 @@
     <primaryMonitor>Mouse</primaryMonitor> <!-- popup dialogs placement (e.g. alt tab): index (from 1), Mouse or Active (active window) -->
   </placement>
   <theme>
-    <name>Numix</name>
+    <name>Zukitwo-Openbox</name>
     <titleLayout>NDLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
