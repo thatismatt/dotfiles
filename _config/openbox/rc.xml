@@ -347,6 +347,15 @@
         <command>terminator</command>
       </action>
     </keybind>
+    <keybind key="W-v">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>pavucontrol</name>
+        </startupnotify>
+        <command>pavucontrol</command>
+      </action>
+    </keybind>
     <keybind key="W-Tab">
       <action name="ShowMenu">
         <menu>client-list-combined-menu</menu>
