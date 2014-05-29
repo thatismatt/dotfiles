@@ -139,6 +139,24 @@
         <width>50%</width>
       </action>
     </keybind>
+    <keybind key="W-C-Left">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <height>100%</height>
+        <width>70%</width>
+      </action>
+    </keybind>
+    <keybind key="W-C-Right">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>0</y>
+        <height>100%</height>
+        <width>70%</width>
+      </action>
+    </keybind>
     <keybind key="W-Up">
       <action name="MaximizeFull"/>
     </keybind>
