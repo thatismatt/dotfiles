@@ -163,6 +163,24 @@
     <keybind key="W-Down">
       <action name="UnmaximizeFull"/>
     </keybind>
+    <keybind key="W-C-Up">
+      <action name="Unmaximize">
+        <direction>vertical</direction>
+      </action>
+      <action name="MoveResizeTo">
+        <y>0</y>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-C-Down">
+      <action name="Unmaximize">
+        <direction>vertical</direction>
+      </action>
+      <action name="MoveResizeTo">
+        <y>-0</y>
+        <height>50%</height>
+      </action>
+    </keybind>
 
     <!-- Monitor switiching -->
     <keybind key="W-A-Left">
