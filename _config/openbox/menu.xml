@@ -16,6 +16,14 @@
     <action name="Execute"><execute>thunar</execute></action>
   </item>
 
+  <separator label="Applications" />
+
+  <menu id="graphics" label="Graphics">
+    <item label="Gimp">
+        <action name="Execute"><execute>gimp</execute></action>
+    </item>
+  </menu>
+
   <separator label="Settings" />
 
   <menu id="openbox" label="Openbox">
