@@ -116,9 +116,11 @@ launcher_icon_size = 32
 # if you have an XSETTINGS manager running (like xfsettingsd), tint2 will follow your current theme.
 launcher_icon_theme = Faenza
 # Each launcher_item_app must be a full path to a .desktop file
-launcher_item_app = /home/matt/.config/tint2/thunar.desktop
+launcher_item_app = /home/matt/.config/tint2/start.desktop
 launcher_item_app = /home/matt/.config/tint2/terminator.desktop
+launcher_item_app = /home/matt/.config/tint2/thunar.desktop
 launcher_item_app = /home/matt/.config/tint2/google-chrome.desktop
+launcher_item_app = /home/matt/.config/tint2/emacs.desktop
 
 # System Tray
 systray = 1

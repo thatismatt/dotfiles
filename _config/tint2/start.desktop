@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Openbox Start Menu
+Comment=Openbox Start Menu
+Exec=xdotool key super+space
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=start-here
+Categories=Menu;
+StartupNotify=true
