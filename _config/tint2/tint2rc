@@ -36,7 +36,7 @@ border_color = #000000 0
 # ID 6 - active taskbar
 rounded = 0
 border_width = 1
-background_color = #d8d8d8 8
+background_color = #d8d8d8 12
 border_color = #d8d8d8 0
 
 # ID 7 - tooltip
