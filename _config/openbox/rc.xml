@@ -120,6 +120,13 @@
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
 
+    <!-- Openbox Menu -->
+    <keybind key="W-space">
+      <action name="ShowMenu">
+        <menu>root-menu</menu>
+      </action>
+    </keybind>
+
     <!-- Aero Snap -->
     <keybind key="W-Left">
       <action name="UnmaximizeFull"/>
@@ -194,7 +201,7 @@
       </action>
     </keybind>
 
-    <!-- Keybindings for desktop switching -->
+    <!-- Desktop switching -->
     <keybind key="C-A-Left">
       <action name="GoToDesktop">
         <to>left</to>
@@ -266,7 +273,8 @@
     <keybind key="W-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
-    <!-- Keybindings for windows -->
+
+    <!-- Windows actions -->
     <keybind key="A-F4">
       <action name="Close"/>
     </keybind>
@@ -292,7 +300,8 @@
         <command>scrot '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'</command>
       </action>
     </keybind>
-    <!-- Keybindings for window switching -->
+
+    <!-- Window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
         <allDesktops>yes</allDesktops>
@@ -312,6 +321,11 @@
         </finalactions>
       </action>
     </keybind>
+    <keybind key="W-Tab">
+      <action name="ShowMenu">
+        <menu>client-list-combined-menu</menu>
+      </action>
+    </keybind>
 
     <!-- Running Applications -->
     <keybind key="A-F2">
@@ -324,7 +338,7 @@
       </action>
     </keybind>
 
-    <!-- Keybindings for window switching with the arrow keys -->
+    <!-- Directional window switching -->
     <keybind key="W-S-Right">
       <action name="DirectionalCycleWindows">
         <direction>right</direction>
@@ -346,7 +360,7 @@
       </action>
     </keybind>
 
-    <!-- Keybindings for running applications -->
+    <!-- Applications -->
     <keybind key="W-f">
       <action name="Execute">
         <startupnotify>
@@ -390,16 +404,6 @@
           <name>pavucontrol</name>
         </startupnotify>
         <command>pavucontrol</command>
-      </action>
-    </keybind>
-    <keybind key="W-Tab">
-      <action name="ShowMenu">
-        <menu>client-list-combined-menu</menu>
-      </action>
-    </keybind>
-    <keybind key="W-space">
-      <action name="ShowMenu">
-        <menu>root-menu</menu>
       </action>
     </keybind>
 
