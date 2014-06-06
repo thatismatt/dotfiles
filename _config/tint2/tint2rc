@@ -120,6 +120,7 @@ launcher_item_app = /home/matt/.config/tint2/start.desktop
 launcher_item_app = /home/matt/.config/tint2/terminator.desktop
 launcher_item_app = /home/matt/.config/tint2/thunar.desktop
 launcher_item_app = /home/matt/.config/tint2/google-chrome.desktop
+launcher_item_app = /home/matt/.config/tint2/firefox.desktop
 launcher_item_app = /home/matt/.config/tint2/emacs.desktop
 
 # System Tray
