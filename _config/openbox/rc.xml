@@ -300,12 +300,12 @@
     <!-- Screenshot -->
     <keybind key="Print">
       <action name="Execute">
-        <command>xfce4-screenshooter</command>
+        <command>scrot '%Y-%m-%d_%s_$wx$h_scrot.png'</command>
       </action>
     </keybind>
     <keybind key="A-Print">
       <action name="Execute">
-        <command>scrot '%Y-%m-%d_%s_$wx$h_scrot.png'</command>
+        <command>scrot -u '%Y-%m-%d_%s_$wx$h_scrot.png'</command>
       </action>
     </keybind>
 
