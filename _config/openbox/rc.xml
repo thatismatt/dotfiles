@@ -312,7 +312,7 @@
     <!-- Window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
-        <allDesktops>yes</allDesktops>
+        <allDesktops>no</allDesktops>
         <finalactions>
           <action name="Focus"/>
           <action name="Raise"/>
@@ -322,6 +322,7 @@
     </keybind>
     <keybind key="A-S-Tab">
       <action name="PreviousWindow">
+        <allDesktops>yes</allDesktops>
         <finalactions>
           <action name="Focus"/>
           <action name="Raise"/>
