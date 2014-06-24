@@ -444,6 +444,7 @@
       </action>
     </keybind>
   </keyboard>
+
   <mouse>
     <dragThreshold>8</dragThreshold>
     <!-- number of pixels the mouse must move before a drag begins -->
@@ -759,19 +760,21 @@
         <action name="Raise"/>
       </mousebind>
     </context>
+
+    <!-- Desktop Menus -->
     <context name="Root">
-      <!-- Menus -->
-      <mousebind button="Middle" action="Press">
-        <action name="ShowMenu">
-          <menu>client-list-combined-menu</menu>
-        </action>
-      </mousebind>
       <mousebind button="Right" action="Press">
         <action name="ShowMenu">
           <menu>root-menu</menu>
         </action>
       </mousebind>
+      <mousebind button="Middle" action="Press">
+        <action name="ShowMenu">
+          <menu>client-list-combined-menu</menu>
+        </action>
+      </mousebind>
     </context>
+
     <context name="MoveResize">
       <mousebind button="Up" action="Click">
         <action name="GoToDesktop">
