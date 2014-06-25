@@ -465,6 +465,22 @@
         <command>amixer -c 1 set Master toggle</command>
       </action>
     </keybind>
+
+    <!-- Window resizing -->
+    <keybind key="W-r" chroot="true">
+      <keybind key="1"><action name="MoveResizeTo"><width>10%</width></action></keybind>
+      <keybind key="2"><action name="MoveResizeTo"><width>20%</width></action></keybind>
+      <keybind key="3"><action name="MoveResizeTo"><width>30%</width></action></keybind>
+      <keybind key="4"><action name="MoveResizeTo"><width>40%</width></action></keybind>
+      <keybind key="5"><action name="MoveResizeTo"><width>50%</width></action></keybind>
+      <keybind key="6"><action name="MoveResizeTo"><width>60%</width></action></keybind>
+      <keybind key="7"><action name="MoveResizeTo"><width>70%</width></action></keybind>
+      <keybind key="8"><action name="MoveResizeTo"><width>80%</width></action></keybind>
+      <keybind key="9"><action name="MoveResizeTo"><width>90%</width></action></keybind>
+      <keybind key="0"><action name="MoveResizeTo"><width>100%</width></action></keybind>
+      <keybind key="Escape"><action name="BreakChroot"/></keybind>
+    </keybind>
+
   </keyboard>
 
   <mouse>
