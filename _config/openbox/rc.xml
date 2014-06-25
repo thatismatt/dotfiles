@@ -172,6 +172,28 @@
         <direction>vertical</direction>
       </action>
     </keybind>
+    <keybind key="W-C-S-Left">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <width>30%</width>
+      </action>
+      <action name="Maximize">
+        <direction>vertical</direction>
+      </action>
+    </keybind>
+    <keybind key="W-C-S-Right">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>0</y>
+        <width>30%</width>
+      </action>
+      <action name="Maximize">
+        <direction>vertical</direction>
+      </action>
+    </keybind>
     <keybind key="W-Up">
       <action name="MaximizeFull"/>
     </keybind>
