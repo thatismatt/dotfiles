@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
 SCALA_VERSION="2.10.4"
-PACKAGE="com.example"
+PACKAGEROOT="com.example"
 
 NAME=$1
+CLASSNAME=`sed -e 's/-\([a-z]\)/\U\1/g' <<< ${NAME^}`
+PACKAGE=$PACKAGEROOT.${NAME//-}
 MAIN=$NAME/src/main
 SRC=$MAIN/scala
 RES=$MAIN/resources
 PRJ=$NAME/project
-BUILD=$PRJ/${NAME^}Build.scala
+BUILD=$PRJ/${CLASSNAME}Build.scala
 BUILDUTILS=$PRJ/Utils.scala
 MAINCLASS=$SRC/Main.scala
 LIBNAME=lib
@@ -26,7 +28,7 @@ cat > $BUILD <<EOF
 import sbt._
 import sbt.Keys._
 
-object ${NAME^}Build extends Build {
+object ${CLASSNAME}Build extends Build {
 
   object B {
     val name = "$NAME"
@@ -70,7 +72,7 @@ object Utils {
 EOF
 
 cat > $MAINCLASS <<EOF
-package $PACKAGE.$NAME
+package $PACKAGE
 
 object Main {
   def main(args: Array[String]) {
@@ -83,7 +85,7 @@ object Main {
 EOF
 
 cat > $LIBCLASS <<EOF
-package $PACKAGE.$NAME
+package $PACKAGE
 
 import com.typesafe.config.{Config, ConfigFactory}
 
