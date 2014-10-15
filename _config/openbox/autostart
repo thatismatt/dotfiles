@@ -1,5 +1,9 @@
-tint2 &
-
 syndaemon -t &
 
+feh --bg-scale ~/Pictures/lake-blurred-dark-blue.png &
+
 compton --config ~/.config/compton.conf &
+
+conky -c ~/.config/conky/conkyrc &
+
+tint2 &
