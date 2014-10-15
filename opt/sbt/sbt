@@ -2,7 +2,8 @@
 
 OPTS="-Xms512M -Xmx4G -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=1G"
 SUSPEND="n" # y = wait for debugger to attach
-DEBUG_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=$SUSPEND,address=5005"
+DEFAULT_DEBUG_PORT=5005
+DEBUG_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=$SUSPEND,address=${SBT_DEBUG_PORT-$DEFAULT_DEBUG_PORT}"
 
 if [[ "$1" == "-d" ]]
 then
