@@ -24,6 +24,12 @@
     </item>
   </menu>
 
+  <menu id="office" label="Office">
+    <item label="LibreOffice">
+        <action name="Execute"><execute>libreoffice</execute></action>
+    </item>
+  </menu>
+
   <separator label="Settings" />
 
   <menu id="openbox" label="Openbox">
