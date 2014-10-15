@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
+
   <resistance>
     <strength>30</strength>
     <screen_edge_strength>30</screen_edge_strength>
   </resistance>
+
   <focus>
     <focusNew>yes</focusNew> <!-- focus new windows -->
     <followMouse>no</followMouse> <!-- focus window under mouse -->
@@ -13,12 +15,14 @@
     <focusDelay>200</focusDelay> <!-- when followMouse enabled, milliseconds before focus -->
     <raiseOnFocus>no</raiseOnFocus> <!-- when followMouse enabled, and window focused also raise it -->
   </focus>
+
   <placement>
     <policy>Smart</policy> <!-- 'Smart' or 'UnderMouse' -->
     <center>yes</center> <!-- place windows in center of free space or top left corner -->
     <monitor>Mouse</monitor> <!-- new window placement: Any, Mouse, Active, or Primary -->
     <primaryMonitor>Mouse</primaryMonitor> <!-- popup dialogs placement (e.g. alt tab): index (from 1), Mouse or Active (active window) -->
   </placement>
+
   <theme>
     <name>Zukitwo-Openbox</name>
     <titleLayout>NDLIMC</titleLayout>
@@ -71,13 +75,8 @@
       <slant>normal</slant>
     </font>
   </theme>
+
   <desktops>
-    <!-- this stuff is only used at startup, pagers allow you to change them during a session
-
-       these are default values to use when other ones are not already set
-       by other applications, or saved in your session
-
-       use obconf if you want to change these without having to log out and back in -->
     <number>4</number>
     <firstdesk>1</firstdesk>
     <names>
@@ -88,6 +87,7 @@
     </names>
     <popupTime>875</popupTime>
   </desktops>
+
   <resize>
     <drawContents>yes</drawContents>
     <popupShow>Nonpixel</popupShow> <!-- 'Always', 'Never', or 'Nonpixel' (xterms and such) -->
@@ -98,12 +98,14 @@
       <y>10</y> <!-- positive for top edge, negative for bottom edge, or 'Center' -->
     </popupFixedPosition>
   </resize>
+
   <margins>
     <top>0</top>
     <bottom>0</bottom>
     <left>0</left>
     <right>0</right>
   </margins>
+
   <dock>
     <position>TopLeft</position>
     <!-- (Top|Bottom)(Left|Right|)|Top|Bottom|Left|Right|Floating -->
@@ -117,6 +119,7 @@
     <showDelay>300</showDelay>
     <moveButton>Middle</moveButton> <!-- 'Left', 'Middle', 'Right' -->
   </dock>
+
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
 
@@ -836,31 +839,18 @@
       </mousebind>
     </context>
   </mouse>
+
   <menu>
-    <!-- You can specify more than one menu file in here and they are all loaded,
-         just don't make menu ids clash or, well, it'll be kind of pointless -->
-    <!-- default menu file (or custom one in $HOME/.config/openbox/) -->
     <file>menu.xml</file>
     <hideDelay>200</hideDelay>
-    <!-- if a press-release lasts longer than this setting (in milliseconds), the
-         menu is hidden again -->
     <middle>no</middle>
-    <!-- center submenus vertically about the parent entry -->
     <submenuShowDelay>100</submenuShowDelay>
-    <!-- time to delay before showing a submenu after hovering over the parent entry.
-       if this is a negative value, then the delay is infinite and the
-       submenu will not be shown until it is clicked on -->
     <submenuHideDelay>400</submenuHideDelay>
-    <!-- time to delay before hiding a submenu when selecting another
-         entry in parent menu
-         if this is a negative value, then the delay is infinite and the
-         submenu will not be hidden until a different submenu is opened -->
     <applicationIcons>yes</applicationIcons>
     <showIcons>yes</showIcons>
-    <!-- controls if icons appear in the client-list-(combined-)menu -->
     <manageDesktops>yes</manageDesktops>
-    <!-- show the manage desktops section in the client-list-(combined-)menu -->
   </menu>
+
   <applications>
     <!--
   # this is an example with comments through out. use these to make your
