@@ -1,18 +1,18 @@
-# Tint2 config file
-# For information on manually configuring tint2 see http://code.google.com/p/tint2/wiki/Configure
+# Tint2 config
+# See http://code.google.com/p/tint2/wiki/Configure
 
 # Background definitions
-# ID 1
+# ID 1 - panel
 rounded = 0
 border_width = 0
-background_color = #000000 40
-border_color = #828282 0
+background_color = #888888 20
+border_color = #000000 0
 
 # ID 2 - task active
 rounded = 1
 border_width = 0
-background_color = #d8d8d8 30
-border_color = #d8d8d8 30
+background_color = #888888 70
+border_color = #000000 0
 
 # ID 3 - task
 rounded = 1
@@ -20,10 +20,10 @@ border_width = 0
 background_color = #000000 0
 border_color = #000000 0
 
-# ID 4
+# ID 4 - task urgent
 rounded = 1
 border_width = 1
-background_color = #888888 20
+background_color = #888888 70
 border_color = #ED2323 60
 
 # ID 5 - taskbar
@@ -32,11 +32,11 @@ border_width = 1
 background_color = #000000 0
 border_color = #000000 0
 
-# ID 6 - active taskbar
+# ID 6 - taskbar active
 rounded = 0
 border_width = 1
-background_color = #d8d8d8 12
-border_color = #d8d8d8 0
+background_color = #888888 30
+border_color = #000000 0
 
 # ID 7 - tooltip
 rounded = 3
@@ -47,8 +47,8 @@ border_color = #222222 90
 # ID 8
 rounded = 1
 border_width = 1
-background_color = #888888 20
-border_color = #888888 20
+background_color = #000000 0
+border_color = #000000 0
 
 # Panel
 panel_monitor = 1
@@ -166,5 +166,3 @@ bat2_font = Liberation Mono 8
 battery_font_color = #b5b5b5 100
 battery_padding = 2 0
 battery_background_id = 0
-
-# End of config
