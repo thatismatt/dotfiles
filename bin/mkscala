@@ -3,14 +3,15 @@
 SCALA_VERSION="2.10.4"
 PACKAGEROOT="com.example"
 
+# TODO: Remove trailing slash from name
 NAME=$1
-CLASSNAME=`sed -e 's/-\([a-z]\)/\U\1/g' <<< ${NAME^}`
+CLASSNAME=`sed -e 's/-\([a-z]\)/\U\1/g' <<< ${NAME^}` # hyphenated to camelcase
 PACKAGE=$PACKAGEROOT.${NAME//-}
 MAIN=$NAME/src/main
 SRC=$MAIN/scala
 RES=$MAIN/resources
 PRJ=$NAME/project
-BUILD=$PRJ/${CLASSNAME}Build.scala
+BUILD=$PRJ/Build.scala
 BUILDUTILS=$PRJ/Utils.scala
 MAINCLASS=$SRC/Main.scala
 LIBNAME=lib
@@ -41,12 +42,13 @@ object ${CLASSNAME}Build extends Build {
       version := B.version,
       scalaVersion := "$SCALA_VERSION",
       scalacOptions ++= Seq("-feature", "-deprecation"),
-      javaOptions in run += "-Xmx4096M",
-      javaOptions in Test ++= Seq("-Xms1024M", "-Xmx4096M"),
+      javaOptions in run += "-Xmx4G",
+      javaOptions in Test ++= Seq("-Xms1G", "-Xmx4G"),
       javacOptions in compile ++= Seq("-source", "1.7", "-target", "1.7", "-g"),
       libraryDependencies ++= Seq(
-        "com.typesafe" % "config" % "1.2.0"
-        //"ch.qos.logback" % "logback-classic" % "1.0.13"
+        "com.typesafe" % "config" % "1.2.0",
+        "ch.qos.logback" % "logback-classic" % "1.0.13",
+        "com.typesafe" %% "scalalogging-slf4j" % "1.1.0"
       ),
       resolvers ++= Seq(
         Resolver.typesafeRepo("releases"),
