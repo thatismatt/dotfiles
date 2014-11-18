@@ -484,6 +484,11 @@
       <keybind key="Escape"><action name="BreakChroot"/></keybind>
     </keybind>
 
+    <!-- Openbox Reload -->
+    <keybind key="W-o">
+      <action name="Reconfigure"/>
+    </keybind>
+
   </keyboard>
 
   <mouse>
