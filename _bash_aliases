@@ -35,6 +35,8 @@ function mvt () {
     fi
 }
 
+alias timestamp="date +%Y%m%d-%H%M%S"
+
 alias l='ls -1'
 alias la="ls -la"
 
