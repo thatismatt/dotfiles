@@ -1,0 +1,80 @@
+############################################################
+# Config
+
+# DEV
+#lua_load ~/dotfiles/_config/conky/conky_context.lua
+#lua_load ~/dotfiles/_config/conky/script.lua
+# LIVE
+lua_load ~/.config/conky/conky_context.lua
+lua_load ~/.config/conky/script.lua
+lua_draw_hook_post main
+
+background no
+#background yes
+use_xft yes
+xftalpha 0.1
+double_buffer yes
+
+draw_borders no
+draw_outline no
+draw_shades no
+
+own_window yes
+own_window_type normal
+own_window_class Conky
+#own_window_hints undecorated
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window_argb_visual yes
+own_window_argb_value 10
+
+#own_window no
+
+#own_window_class Conky
+#own_window yes
+#own_window_type normal
+#own_window_transparent yes
+#own_window_hints undecorate
+
+#own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#own_window yes
+#own_window_title conky
+#own_window_type normal
+#own_window_transparent yes
+#own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+#own_window_argb_visual yes
+#own_window_argb_value 100
+
+xftfont Droid Sans Mono:size=16
+#xftfont asdf:size=16
+
+update_interval 1
+#pad_percents 3
+#cpu_avg_samples 2
+#net_avg_samples 2
+
+minimum_size  1000 1500
+maximum_width 1000
+alignment top_left
+gap_x 30
+gap_y 70
+
+default_color ffffff
+#default_shade_color black
+#default_outline_color black
+#uppercase no
+#out_to_console yes
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+#use_spacer no
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+
+############################################################
+# Text
+
+TEXT
+#${font Droid Sans Mono:bold:size=36}$nodename${font}
+#${exec echo `lsb_release -si` `lsb_release -sr`} | $kernel
