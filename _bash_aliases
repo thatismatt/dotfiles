@@ -46,6 +46,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
+alias cdi='~/bin/cdi/cdi.py /tmp/cdi.out && cd `cat /tmp/cdi.out`'
+
 alias agi="sudo apt-get install"
 alias acs="apt-cache show"
 alias acr="apt-cache search"
