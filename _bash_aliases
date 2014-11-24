@@ -27,12 +27,14 @@ function todo () {
 
 # rm alternative
 function mvt () {
-    if [[ -f $1 ]] || [[ -d $1 ]]
-    then
-        mv $1 ~/tmp/`date +%Y%m%d-%H%M%S`-`basename $1`
-    else
-        echo "mvt: missing file operand"
-    fi
+    for f in "$@"; do
+        if [[ -f $f ]] || [[ -d $f ]]
+        then
+            mv $f ~/tmp/`date +%Y%m%d-%H%M%S`-`basename $f`
+        else
+            echo "mvt: $f is not a file or directory."
+        fi
+    done
 }
 
 alias timestamp="date +%Y%m%d-%H%M%S"
