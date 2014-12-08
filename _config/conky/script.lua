@@ -3,6 +3,7 @@
 
 local _options = {
    font = "Liberation Mono",
+   -- font = "Inconsolata",
    cpu_bands = {
       x = 0,
       y = 350,
