@@ -23,9 +23,17 @@ local _options = {
       x = 0,
       y = 600
    },
+   bandwidth = {
+      x = 0,
+      y = 650
+   },
+   wifi = {
+      x = 0,
+      y = 750
+   },
    todo = {
       x = 0,
-      y = 720
+      y = 800
    }
 }
 
@@ -53,6 +61,8 @@ function draw(cc, data, options)
    cpu_bars(cc, data, options)
    cpu_bands(cc, data, options)
    battery(cc, data, options)
+   bandwidth(cc, data, options)
+   wifi(cc, data, options)
    todo(cc, data, options)
 end
 
@@ -130,6 +140,22 @@ function Data:battery_state()
    return battery
 end
 
+function Data:bandwidth()
+   local bandwidth = {
+      up = conky_parse("${upspeedf wlan0}") * 8192 / 1000000,    -- KiB -> Mb
+      down = conky_parse("${downspeedf wlan0}") * 8192 / 1000000 -- KiB -> Mb
+   }
+   return bandwidth
+end
+
+
+function Data:wifi()
+   local wifi = {
+      quality = conky_parse("${wireless_link_qual_perc wlan0}")
+   }
+   return wifi
+end
+
 ------------------------------------------------------------
 -- Widgets
 
@@ -204,6 +230,19 @@ end
 function battery(cc, data, options)
    local x, y = options.battery.x, options.battery.y
    cc:text(x, y, "Battery: " .. data:battery_state(), options.font, 24)
+end
+
+function bandwidth(cc, data, options)
+   local x, y = options.bandwidth.x, options.bandwidth.y
+   local bandwidth = data:bandwidth()
+   cc:text(x, y, "Bandwidth", options.font, 24)
+   cc:text(x, y + 24, " Up:   " .. bandwidth.up .. " Mbps", options.font, 24)
+   cc:text(x, y + 48, " Down: " .. bandwidth.down .. " Mbps", options.font, 24)
+end
+
+function wifi(cc, data, options)
+   local x, y = options.wifi.x, options.wifi.y
+   cc:text(x, y, "Wifi:  " .. data:wifi().quality .. "%", options.font, 24)
 end
 
 function todo(cc, data, options)
