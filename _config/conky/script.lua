@@ -47,7 +47,6 @@ end
 
 function draw(cc, data, options)
    cc:rgba(1, 1, 1, 0.3)
-   --cc:rect(100, 100, 100, 100)
    machine(cc, data, options)
    clock(cc, data, options)
    cpu_bars(cc, data, options)
