@@ -4,6 +4,7 @@
 local _options = {
    font = "Liberation Mono",
    -- font = "Inconsolata",
+   fontsize = 24,
    cpu_bands = {
       x = 0,
       y = 350,
@@ -21,7 +22,7 @@ local _options = {
    },
    battery = {
       x = 0,
-      y = 600
+      y = 550
    },
    bandwidth = {
       x = 0,
@@ -33,7 +34,7 @@ local _options = {
    },
    todo = {
       x = 0,
-      y = 850
+      y = 900
    }
 }
 
@@ -152,7 +153,8 @@ end
 function Data:wifi()
    local wifi = {
       quality = conky_parse("${wireless_link_qual_perc wlan0}"),
-      ssid = conky_parse("${wireless_essid wlan0}")
+      ssid = conky_parse("${wireless_essid wlan0}"),
+      ip = conky_parse("${addr wlan0}")
    }
    return wifi
 end
@@ -230,30 +232,35 @@ end
 
 function battery(cc, data, options)
    local x, y = options.battery.x, options.battery.y
-   cc:text(x, y, "Battery: " .. data:battery_state(), options.font, 24)
+   cc:text(x, y, "Battery", options.font, options.fontsize)
+   cc:text(x, y + options.fontsize, " " .. data:battery_state(), options.font, options.fontsize)
 end
 
 function bandwidth(cc, data, options)
    local x, y = options.bandwidth.x, options.bandwidth.y
    local bandwidth = data:bandwidth()
-   cc:text(x, y, "Bandwidth", options.font, 24)
-   cc:text(x, y + 24, " Up:   " .. bandwidth.up .. " Mbps", options.font, 24)
-   cc:text(x, y + 48, " Down: " .. bandwidth.down .. " Mbps", options.font, 24)
+   cc:text(x, y, "Bandwidth", options.font, options.fontsize)
+   cc:text(x, y + options.fontsize * 1, " Up:   " .. bandwidth.up .. " Mbps", options.font, options.fontsize)
+   cc:text(x, y + options.fontsize * 2, " Down: " .. bandwidth.down .. " Mbps", options.font, options.fontsize)
 end
 
 function wifi(cc, data, options)
    local x, y = options.wifi.x, options.wifi.y
    local wifi = data:wifi()
-   cc:text(x, y, "Wifi", options.font, 24)
-   cc:text(x, y + 24, " Quality: " .. wifi.quality .. "%", options.font, 24)
-   cc:text(x, y + 48, " SSID:    " .. wifi.ssid, options.font, 24)
+   cc:text(x, y, "Wifi", options.font, options.fontsize)
+   cc:text(x, y + options.fontsize * 1, " Quality: " .. wifi.quality .. "%", options.font, options.fontsize)
+   cc:text(x, y + options.fontsize * 2, " SSID:    " .. wifi.ssid, options.font, options.fontsize)
+   cc:text(x, y + options.fontsize * 3, " IP:      " .. wifi.ip, options.font, options.fontsize)
 end
 
 function todo(cc, data, options)
    local filename = os.getenv("HOME") .. "/notes/todo.org"
    local l, x, y = 0, options.todo.x, options.todo.y
+   cc:text(x, y, "Todo", options.font, options.fontsize)
    for line in io.lines(filename) do
-      l = l + 1
-      cc:text(x, y + l * 18, line, options.font, 18)
+      if (string.match(line, "* TODO")) then
+         cc:text(x, y + options.fontsize + l * 18, line, options.font, 18)
+         l = l + 1
+      end
    end
 end
