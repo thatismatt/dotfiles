@@ -33,7 +33,7 @@ local _options = {
    },
    todo = {
       x = 0,
-      y = 800
+      y = 850
    }
 }
 
@@ -151,7 +151,8 @@ end
 
 function Data:wifi()
    local wifi = {
-      quality = conky_parse("${wireless_link_qual_perc wlan0}")
+      quality = conky_parse("${wireless_link_qual_perc wlan0}"),
+      ssid = conky_parse("${wireless_essid wlan0}")
    }
    return wifi
 end
@@ -242,7 +243,10 @@ end
 
 function wifi(cc, data, options)
    local x, y = options.wifi.x, options.wifi.y
-   cc:text(x, y, "Wifi:  " .. data:wifi().quality .. "%", options.font, 24)
+   local wifi = data:wifi()
+   cc:text(x, y, "Wifi", options.font, 24)
+   cc:text(x, y + 24, " Quality: " .. wifi.quality .. "%", options.font, 24)
+   cc:text(x, y + 48, " SSID:    " .. wifi.ssid, options.font, 24)
 end
 
 function todo(cc, data, options)
