@@ -17,7 +17,7 @@ function bash-reload () {
 }
 
 function todo () {
-    if [[ $1 == "?" ]]
+    if [[ -z "$1" ]]
     then
         cat ~/notes/todo.org | grep --color=never "\* TODO"
     else
