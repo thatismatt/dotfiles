@@ -5,5 +5,5 @@
     cd ~
     git clone https://github.com/thatismatt/dotfiles.git
     cd dotfiles
-    ./scripts/install
+    ./install
     # follow the prompts
