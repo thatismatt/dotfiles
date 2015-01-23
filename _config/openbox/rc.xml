@@ -440,6 +440,18 @@
         <command>pavucontrol</command>
       </action>
     </keybind>
+    <keybind key="W-s">
+      <keybind key="1">
+        <action name="Execute">
+          <command>~/scripts/screen.sh single</command>
+        </action>
+      </keybind>
+      <keybind key="2">
+        <action name="Execute">
+          <command>~/scripts/screen.sh dual</command>
+        </action>
+      </keybind>
+    </keybind>
 
     <!-- Quit -->
     <keybind key="W-q">
