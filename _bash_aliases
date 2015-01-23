@@ -57,8 +57,11 @@ alias acr="apt-cache search"
 
 alias json="python -mjson.tool"
 
-alias emacs-daemon="emacs --daemon"
-alias e-d="emacs --daemon"
-alias emacs-kill="emacsclient -eval \"(kill-emacs)\""
-alias e-k="emacsclient -eval \"(kill-emacs)\""
-alias e="emacsclient -n"
+# Emacs - Server Socket (for multiple daemons)
+# NOTES: - default = server
+#        - see /tmp/emacs1000/ (emacs variable server-socket-dir)
+alias emacs-daemon="emacs --daemon=${EMACS_SERVER:-server}"
+alias e-d="emacs --daemon=${EMACS_SERVER:-server}"
+alias emacs-kill="emacsclient -s ${EMACS_SERVER:-server} -eval \"(kill-emacs)\""
+alias e-k="emacsclient -s ${EMACS_SERVER:-server} -eval \"(kill-emacs)\""
+alias e='emacsclient -s ${EMACS_SERVER:-server} -n'
