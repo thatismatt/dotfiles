@@ -46,6 +46,8 @@ alias la="ls -la"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 
 alias cdi='~/bin/cdi/cdi.py /tmp/cdi.out && cd `cat /tmp/cdi.out`'
 
