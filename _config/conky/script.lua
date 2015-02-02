@@ -5,6 +5,7 @@ local _options = {
    font = "Liberation Mono",
    -- font = "Inconsolata",
    fontsize = 24,
+   cores = tonumber(conky_parse("${exec grep -c ^processor /proc/cpuinfo}")),
    cpu_bands = {
       x = 0,
       y = 350,
@@ -114,7 +115,7 @@ end
 
 function Data:cpus()
    local cpus = {}
-   for c = 0, 7 do
+   for c = 0, (self._options.cores - 1) do
       table.insert(cpus, tonumber(conky_parse('${cpu cpu' .. c .. '}')))
    end
    return cpus
@@ -124,7 +125,12 @@ function Data:cpu_bands()
    local cpus = self:cpus()
    if #cpus > 0 then
       table.sort(cpus)
-      local bands = { cpus[1], cpus[3], cpus[6], cpus[8] }
+      -- TODO: calculate the indices
+      if self._options.cores == 8 then
+         local bands = { cpus[1], cpus[3], cpus[6], cpus[8] }
+      else
+         local bands = { cpus[1], cpus[2], cpus[3], cpus[4] }
+      end
       table.insert(self._cpu_bands, bands)
       table.remove(self._cpu_bands, 1)
    end
