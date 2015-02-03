@@ -126,10 +126,11 @@ function Data:cpu_bands()
    if #cpus > 0 then
       table.sort(cpus)
       -- TODO: calculate the indices
+      local bands
       if self._options.cores == 8 then
-         local bands = { cpus[1], cpus[3], cpus[6], cpus[8] }
+         bands = { cpus[1], cpus[3], cpus[6], cpus[8] }
       else
-         local bands = { cpus[1], cpus[2], cpus[3], cpus[4] }
+         bands = { cpus[1], cpus[2], cpus[3], cpus[4] }
       end
       table.insert(self._cpu_bands, bands)
       table.remove(self._cpu_bands, 1)
