@@ -17,12 +17,28 @@ function bash-reload () {
     . ~/.bash_aliases
 }
 
+TODO_FILE=~/notes/todo.org
+
 function todo () {
     if [[ -z "$1" ]]
     then
-        cat ~/notes/todo.org | grep --color=never "\* TODO"
+        cat $TODO_FILE | grep --color=never "\* TODO"
+    elif [[ "$1" == "-f" ]]
+    then
+        echo $TODO_FILE
+    elif [[ "$1" == "-e" ]]
+    then
+        e $TODO_FILE
+    elif [[ "$1" == "-?" ]]
+    then
+        echo "Usage: todo [TASK] [-f] [-e] [-?]"
+        echo "Displays the tasks in the todo file, or"
+        echo "Add TASK to the todo file."
+        echo "  -f  Print the name of the todo file"
+        echo "  -e  Edit the todo file (in Emacs)"
+        echo "  -?  Print this help text"
     else
-        echo "* TODO $@" >> ~/notes/todo.org
+        echo "* TODO $@" >> $TODO_FILE
     fi
 }
 
