@@ -1,0 +1,34 @@
+! -*- mode: conf-xdefaults -*-
+
+! xterm
+XTerm*faceName: Inconsolata
+XTerm*faceSize: 13
+XTerm*metaSendsEscape: true
+Xterm*saveLines: 10000
+XTerm*reverseVideo: off
+*foreground: #aaaaaa
+*background: #001111
+! black
+*color0:     #001111
+*color8:     #666666
+! red
+*color1:     #cc3333
+*color9:     #993333
+! green
+*color2:     #55ff33
+*color10:    #33aa33
+! yellow
+*color3:     #ffaa00
+*color11:    #996600
+! blue
+*color4:     #3355ff
+*color12:    #3333aa
+! magenta
+*color5:     #ff00aa
+*color13:    #993399
+! cyan
+*color6:     #00cccc
+*color14:    #009999
+! white
+*color7:     #aaaaaa
+*color15:    #FFFFFF
