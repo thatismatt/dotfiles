@@ -188,6 +188,24 @@ for s = 1, screen.count() do
 end
 -- }}}
 
+-- {{{ Bottom Wibox
+bottomwibox = awful.wibox({ position = "bottom", screen = screen.count(), height = 25 })
+
+-- Wifi signal
+wifi_widget = widget({ type = "textbox", name = "wifi_widget", align = "right" })
+function wifi_info()
+   local wifi_strength = awful.util.pread("awk 'NR==3 {printf \"%.1f%%\\n\",($3/70)*100}' /proc/net/wireless")
+   wifi_widget.text = " " .. wifi_strength
+end
+wifi_info()
+awful.hooks.timer.register(5, wifi_info)
+
+bottomwibox.widgets = {
+   wifi_widget,
+   layout = awful.widget.layout.horizontal.leftright
+}
+-- }}}
+
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
                 awful.button({ }, 3, function () mymainmenu:toggle() end),
