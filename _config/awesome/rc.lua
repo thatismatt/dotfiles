@@ -90,6 +90,7 @@ mymainmenu = awful.menu({ items = {
                              { "emacs",    emacs },
                              { "firefox",  "firefox" },
                              { "thunar",   "thunar" },
+                             { "lxappearance", "lxappearance" },
                              { "terminal", terminal } }
                        })
 
