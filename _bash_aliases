@@ -77,8 +77,6 @@ alias json="python -mjson.tool"
 # NOTES: - default = server
 #        - see /tmp/emacs1000/ (emacs variable server-socket-dir)
 alias emacs-daemon="emacs --daemon=${EMACS_SERVER:-server}"
-alias e-d="emacs --daemon=${EMACS_SERVER:-server}"
 alias emacs-kill="emacsclient -s ${EMACS_SERVER:-server} -eval \"(kill-emacs)\""
-alias e-k="emacsclient -s ${EMACS_SERVER:-server} -eval \"(kill-emacs)\""
 EMACSCLIENT_NO_WAIT="-n" && [[ -z "$DISPLAY" ]] && EMACSCLIENT_NO_WAIT=""
 alias e='emacsclient -s ${EMACS_SERVER:-server} $EMACSCLIENT_NO_WAIT'
