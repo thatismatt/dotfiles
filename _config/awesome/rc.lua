@@ -7,6 +7,10 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
+function log (msg)
+   naughty.notify({ text = msg })
+end
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
