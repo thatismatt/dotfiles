@@ -80,23 +80,26 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual",      terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart",     awesome.restart },
-   { "quit",        awesome.quit }
+   { "Manual",      terminal .. " -e man awesome" },
+   { "Edit Config", editor_cmd .. " " .. awesome.conffile },
+   { "Restart",     awesome.restart },
+   { "Quit",        awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = {
-                             { "awesome",  myawesomemenu, beautiful.awesome_icon },
-                             { "emacs",    emacs },
-                             { "firefox",  "firefox" },
-                             { "thunar",   "thunar" },
-                             { "lxappearance", "lxappearance" },
-                             { "terminal", terminal } }
-                       })
+mymainmenu = awful.menu({
+      items = {
+         { "Awesome", myawesomemenu, beautiful.awesome_icon },
+         { "Emacs", emacs, "/usr/share/icons/Faenza/apps/32/emacs.png" },
+         { "Firefox", "firefox", "/usr/share/icons/Faenza/apps/32/firefox.png" },
+         { "Thunar", "thunar", "/usr/share/icons/Faenza/apps/32/thunar.png" },
+         { "LXAppearance", "lxappearance", "/usr/share/icons/Faenza/categories/32/preferences-desktop.png" },
+         { "Terminal", terminal, "/usr/share/icons/Faenza/apps/32/xterm.png" },
+         { "Quit", awesome.quit } }
+})
 
-mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
-                                     menu = mymainmenu })
+mylauncher = awful.widget.launcher({
+      image = image(beautiful.awesome_icon),
+      menu = mymainmenu })
 -- }}}
 
 -- {{{ Key utils
