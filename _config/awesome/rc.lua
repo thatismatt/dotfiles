@@ -110,7 +110,6 @@ mysystray = widget({ type = "systray" })
 
 -- Create a wibox for each screen and add it
 mywibox = {}
-mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
@@ -155,7 +154,6 @@ end))
 
 for s = 1, screen.count() do
    -- Create a promptbox for each screen
-   mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
    -- We need one layoutbox per screen.
    mylayoutbox[s] = awful.widget.layoutbox(s)
@@ -179,7 +177,6 @@ for s = 1, screen.count() do
       {
          mylauncher,
          mytaglist[s],
-         mypromptbox[s],
          layout = awful.widget.layout.horizontal.leftright
       },
       mylayoutbox[s],
@@ -203,9 +200,12 @@ end
 wifi_info()
 awful.hooks.timer.register(5, wifi_info)
 
+mypromptbox = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
+
 bottomwibox.widgets = {
+   mypromptbox,
    wifi_widget,
-   layout = awful.widget.layout.horizontal.leftright
+   layout = awful.widget.layout.horizontal.rightleft
 }
 -- }}}
 
@@ -269,14 +269,17 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Control" }, "n",      awful.client.restore),
 
    -- Prompt
-   awful.key({ modkey },            "r",      function () mypromptbox[mouse.screen]:run() end),
+   awful.key({ modkey },            "r",      function () mypromptbox:run() end),
 
    awful.key({ modkey },            "x",
       function ()
-         awful.prompt.run({ prompt = "Run Lua code: " },
-            mypromptbox[mouse.screen].widget,
-            awful.util.eval, nil,
-            awful.util.getdir("cache") .. "/history_eval")
+         awful.prompt.run(
+            { prompt = "Run Lua code: " },
+            mypromptbox.widget,
+            awful.util.eval,
+            nil,
+            awful.util.getdir("cache") .. "/history_eval"
+         )
       end
    )
 )
