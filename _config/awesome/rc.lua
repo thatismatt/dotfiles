@@ -204,6 +204,19 @@ end
 wifi_info()
 awful.hooks.timer.register(5, wifi_info)
 
+-- Bandwidth - TODO
+-- local devices = {}
+-- for line in io.lines('/proc/net/dev') do
+--    local device = line:match('^[%s]*([%w]+):')
+--    if device == "wlan0" then
+--       -- totals
+--       local recv = tonumber(string.match(line, ":[%s]*([%d]+)"))
+--       local send = -- Transmited bytes, 7 fields from end of the line
+--          tonumber(string.match(line, "([%d]+)%s+%d+%s+%d+%s+%d+%s+%d+%s+%d+%s+%d+%s+%d$"))
+--       utils.log(device .. " " .. send .. " " .. recv)
+--    end
+-- end
+
 mypromptbox = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
 
 bottomwibox.widgets = {
