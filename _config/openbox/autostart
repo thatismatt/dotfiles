@@ -1,8 +1,3 @@
-# Turn off system beep
-xset b off &
-
-syndaemon -t &
-
 feh --bg-scale ~/Pictures/lake-blurred-dark-blue.png &
 
 compton --config ~/.config/compton.conf &
