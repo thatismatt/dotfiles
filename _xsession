@@ -1,31 +1,5 @@
-# Turn off system beep
-xset b off
+# X settings
+xrdb -merge .Xresources &&
 
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
-
-syndaemon -t &
-synclient HorizTwoFingerScroll=1
-
-date >> ~/tmp/xsession.log
-echo "$SESSION" >> ~/tmp/xsession.log
-
-case "$SESSION" in
-
-    o|openbox)
-        exec openbox-session
-        ;;
-
-    a|awesome)
-        exec awesome
-        ;;
-
-    g|guile)
-        exec /home/matt/code/guile-wm/guile-wm
-        ;;
-
-    *)
-        exec openbox-session
-        ;;
-
-esac
+# Start WM
+exec awesome
