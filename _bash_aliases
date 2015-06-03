@@ -8,7 +8,7 @@ path_add() {
 }
 
 path_add /home/matt/bin
-path_add /home/matt/opt/sbt
+path_add /home/matt/opt/sbt/bin
 path_add /home/matt/opt/idea/latest/bin
 path_add /home/matt/opt/node/latest/bin
 path_add /home/matt/opt/jmeter/latest/bin
