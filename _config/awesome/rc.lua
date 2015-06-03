@@ -109,7 +109,6 @@ mymainmenu = awful.menu({
          { "Quit", awesome.quit } }
 })
 
-
 mylauncher = awful.widget.launcher({
       image = beautiful.awesome_icon,
       menu = mymainmenu
@@ -348,7 +347,7 @@ clientkeys = awful.util.table.join(
 -- Compute the maximum number of digit we need, limited to 9
 keynumber = 0
 for s = 1, screen.count() do
-   keynumber = math.min(9, math.max(#tags[s], keynumber));
+   keynumber = math.min(9, math.max(#tags[s], keynumber))
 end
 
 -- Bind all key numbers to tags.
