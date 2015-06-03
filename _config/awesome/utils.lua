@@ -1,3 +1,5 @@
+local naughty = require("naughty")
+
 utils = {}
 
 utils.log = function (msg)
