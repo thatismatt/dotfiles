@@ -271,9 +271,9 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "Down",  function () awful.client.swap.byidx(1) end),
    awful.key({ modkey,           }, "Left",  function () awful.screen.focus_relative(1) end),
    awful.key({ modkey,           }, "Right", function () awful.screen.focus_relative(-1) end),
-   awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-   awful.key({ modkey,           }, "Tab", awful.tag.viewnext),
-   awful.key({ modkey, "Shift"   }, "Tab", awful.tag.viewprev),
+   awful.key({ modkey,           }, "u",     awful.client.urgent.jumpto),
+   awful.key({ modkey,           }, "Tab",   awful.tag.viewnext),
+   awful.key({ modkey, "Shift"   }, "Tab",   awful.tag.viewprev),
    awful.key({ altkey,           }, "Tab",
       function ()
          awful.client.focus.history.previous()
