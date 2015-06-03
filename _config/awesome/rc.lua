@@ -259,20 +259,20 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
---   awful.key({ modkey,           }, "Left",   awful.tag.viewprev),
---   awful.key({ modkey,           }, "Right",  awful.tag.viewnext),
-   awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+   -- awful.key({ modkey            }, "Left",   awful.tag.viewprev),
+   -- awful.key({ modkey            }, "Right",  awful.tag.viewnext),
+   awful.key({ modkey            }, "Escape", awful.tag.history.restore),
 
-   awful.key({ modkey,           }, "Up",   focus_raise(-1)),
-   awful.key({ modkey,           }, "Down", focus_raise(1)),
+   awful.key({ modkey            }, "Up",   focus_raise(-1)),
+   awful.key({ modkey            }, "Down", focus_raise(1)),
 
    -- Layout manipulation
    awful.key({ modkey, "Shift"   }, "Up",    function () awful.client.swap.byidx(-1) end),
    awful.key({ modkey, "Shift"   }, "Down",  function () awful.client.swap.byidx(1) end),
-   awful.key({ modkey,           }, "u",     awful.client.urgent.jumpto),
-   awful.key({ modkey,           }, "Tab",   awful.tag.viewnext),
+   awful.key({ modkey            }, "u",     awful.client.urgent.jumpto),
+   awful.key({ modkey            }, "Tab",   awful.tag.viewnext),
    awful.key({ modkey, "Shift"   }, "Tab",   awful.tag.viewprev),
-   awful.key({ altkey,           }, "Tab",
+   awful.key({ altkey            }, "Tab",
       function ()
          awful.client.focus.history.previous()
          if client.focus then
@@ -281,29 +281,28 @@ globalkeys = awful.util.table.join(
    end),
 
    -- Standard program
-   awful.key({ modkey,           }, "t",      function () awful.util.spawn(terminal) end),
-   awful.key({ modkey,           }, "e",      function () awful.util.spawn(emacs) end),
-   awful.key({ modkey,           }, "f",      function () awful.util.spawn("thunar") end),
-   awful.key({ modkey,           }, "w",      function () awful.util.spawn("x-www-browser") end),
-   awful.key({ modkey,           }, "v",      function () awful.util.spawn("pavucontrol") end),
+   awful.key({ modkey            }, "t",      function () awful.util.spawn(terminal) end),
+   awful.key({ modkey            }, "e",      function () awful.util.spawn(emacs) end),
+   awful.key({ modkey            }, "f",      function () awful.util.spawn("thunar") end),
+   awful.key({ modkey            }, "w",      function () awful.util.spawn("x-www-browser") end),
+   awful.key({ modkey            }, "v",      function () awful.util.spawn("pavucontrol") end),
    awful.key({ modkey, "Control" }, "r",      awesome.restart),
    awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
-   awful.key({ modkey,           }, "Right",  function () awful.tag.incmwfact( 0.05) end),
-   awful.key({ modkey,           }, "Left",   function () awful.tag.incmwfact(-0.05) end),
+   awful.key({ modkey            }, "Right",  function () awful.tag.incmwfact( 0.05) end),
+   awful.key({ modkey            }, "Left",   function () awful.tag.incmwfact(-0.05) end),
    awful.key({ modkey, "Control" }, "Right",  function () awful.tag.incnmaster( 1) end),
    awful.key({ modkey, "Control" }, "Left",   function () awful.tag.incnmaster(-1) end),
    -- awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1) end),
    -- awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1) end),
-   awful.key({ modkey,           }, "space",  function () awful.layout.inc(layouts, 1) end),
+   awful.key({ modkey            }, "space",  function () awful.layout.inc(layouts, 1) end),
    awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1) end),
 
    awful.key({ modkey, "Control" }, "n",      awful.client.restore),
 
    -- Prompt
-   awful.key({ modkey },            "r",      function () mypromptbox:run() end),
-
-   awful.key({ modkey },            "x",
+   awful.key({ modkey            }, "r",      function () mypromptbox:run() end),
+   awful.key({ modkey            }, "x",
       function ()
          awful.prompt.run(
             { prompt = "Run Lua code: " },
@@ -326,8 +325,8 @@ end
 clientkeys = awful.util.table.join(
    awful.key({ altkey            }, "F4",     function (c) c:kill() end),
    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
-   awful.key({ modkey,           }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-   awful.key({ modkey,           }, "o",      function () awful.screen.focus_relative(1) end),
+   awful.key({ modkey            }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+   awful.key({ modkey            }, "o",      function () awful.screen.focus_relative(1) end),
    awful.key({ modkey, "Shift"   }, "o",      awful.client.movetoscreen),
    awful.key({ modkey, "Shift"   }, "t",      function (c) c.ontop = not c.ontop end),
    awful.key({ modkey, "Shift"   }, "f",      function (c) c.fullscreen = not c.fullscreen end),
