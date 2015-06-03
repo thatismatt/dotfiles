@@ -1,5 +1,7 @@
 # X settings
 xrdb -merge .Xresources &&
 
+eval `ssh-agent`
+
 # Start WM
 exec awesome
