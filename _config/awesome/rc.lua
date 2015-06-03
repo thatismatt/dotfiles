@@ -45,11 +45,8 @@ end
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/matt/.config/awesome/theme.lua")
 
--- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
 emacs = "emacsclient -c -a="
-editor = os.getenv("EDITOR") or "editor"
-editor_cmd = terminal .. " -e " .. editor
 
 modkey = "Mod4"
 altkey = "Mod1"
@@ -93,7 +90,6 @@ end
 -- Create a laucher widget and a main menu
 myawesomemenu = {
    { "Manual",      terminal .. " -e man awesome" },
-   { "Edit Config", editor_cmd .. " " .. awesome.conffile },
    { "Restart",     awesome.restart },
    { "Quit",        awesome.quit }
 }
