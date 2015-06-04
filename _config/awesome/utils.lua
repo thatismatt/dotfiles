@@ -39,9 +39,9 @@ end
 utils.dump = function (o, indent)
    indent = indent or ""
    if type(o) == "table" then
-      local s = indent .. "{\n"
+      local s = "{\n"
       for k, v in pairs(o) do
-         s = s .. indent .. tostring(k) .. ' = ' .. utils.dump(v, indent .. " ") .. '\n'
+         s = s .. indent .. " " .. tostring(k) .. ' = ' .. utils.dump(v, indent .. " ") .. '\n'
       end
       return s .. indent .. "}"
    else
