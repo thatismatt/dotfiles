@@ -330,6 +330,7 @@ clientkeys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "f",      function (c) c.fullscreen = not c.fullscreen end),
    awful.key({ modkey, "Shift"   }, "n",      function (c) c.minimized = true end),
    awful.key({ modkey, "Shift"   }, "m",      toggle_maximized),
+   awful.key({ modkey, "Shift"   }, "k",      awful.client.togglemarked),
    awful.key({ modkey, "Shift"   }, "d",      function (c) debug_client = c end)
 )
 
@@ -487,6 +488,18 @@ client.connect_signal(
    end
 )
 
-client.connect_signal("focus", function (c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function (c) c.border_color = beautiful.border_normal end)
+function decorate_client (c)
+   if awful.client.ismarked(c) then
+      c.border_color = beautiful.border_marked
+   elseif client.focus == c then
+      c.border_color = beautiful.border_focus
+   else
+      c.border_color = beautiful.border_normal
+   end
+end
+
+client.connect_signal("focus",    decorate_client)
+client.connect_signal("unfocus",  decorate_client)
+client.connect_signal("marked",   decorate_client)
+client.connect_signal("unmarked", decorate_client)
 -- }}}
