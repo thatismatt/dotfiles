@@ -3,7 +3,7 @@ local naughty = require("naughty")
 local utils = {}
 
 utils.log = function (msg)
-   naughty.notify({ text = msg })
+   naughty.notify({ text = msg, timeout = 0 })
 end
 
 utils.map = function (tbl, f)
