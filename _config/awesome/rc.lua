@@ -241,6 +241,16 @@ bottom_widgets_layout:add(wifi_widget)
 
 mypromptbox = awful.widget.prompt()
 
+mypromptbox.lua = function ()
+   awful.prompt.run(
+      { prompt = "Lua: " },
+      mypromptbox.widget,
+      awful.util.eval,
+      nil,
+      awful.util.getdir("cache") .. "/history_eval"
+   )
+end
+
 local bottom_layout = wibox.layout.align.horizontal()
 bottom_layout:set_left(mypromptbox)
 bottom_layout:set_middle(bottom_widgets_layout)
@@ -300,19 +310,7 @@ globalkeys = awful.util.table.join(
 
    -- Prompt
    awful.key({ modkey            }, "r",      function () mypromptbox:run() end),
-   awful.key({ modkey            }, "x",
-      function ()
-         awful.prompt.run(
-            { prompt = "Lua: " },
-            mypromptbox.widget,
-            awful.util.eval,
-            nil,
-            awful.util.getdir("cache") .. "/history_eval"
-         )
-      end
-   ),
-   -- Menubar
-   awful.key({ modkey }, "p", function () menubar.show() end)
+   awful.key({ modkey            }, "x",      mypromptbox.lua)
 )
 
 function toggle_maximized (c)
