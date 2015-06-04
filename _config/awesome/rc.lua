@@ -303,7 +303,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey            }, "x",
       function ()
          awful.prompt.run(
-            { prompt = "Run Lua code: " },
+            { prompt = "Lua: " },
             mypromptbox.widget,
             awful.util.eval,
             nil,
