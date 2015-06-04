@@ -36,4 +36,21 @@ utils.intr = function (tbl)
    return table.concat(lines, "\n")
 end
 
+utils.dump = function (o, indent)
+   indent = indent or ""
+   if type(o) == "table" then
+      local s = indent .. "{\n"
+      for k, v in pairs(o) do
+         s = s .. indent .. tostring(k) .. ' = ' .. utils.dump(v, indent .. " ") .. '\n'
+      end
+      return s .. indent .. "}"
+   else
+      return tostring(o)
+   end
+end
+
+utils.pp = function(o)
+   utils.log(utils.dump(o))
+end
+
 return utils
