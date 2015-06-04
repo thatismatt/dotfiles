@@ -1,6 +1,6 @@
 local naughty = require("naughty")
 
-utils = {}
+local utils = {}
 
 utils.log = function (msg)
    naughty.notify({ text = msg })
