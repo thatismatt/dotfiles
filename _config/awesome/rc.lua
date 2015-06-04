@@ -291,18 +291,15 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey            }, "Escape", awful.tag.history.restore),
    awful.key({ modkey            }, "Up",     focus_raise(-1)),
    awful.key({ modkey            }, "Down",   focus_raise(1)),
-
-   -- Layout manipulation
    awful.key({ modkey, "Shift"   }, "Up",     function () awful.client.swap.byidx(-1) end),
    awful.key({ modkey, "Shift"   }, "Down",   function () awful.client.swap.byidx(1) end),
-   awful.key({ modkey            }, "u",      awful.client.urgent.jumpto),
    awful.key({ modkey            }, "Tab",    awful.tag.viewnext),
    awful.key({ modkey, "Shift"   }, "Tab",    awful.tag.viewprev),
-
-   -- Standard program
    awful.key({ modkey, "Control" }, "Up",     cycle_master(false)),
    awful.key({ modkey, "Control" }, "Down",   cycle_master(true)),
    awful.key({ altkey,           }, "Tab",    previous_client),
+   awful.key({ modkey            }, "p",      menubar.show),
+   awful.key({ modkey            }, "u",      awful.client.urgent.jumpto),
    awful.key({ modkey            }, "t",      function () awful.util.spawn(terminal) end),
    awful.key({ modkey            }, "e",      function () awful.util.spawn(emacs) end),
    awful.key({ modkey            }, "f",      function () awful.util.spawn("thunar") end),
@@ -310,19 +307,15 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey            }, "v",      function () awful.util.spawn("pavucontrol") end),
    awful.key({ modkey, "Control" }, "r",      awesome.restart),
    awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
-
    awful.key({ modkey            }, "Right",  function () awful.tag.incmwfact( 0.05) end),
    awful.key({ modkey            }, "Left",   function () awful.tag.incmwfact(-0.05) end),
-   awful.key({ modkey, "Control" }, "Right",  function () awful.tag.incnmaster( 1) end),
+   awful.key({ modkey, "Control" }, "Right",  function () awful.tag.incnmaster(1) end),
    awful.key({ modkey, "Control" }, "Left",   function () awful.tag.incnmaster(-1) end),
-   -- awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1) end),
-   -- awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1) end),
+   awful.key({ modkey, "Shift"   }, "Right",  function () awful.tag.incncol(1) end),
+   awful.key({ modkey, "Shift"   }, "Left",   function () awful.tag.incncol(-1) end),
    awful.key({ modkey            }, "space",  function () awful.layout.inc(layouts, 1) end),
    awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1) end),
-
    awful.key({ modkey, "Control" }, "n",      function () awful.client.restore(mouse.screen) end),
-
-   -- Prompt
    awful.key({ modkey            }, "r",      function () mypromptbox:run() end),
    awful.key({ modkey            }, "x",      mypromptbox.lua)
 )
