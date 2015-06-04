@@ -114,11 +114,18 @@ mylauncher = awful.widget.launcher({
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- {{{ Key utils
+-- {{{ Utils
 function focus_raise (idx)
    return function ()
       awful.client.focus.byidx(idx)
       if client.focus then client.focus:raise() end
+   end
+end
+
+function previous_client ()
+   awful.client.focus.history.previous()
+   if client.focus then
+      client.focus:raise()
    end
 end
 -- }}}
@@ -279,16 +286,9 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey            }, "u",      awful.client.urgent.jumpto),
    awful.key({ modkey            }, "Tab",    awful.tag.viewnext),
    awful.key({ modkey, "Shift"   }, "Tab",    awful.tag.viewprev),
-   awful.key({ altkey            }, "Tab",
-      function ()
-         awful.client.focus.history.previous()
-         if client.focus then
-            client.focus:raise()
-         end
-      end
-   ),
 
    -- Standard program
+   awful.key({ altkey,           }, "Tab",    previous_client),
    awful.key({ modkey            }, "t",      function () awful.util.spawn(terminal) end),
    awful.key({ modkey            }, "e",      function () awful.util.spawn(emacs) end),
    awful.key({ modkey            }, "f",      function () awful.util.spawn("thunar") end),
