@@ -122,6 +122,18 @@ function focus_raise (idx)
    end
 end
 
+function cycle_master (direction)
+   return function ()
+      if client.focus == awful.client.getmaster() then
+         awful.client.cycle(direction)
+      else
+         awful.client.setmaster(client.focus)
+      end
+      client.focus = awful.client.getmaster()
+      client.focus:raise()
+   end
+end
+
 function previous_client ()
    awful.client.focus.history.previous()
    if client.focus then
@@ -288,6 +300,8 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "Tab",    awful.tag.viewprev),
 
    -- Standard program
+   awful.key({ modkey, "Control" }, "Up",     cycle_master(false)),
+   awful.key({ modkey, "Control" }, "Down",   cycle_master(true)),
    awful.key({ altkey,           }, "Tab",    previous_client),
    awful.key({ modkey            }, "t",      function () awful.util.spawn(terminal) end),
    awful.key({ modkey            }, "e",      function () awful.util.spawn(emacs) end),
