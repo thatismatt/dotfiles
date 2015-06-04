@@ -146,7 +146,6 @@ end
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 
--- Create a wibox for each screen and add it
 mywibox = {}
 mylayoutbox = {}
 mytaglist = {}
@@ -190,21 +189,20 @@ mytasklist.buttons = awful.util.table.join(
    awful.button({ }, 5, focus_raise(1)))
 
 for s = 1, screen.count() do
-   -- Create an imagebox widget which will contains an icon indicating which layout we're using.
-   -- We need one layoutbox per screen.
+   -- Layouts widget
    mylayoutbox[s] = awful.widget.layoutbox(s)
    mylayoutbox[s]:buttons(awful.util.table.join(
                              awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
                              awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
                              awful.button({ }, 4, function () awful.layout.inc(layouts, -1) end),
                              awful.button({ }, 5, function () awful.layout.inc(layouts, 1) end)))
-   -- Create a taglist widget
+   -- Taglist widget
    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
-   -- Create a tasklist widget
+   -- Tasklist widget
    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
-   -- Create the wibox
+   -- Top wibox
    mywibox[s] = awful.wibox({ position = "top", screen = s })
 
    -- Widgets that are aligned to the left
@@ -228,7 +226,7 @@ for s = 1, screen.count() do
 end
 -- }}}
 
--- {{{ Bottom Wibox
+-- {{{ Bottom wibox
 bottom_wibox = awful.wibox({ position = "bottom", screen = screen.count(), height = 25 })
 
 -- Wifi signal
