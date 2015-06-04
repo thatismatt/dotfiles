@@ -2,33 +2,34 @@
 -- Default awesome theme --
 ---------------------------
 
-theme = {}
+local theme = {}
 
 theme.font          = "Liberation Sans 12"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#555555"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
-
 theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.bg_normal     = "#222222"
+
+theme.fg_focus      = "#dddddd"
+theme.bg_focus      = "#555555"
+
+theme.fg_urgent     = "#dddddd"
+theme.bg_urgent     = "#ff0000"
+
+theme.fg_minimize   = "#dddddd"
+theme.bg_minimize   = "#444444"
 
 theme.border_width  = "2"
 theme.border_normal = "#444444"
-theme.border_focus  = "#5577dd"
-theme.border_marked = "#91231c"
+theme.border_focus  = "#3333dd"
+theme.border_marked = "#ff0000"
 
 -- There are other variable sets overriding the default one when defined, the sets are:
 -- [taglist|tasklist]_[bg|fg]_[focus|urgent]
 -- titlebar_[bg|fg]_[normal|focus]
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
--- Example:
-theme.taglist_bg_focus = "#555555"
-theme.taglist_bg_normal = "#111111"
+-- theme.taglist_bg_focus = "#555555"
+-- theme.taglist_bg_normal = "#111111"
 
 -- Display the taglist squares
 theme.taglist_squares_sel   = "/usr/share/awesome/themes/default/taglist/squarefw.png"
