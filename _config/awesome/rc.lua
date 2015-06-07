@@ -99,6 +99,7 @@ mymainmenu = awful.menu({
          { "Awesome",      myawesomemenu,   beautiful.awesome_icon },
          { "Emacs",        emacs,           "/usr/share/icons/Faenza/apps/32/emacs.png" },
          { "Firefox",      "firefox",       "/usr/share/icons/Faenza/apps/32/firefox.png" },
+         { "Chrome",       "google-chrome", "/usr/share/icons/Faenza/apps/32/google-chrome.png" },
          { "Thunar",       "thunar",        "/usr/share/icons/Faenza/apps/32/thunar.png" },
          { "LXAppearance", "lxappearance",  "/usr/share/icons/Faenza/categories/32/preferences-desktop.png" },
          { "Terminal",     terminal,        "/usr/share/icons/Faenza/apps/32/xterm.png" },
