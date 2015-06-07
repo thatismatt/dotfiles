@@ -1,33 +1,35 @@
 ! -*- mode: conf-xdefaults -*-
 
 ! xterm
-XTerm*faceName: Inconsolata
-XTerm*faceSize: 13
+XTerm*faceName: Bitstream Vera Serif Mono
+!XTerm*faceName: Inconsolata
+XTerm*faceSize: 10
+XTerm*renderFont: true
 XTerm*metaSendsEscape: true
 Xterm*saveLines: 10000
-XTerm*reverseVideo: off
+!XTerm*reverseVideo: off
 XTerm*Foreground: #aaaaaa
 XTerm*Background: #001111
 ! black
-*color0:     #001111
+*color0:     #444444
 *color8:     #666666
 ! red
 *color1:     #dd3333
 *color9:     #aa3333
 ! green
-*color2:     #55dd33
+*color2:     #009900
 *color10:    #33aa33
 ! yellow
 *color3:     #ffaa00
 *color11:    #996600
 ! blue
-*color4:     #5577ff
+*color4:     #5599ff
 *color12:    #3355ff
 ! magenta
 *color5:     #ff00aa
 *color13:    #993399
 ! cyan
-*color6:     #00cccc
+*color6:     #1199bb
 *color14:    #009999
 ! white
 *color7:     #aaaaaa
