@@ -3,5 +3,7 @@ xrdb -merge ~/.Xresources
 
 eval `ssh-agent`
 
+emacs --daemon=server &
+
 # Start WM
 exec awesome
