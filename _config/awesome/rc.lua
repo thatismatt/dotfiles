@@ -96,13 +96,13 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({
       items = {
-         {  "Awesome",      myawesomemenu,  beautiful.awesome_icon },
-         {  "Emacs",        emacs,          "/usr/share/icons/Faenza/apps/32/emacs.png" },
-         {  "Firefox",      "firefox",      "/usr/share/icons/Faenza/apps/32/firefox.png" },
-         {  "Thunar",       "thunar",       "/usr/share/icons/Faenza/apps/32/thunar.png" },
-         {  "LXAppearance", "lxappearance", "/usr/share/icons/Faenza/categories/32/preferences-desktop.png" },
-         {  "Terminal",     terminal,       "/usr/share/icons/Faenza/apps/32/xterm.png" },
-         {  "Quit",         awesome.quit }
+         { "Awesome",      myawesomemenu,   beautiful.awesome_icon },
+         { "Emacs",        emacs,           "/usr/share/icons/Faenza/apps/32/emacs.png" },
+         { "Firefox",      "firefox",       "/usr/share/icons/Faenza/apps/32/firefox.png" },
+         { "Thunar",       "thunar",        "/usr/share/icons/Faenza/apps/32/thunar.png" },
+         { "LXAppearance", "lxappearance",  "/usr/share/icons/Faenza/categories/32/preferences-desktop.png" },
+         { "Terminal",     terminal,        "/usr/share/icons/Faenza/apps/32/xterm.png" },
+         { "Quit",         awesome.quit }
 }})
 
 mylauncher = awful.widget.launcher({
