@@ -359,7 +359,7 @@ bindings.keys = awful.util.table.join(
 
 -- Volume keys
 function volume_key(action)
-   return function () awful.util.spawn("amixer -q -D pulse set Master " .. action) end
+   return function () awful.util.spawn("amixer -q -D pulse set Master " .. action, false) end
 end
 bindings.volume = awful.util.table.join(
    awful.key({ }, "XF86AudioMute",        volume_key("toggle")),
