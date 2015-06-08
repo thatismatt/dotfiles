@@ -269,9 +269,30 @@ bandwidth.timer = timer({ timeout = 1 })
 bandwidth.timer:connect_signal("timeout", bandwidth.update)
 bandwidth.timer:start()
 
+local volume = {}
+volume.widget = wibox.widget.textbox()
+
+volume.update = function ()
+   local fd = io.popen("amixer -D pulse sget Master")
+   local status = fd:read("*all")
+   fd:close()
+   local on = string.match(status, "%[(o[^%]]*)%]") == "on"
+   local text = "mute"
+   if on then
+      text = string.match(status, "(%d?%d?%d)%%")
+   end
+   volume.widget:set_text(" Volume: " .. text)
+end
+
+volume.update()
+volume.timer = timer({ timeout = 1 })
+volume.timer:connect_signal("timeout", volume.update)
+volume.timer:start()
+
 local bottom_widgets_layout = wibox.layout.fixed.horizontal()
 bottom_widgets_layout:add(wifi.widget)
 bottom_widgets_layout:add(bandwidth.widget)
+bottom_widgets_layout:add(volume.widget)
 
 mypromptbox = awful.widget.prompt()
 
