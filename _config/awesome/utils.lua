@@ -49,7 +49,7 @@ utils.dump = function (o, indent)
    end
 end
 
-utils.pp = function(o)
+utils.pp = function (o)
    utils.log(utils.dump(o))
 end
 
