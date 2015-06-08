@@ -333,6 +333,16 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey            }, "x",      mypromptbox.lua)
 )
 
+-- Volume keys
+function volume_key(action)
+   return function () awful.util.spawn("amixer -q -D pulse set Master " .. action) end
+end
+volumekeys = awful.util.table.join(
+   awful.key({ }, "XF86AudioMute",        volume_key("toggle")),
+   awful.key({ }, "XF86AudioRaiseVolume", volume_key("5%+")),
+   awful.key({ }, "XF86AudioLowerVolume", volume_key("5%-"))
+)
+
 function toggle_maximized (c)
    c.maximized_horizontal = not c.maximized_horizontal
    c.maximized_vertical   = not c.maximized_vertical
@@ -407,7 +417,7 @@ clientbuttons = awful.util.table.join(
    awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
-root.keys(globalkeys)
+root.keys(awful.util.table.join(globalkeys, volumekeys))
 -- }}}
 
 -- {{{ Rules
