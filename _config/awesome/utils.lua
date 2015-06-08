@@ -24,7 +24,8 @@ end
 
 utils.keys = function (tbl)
    local ks = {}
-   table.foreach(tbl, function (k, v) ks[#ks + 1] = k end)
+   -- NOTE: tostring(k) required for sorting
+   table.foreach(tbl, function (k, v) ks[#ks + 1] = tostring(k) end)
    table.sort(ks)
    return ks
 end
