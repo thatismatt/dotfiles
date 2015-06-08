@@ -51,6 +51,8 @@ emacs = "emacsclient -c -a="
 modkey = "Mod4"
 altkey = "Mod1"
 
+local bindings = {};
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts = {
    awful.layout.suit.tile,
@@ -292,15 +294,15 @@ bottom_wibox:set_widget(bottom_layout)
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(awful.util.table.join(
-                awful.button({ }, 3, function () mymainmenu:toggle() end),
-                awful.button({ }, 4, awful.tag.viewprev),
-                awful.button({ }, 5, awful.tag.viewnext)
-))
+bindings.mouse = awful.util.table.join(
+   awful.button({ }, 3, function () mymainmenu:toggle() end),
+   awful.button({ }, 4, awful.tag.viewprev),
+   awful.button({ }, 5, awful.tag.viewnext)
+)
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = awful.util.table.join(
+bindings.keys = awful.util.table.join(
    awful.key({ modkey            }, "Escape", awful.tag.history.restore),
    awful.key({ modkey            }, "Up",     focus_raise(-1)),
    awful.key({ modkey            }, "Down",   focus_raise(1)),
@@ -338,7 +340,7 @@ globalkeys = awful.util.table.join(
 function volume_key(action)
    return function () awful.util.spawn("amixer -q -D pulse set Master " .. action) end
 end
-volumekeys = awful.util.table.join(
+bindings.volume = awful.util.table.join(
    awful.key({ }, "XF86AudioMute",        volume_key("toggle")),
    awful.key({ }, "XF86AudioRaiseVolume", volume_key("5%+")),
    awful.key({ }, "XF86AudioLowerVolume", volume_key("5%-"))
@@ -366,8 +368,8 @@ clientkeys = awful.util.table.join(
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, #tags[1] do
-   globalkeys = awful.util.table.join(
-      globalkeys,
+   bindings.keys = awful.util.table.join(
+      bindings.keys,
       -- View tag only.
       awful.key({ modkey }, "#" .. i + 9,
          function ()
@@ -417,8 +419,9 @@ clientbuttons = awful.util.table.join(
    awful.button({ modkey }, 1, awful.mouse.client.move),
    awful.button({ modkey }, 3, awful.mouse.client.resize))
 
--- Set keys
-root.keys(awful.util.table.join(globalkeys, volumekeys))
+-- Set Key/Mouse Bindings
+root.keys(awful.util.table.join(bindings.keys, bindings.volume))
+root.buttons(bindings.mouse)
 -- }}}
 
 -- {{{ Rules
