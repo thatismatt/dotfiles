@@ -237,7 +237,7 @@ local wifi = {}
 wifi.widget = wibox.widget.textbox()
 wifi.update = function ()
    local strength = awful.util.pread("awk 'NR==3 {printf \"%.1f%%\\n\",($3/70)*100}' /proc/net/wireless")
-   wifi.widget:set_text(" " .. strength)
+   wifi.widget:set_text(" Wifi: " .. strength)
 end
 wifi.timer = timer({ timeout = 2 })
 wifi.timer:connect_signal("timeout", wifi.update)
