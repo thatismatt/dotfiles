@@ -231,15 +231,16 @@ end
 bottom_wibox = awful.wibox({ position = "bottom", screen = screen.count(), height = 25 })
 
 -- Wifi signal
-wifi_widget = wibox.widget.textbox()
-function wifi_info()
-   local wifi_strength = awful.util.pread("awk 'NR==3 {printf \"%.1f%%\\n\",($3/70)*100}' /proc/net/wireless")
-   wifi_widget:set_text(" " .. wifi_strength)
+local wifi = {}
+wifi.widget = wibox.widget.textbox()
+wifi.update = function ()
+   local strength = awful.util.pread("awk 'NR==3 {printf \"%.1f%%\\n\",($3/70)*100}' /proc/net/wireless")
+   wifi.widget:set_text(" " .. strength)
 end
-wifi_info()
-wifi_timer = timer({ timeout = 2 })
-wifi_timer:connect_signal("timeout", wifi_info)
-wifi_timer:start()
+wifi.timer = timer({ timeout = 2 })
+wifi.timer:connect_signal("timeout", wifi.update)
+wifi.timer:start()
+wifi.update()
 
 -- Bandwidth
 local bandwidth = {}
@@ -267,7 +268,7 @@ bandwidth.timer:connect_signal("timeout", bandwidth.update)
 bandwidth.timer:start()
 
 local bottom_widgets_layout = wibox.layout.fixed.horizontal()
-bottom_widgets_layout:add(wifi_widget)
+bottom_widgets_layout:add(wifi.widget)
 bottom_widgets_layout:add(bandwidth.widget)
 
 mypromptbox = awful.widget.prompt()
