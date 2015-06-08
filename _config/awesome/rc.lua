@@ -241,21 +241,34 @@ wifi_timer = timer({ timeout = 2 })
 wifi_timer:connect_signal("timeout", wifi_info)
 wifi_timer:start()
 
--- Bandwidth - TODO
--- local devices = {}
--- for line in io.lines('/proc/net/dev') do
---    local device = line:match('^[%s]*([%w]+):')
---    if device == "wlan0" then
---       -- totals
---       local recv = tonumber(string.match(line, ":[%s]*([%d]+)"))
---       local send = -- Transmited bytes, 7 fields from end of the line
---          tonumber(string.match(line, "([%d]+)%s+%d+%s+%d+%s+%d+%s+%d+%s+%d+%s+%d+%s+%d$"))
---       utils.log(device .. " " .. send .. " " .. recv)
---    end
--- end
+-- Bandwidth
+local bandwidth = {}
+bandwidth.widget = wibox.widget.textbox()
+bandwidth.interface = "wlan0"
+bandwidth.previous = { rx = 0, tx = 0 }
+bandwidth.update = function ()
+   local current_rx = tonumber(io.lines("/sys/class/net/" .. bandwidth.interface .. "/statistics/rx_bytes")())
+   local current_tx = tonumber(io.lines("/sys/class/net/" .. bandwidth.interface .. "/statistics/tx_bytes")())
+   local rx = current_rx - bandwidth.previous.rx
+   local tx = current_tx - bandwidth.previous.tx
+   if bandwidth.previous.rx == 0 then
+      rx = 0
+      tx = 0
+   end
+   bandwidth.previous = { rx = current_rx, tx = current_tx }
+   -- 131072 = 1024 * 1024 / 8
+   bandwidth.widget:set_text(
+      " Down: " .. string.format("%.2f", rx / 131072) ..
+         " Up: " .. string.format("%.2f", tx / 131072))
+end
+bandwidth.update()
+bandwidth.timer = timer({ timeout = 1 })
+bandwidth.timer:connect_signal("timeout", bandwidth.update)
+bandwidth.timer:start()
 
 local bottom_widgets_layout = wibox.layout.fixed.horizontal()
 bottom_widgets_layout:add(wifi_widget)
+bottom_widgets_layout:add(bandwidth.widget)
 
 mypromptbox = awful.widget.prompt()
 
