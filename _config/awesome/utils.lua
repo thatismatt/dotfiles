@@ -1,4 +1,5 @@
 local naughty = require("naughty")
+local awful = require("awful")
 
 local utils = {}
 
@@ -14,6 +15,10 @@ utils.map = function (tbl, f)
    return r
 end
 
+utils.flatmap = function (tbl, f)
+   return utils.concat(utils.map(tbl, f))
+end
+
 utils.map_values = function (tbl, f)
    local r = {}
    for k, v in pairs(tbl) do
@@ -24,10 +29,24 @@ end
 
 utils.keys = function (tbl)
    local ks = {}
-   -- NOTE: tostring(k) required for sorting
-   table.foreach(tbl, function (k, v) ks[#ks + 1] = tostring(k) end)
-   table.sort(ks)
+   table.foreach(tbl, function (k, v) ks[#ks + 1] = k end)
    return ks
+end
+
+utils.concat = function (tbls)
+   local r = {}
+   for k, v in pairs(tbls) do
+      r = awful.util.table.join(r, v)
+   end
+   return r
+end
+
+utils.range = function (to)
+   local r = {}
+   for i = 1, to do
+      table.insert(r, i)
+   end
+   return r
 end
 
 utils.intr = function (tbl)
