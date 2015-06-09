@@ -317,6 +317,30 @@ local bandwidth_tx = bottom_widget(
    { previous = 0, interface = "wlan0", direction = "tx" }
 )
 
+local cpu = bottom_widget(
+   icon_file("action", "settings"),
+   function (cpu)
+      local user, system, idle = string.match(io.lines("/proc/stat")(), "cpu +(%d+) +%d+ +(%d+) +(%d+)")
+      local text = ""
+      if cpu.user then
+         local total_d = user + system + idle - cpu.user - cpu.system - cpu.idle
+         local used_d = user + system - cpu.user - cpu.system
+         text = string.format("%.2f", 100 * used_d / total_d)
+      end
+      cpu.user, cpu.system, cpu.idle = user, system, idle
+      return text
+   end,
+   {}
+)
+
+local memory = bottom_widget(
+   icon_file("hardware", "memory"),
+   function (memory)
+      local total, used = string.match(awful.util.pread("free -m"), "Mem: +(%d+) +(%d+)")
+      return string.format("%.2f", 100 * used / total)
+   end
+)
+
 local battery = bottom_widget(
    function (battery)
       local charge = "20"
@@ -373,6 +397,10 @@ bottom_widgets_layout:add(battery.icon)
 bottom_widgets_layout:add(battery.widget)
 bottom_widgets_layout:add(volume.icon)
 bottom_widgets_layout:add(volume.widget)
+bottom_widgets_layout:add(cpu.icon)
+bottom_widgets_layout:add(cpu.widget)
+bottom_widgets_layout:add(memory.icon)
+bottom_widgets_layout:add(memory.widget)
 
 mypromptbox = awful.widget.prompt()
 
