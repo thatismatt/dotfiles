@@ -233,7 +233,6 @@ end
 -- {{{ Bottom wibox
 bottom_wibox = awful.wibox({ position = "bottom", screen = screen.count(), height = 25 })
 
--- Wifi signal
 local wifi = {}
 wifi.widget = wibox.widget.textbox()
 wifi.update = function ()
@@ -245,7 +244,6 @@ wifi.timer:connect_signal("timeout", wifi.update)
 wifi.timer:start()
 wifi.update()
 
--- Bandwidth
 local bandwidth = {}
 bandwidth.widget = wibox.widget.textbox()
 bandwidth.interface = "wlan0"
@@ -270,9 +268,23 @@ bandwidth.timer = timer({ timeout = 1 })
 bandwidth.timer:connect_signal("timeout", bandwidth.update)
 bandwidth.timer:start()
 
+local battery = {}
+battery.widget = wibox.widget.textbox()
+battery.identifier = "BAT1"
+battery.update = function ()
+   local full = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_full")())
+   local now = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_now")())
+   local status = io.lines("/sys/class/power_supply/" .. battery.identifier .. "/status")()
+   local text = string.format("%.2f (%s)", 100 * now / full, status)
+   battery.widget:set_text(" Battery: " .. text)
+end
+battery.update()
+battery.timer = timer({ timeout = 1 })
+battery.timer:connect_signal("timeout", battery.update)
+battery.timer:start()
+
 local volume = {}
 volume.widget = wibox.widget.textbox()
-
 volume.update = function ()
    local fd = io.popen("amixer -D pulse sget Master")
    local status = fd:read("*all")
@@ -284,7 +296,6 @@ volume.update = function ()
    end
    volume.widget:set_text(" Volume: " .. text)
 end
-
 volume.update()
 volume.timer = timer({ timeout = 1 })
 volume.timer:connect_signal("timeout", volume.update)
@@ -293,6 +304,7 @@ volume.timer:start()
 local bottom_widgets_layout = wibox.layout.fixed.horizontal()
 bottom_widgets_layout:add(wifi.widget)
 bottom_widgets_layout:add(bandwidth.widget)
+bottom_widgets_layout:add(battery.widget)
 bottom_widgets_layout:add(volume.widget)
 
 mypromptbox = awful.widget.prompt()
