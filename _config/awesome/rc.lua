@@ -233,78 +233,108 @@ end
 -- {{{ Bottom wibox
 bottom_wibox = awful.wibox({ position = "bottom", screen = screen.count(), height = 25 })
 
-local wifi = {}
-wifi.widget = wibox.widget.textbox()
-wifi.update = function ()
-   local strength = awful.util.pread("awk 'NR==3 {printf \"%.1f%%\\n\",($3/70)*100}' /proc/net/wireless")
-   wifi.widget:set_text(" Wifi: " .. strength)
-end
-wifi.timer = timer({ timeout = 2 })
-wifi.timer:connect_signal("timeout", wifi.update)
-wifi.timer:start()
-wifi.update()
-
-local bandwidth = {}
-bandwidth.widget = wibox.widget.textbox()
-bandwidth.interface = "wlan0"
-bandwidth.previous = { rx = 0, tx = 0 }
-bandwidth.update = function ()
-   local current_rx = tonumber(io.lines("/sys/class/net/" .. bandwidth.interface .. "/statistics/rx_bytes")())
-   local current_tx = tonumber(io.lines("/sys/class/net/" .. bandwidth.interface .. "/statistics/tx_bytes")())
-   local rx = current_rx - bandwidth.previous.rx
-   local tx = current_tx - bandwidth.previous.tx
-   if bandwidth.previous.rx == 0 then
-      rx = 0
-      tx = 0
+function imagebox_centered (image)
+   local img = wibox.widget.imagebox(image, false)
+   -- patch wibox.widget.imagebox.draw to center the image vertically
+   function img:draw(wibox, cr, width, height)
+      if not self._image then return end
+      if width == 0 or height == 0 then return end
+      cr:save()
+      -- vertically center image
+      local h = (height - self._image.height) / 2
+      cr:set_source_surface(self._image, 0, h)
+      cr:paint()
+      cr:restore()
    end
-   bandwidth.previous = { rx = current_rx, tx = current_tx }
+   return img
+end
+
+function icon_file(...)
+   return string.format("/home/matt/tmp/material-design-icons/%s/1x_web/ic_%s_white_18dp.png", ...)
+end
+
+function bottom_widget (icon, update, data)
+   local w = data or {}
+   w.widget = wibox.widget.textbox()
+   w.icon = imagebox_centered(icon)
+   w.update = function ()
+      local text = update(w)
+      w.widget:set_text(" " .. text .. "  ")
+   end
+   w.timer = timer({ timeout = 2 })
+   w.timer:connect_signal("timeout", w.update)
+   w.timer:start()
+   w.update(w)
+   return w
+end
+
+local wifi = bottom_widget(
+   icon_file("device", "network_wifi"),
+   function (wifi)
+      return awful.util.pread("awk 'NR==3 {printf \"%.1f%%\",($3/70)*100}' /proc/net/wireless")
+   end
+)
+
+function bandwidth_update (bandwidth)
+   local current = tonumber(io.lines("/sys/class/net/" .. bandwidth.interface .. "/statistics/" .. bandwidth.direction .. "_bytes")())
+   local d = current - bandwidth.previous
+   if bandwidth.previous == 0 then
+      d = 0
+   end
+   bandwidth.previous = current
    -- 131072 = 1024 * 1024 / 8
-   bandwidth.widget:set_text(
-      " Down: " .. string.format("%.2f", rx / 131072) ..
-         " Up: " .. string.format("%.2f", tx / 131072))
+   return string.format("%.2f", d / 131072)
 end
-bandwidth.update()
-bandwidth.timer = timer({ timeout = 1 })
-bandwidth.timer:connect_signal("timeout", bandwidth.update)
-bandwidth.timer:start()
 
-local battery = {}
-battery.widget = wibox.widget.textbox()
-battery.identifier = "BAT1"
-battery.update = function ()
-   local full = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_full")())
-   local now = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_now")())
-   local status = io.lines("/sys/class/power_supply/" .. battery.identifier .. "/status")()
-   local text = string.format("%.2f (%s)", 100 * now / full, status)
-   battery.widget:set_text(" Battery: " .. text)
-end
-battery.update()
-battery.timer = timer({ timeout = 1 })
-battery.timer:connect_signal("timeout", battery.update)
-battery.timer:start()
+local bandwidth_rx = bottom_widget(
+   icon_file("file", "file_download"),
+   bandwidth_update,
+   { previous = 0, interface = "wlan0", direction = "rx" }
+)
 
-local volume = {}
-volume.widget = wibox.widget.textbox()
-volume.update = function ()
-   local fd = io.popen("amixer -D pulse sget Master")
-   local status = fd:read("*all")
-   fd:close()
-   local on = string.match(status, "%[(o[^%]]*)%]") == "on"
-   local text = "mute"
-   if on then
-      text = string.match(status, "(%d?%d?%d)%%")
+local bandwidth_tx = bottom_widget(
+   icon_file("file", "file_upload"),
+   bandwidth_update,
+   { previous = 0, interface = "wlan0", direction = "tx" }
+)
+
+local battery = bottom_widget(
+   icon_file("device", "battery_full"),
+   function (battery)
+      local full = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_full")())
+      local now = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_now")())
+      local status = io.lines("/sys/class/power_supply/" .. battery.identifier .. "/status")()
+      local text = string.format("%.2f (%s)", 100 * now / full, status)
+      return text
+   end,
+   { identifier = "BAT1" }
+)
+
+local volume = bottom_widget(
+   icon_file("hardware", "speaker"),
+   function (volume)
+      local fd = io.popen("amixer -D pulse sget Master")
+      local status = fd:read("*all")
+      fd:close()
+      local on = string.match(status, "%[(o[^%]]*)%]") == "on"
+      local text = "mute"
+      if on then
+         text = string.match(status, "(%d?%d?%d)%%")
+      end
+      return text
    end
-   volume.widget:set_text(" Volume: " .. text)
-end
-volume.update()
-volume.timer = timer({ timeout = 1 })
-volume.timer:connect_signal("timeout", volume.update)
-volume.timer:start()
+)
 
 local bottom_widgets_layout = wibox.layout.fixed.horizontal()
+bottom_widgets_layout:add(wifi.icon)
 bottom_widgets_layout:add(wifi.widget)
-bottom_widgets_layout:add(bandwidth.widget)
+bottom_widgets_layout:add(bandwidth_rx.icon)
+bottom_widgets_layout:add(bandwidth_rx.widget)
+bottom_widgets_layout:add(bandwidth_tx.icon)
+bottom_widgets_layout:add(bandwidth_tx.widget)
+bottom_widgets_layout:add(battery.icon)
 bottom_widgets_layout:add(battery.widget)
+bottom_widgets_layout:add(volume.icon)
 bottom_widgets_layout:add(volume.widget)
 
 mypromptbox = awful.widget.prompt()
