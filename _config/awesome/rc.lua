@@ -233,8 +233,8 @@ end
 -- {{{ Bottom wibox
 bottom_wibox = awful.wibox({ position = "bottom", screen = screen.count(), height = 25 })
 
-function imagebox_centered (image)
-   local img = wibox.widget.imagebox(image, false)
+function imagebox_centered ()
+   local img = wibox.widget.imagebox(nil, false)
    -- patch wibox.widget.imagebox.draw to center the image vertically
    function img:draw(wibox, cr, width, height)
       if not self._image then return end
@@ -250,16 +250,18 @@ function imagebox_centered (image)
 end
 
 function icon_file(...)
-   return string.format("/home/matt/tmp/material-design-icons/%s/1x_web/ic_%s_white_18dp.png", ...)
+   return string.format("/home/matt/Pictures/material-design-icons/%s/1x_web/ic_%s_white_18dp.png", ...)
 end
 
-function bottom_widget (icon, update, data)
+function bottom_widget (icon_or_fn, update, data)
    local w = data or {}
    w.widget = wibox.widget.textbox()
-   w.icon = imagebox_centered(icon)
+   w.icon = imagebox_centered()
    w.update = function ()
       local text = update(w)
       w.widget:set_text(" " .. text .. "  ")
+      local icon = type(icon_or_fn) == "function" and icon_or_fn(w) or icon_or_fn
+      w.icon:set_image(icon)
    end
    w.timer = timer({ timeout = 2 })
    w.timer:connect_signal("timeout", w.update)
@@ -269,10 +271,27 @@ function bottom_widget (icon, update, data)
 end
 
 local wifi = bottom_widget(
-   icon_file("device", "network_wifi"),
    function (wifi)
-      return awful.util.pread("awk 'NR==3 {printf \"%.1f%%\",($3/70)*100}' /proc/net/wireless")
-   end
+      local icon = "signal_wifi_off"
+      if wifi.strength > 80 then icon = "signal_wifi_4_bar"
+      elseif wifi.strength > 75 then icon = "signal_wifi_3_bar"
+      elseif wifi.strength > 50 then icon = "signal_wifi_2_bar"
+      elseif wifi.strength > 25 then icon = "signal_wifi_1_bar"
+      elseif wifi.strength > 0 then icon = "signal_wifi_0_bar"
+      end
+      return icon_file("device", icon)
+   end,
+   function (wifi)
+      for line in io.lines("/proc/net/wireless") do
+         local match = string.match(line, "^ *" .. wifi.interface .. ": +%d+ +(%d+)")
+         if match then
+            wifi.strength = 100 * tonumber(match) / 70
+            return string.format("%.2f", wifi.strength)
+         end
+      end
+      return "off"
+   end,
+   { interface = "wlan0" }
 )
 
 function bandwidth_update (bandwidth)
@@ -299,12 +318,30 @@ local bandwidth_tx = bottom_widget(
 )
 
 local battery = bottom_widget(
-   icon_file("device", "battery_full"),
+   function (battery)
+      local charge = "20"
+      if battery.charge > 0.9 then charge = "90"
+      elseif battery.charge > 0.8 then charge = "80"
+      elseif battery.charge > 0.6 then charge = "60"
+      elseif battery.charge > 0.5 then charge = "50"
+      elseif battery.charge > 0.3 then charge = "30"
+      end
+      local status = io.lines("/sys/class/power_supply/" .. battery.identifier .. "/status")()
+      local status_mapping = {
+         Full = "battery_charging_full",
+         Discharging = "battery_%s",
+         Charging = "battery_charging_%s"
+      }
+      local icon_fmt = status_mapping[status] or "battery_unknown"
+
+      local icon = string.format(icon_fmt, charge)
+      return icon_file("device", icon)
+   end,
    function (battery)
       local full = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_full")())
       local now = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_now")())
-      local status = io.lines("/sys/class/power_supply/" .. battery.identifier .. "/status")()
-      local text = string.format("%.2f (%s)", 100 * now / full, status)
+      battery.charge = 100 * now / full
+      local text = string.format("%.2f", battery.charge)
       return text
    end,
    { identifier = "BAT1" }
