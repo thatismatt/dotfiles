@@ -275,7 +275,7 @@ local wifi = bottom_widget(
          local match = string.match(line, "^ *" .. wifi.interface .. ": +%d+ +(%d+)")
          if match then
             wifi.strength = 100 * tonumber(match) / 70
-            return string.format("%.2f", wifi.strength)
+            return string.format("%.0f%%", wifi.strength)
          end
       end
       return "off"
@@ -314,7 +314,7 @@ local cpu = bottom_widget(
       if cpu.user then
          local total_d = user + system + idle - cpu.user - cpu.system - cpu.idle
          local used_d = user + system - cpu.user - cpu.system
-         text = string.format("%.2f", 100 * used_d / total_d)
+         text = string.format("%.1f%%", 100 * used_d / total_d)
       end
       cpu.user, cpu.system, cpu.idle = user, system, idle
       return text
@@ -326,7 +326,7 @@ local memory = bottom_widget(
    icon_file("hardware", "memory"),
    function (memory)
       local total, used = string.match(awful.util.pread("free -m"), "Mem: +(%d+) +(%d+)")
-      return string.format("%.2f", 100 * used / total)
+      return string.format("%.0f%%", 100 * used / total)
    end
 )
 
@@ -354,7 +354,7 @@ local battery = bottom_widget(
       local full = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_full")())
       local now = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_now")())
       battery.charge = 100 * now / full
-      local text = string.format("%.2f", battery.charge)
+      local text = string.format("%.0f%%", battery.charge)
       return text
    end,
    { identifier = "BAT1" }
@@ -369,7 +369,7 @@ local volume = bottom_widget(
       local on = string.match(status, "%[(o[^%]]*)%]") == "on"
       local text = "mute"
       if on then
-         text = string.match(status, "(%d?%d?%d)%%")
+         text = string.match(status, "(%d?%d?%d)%%") .. "%"
       end
       return text
    end
