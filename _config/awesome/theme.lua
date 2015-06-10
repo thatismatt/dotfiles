@@ -38,7 +38,7 @@ theme.menu_width  = "150"
 
 theme.wallpaper = "/home/matt/Pictures/wallpaper"
 
-theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
+theme.awesome_icon = "/home/matt/.config/awesome/awesome_icon.png"
 
 -- theme.tasklist_plain_task_name = true
 
