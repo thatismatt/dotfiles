@@ -80,11 +80,14 @@ end
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {}
-tags.count = 4
+tags = { by_screen = {} }
+tags.count = 4 -- per screen
 for s = 1, screen.count() do
-   -- Each screen has its own tag table.
-   tags[s] = awful.tag(utils.range(tags.count), s, layouts[1])
+   local names = utils.range((s - 1) * tags.count + 1, tags.count * s)
+   tags.by_screen[s] = awful.tag(names, s, layouts[1])
+   for k, v in pairs(names) do
+      tags[v] = tags.by_screen[s][k]
+   end
 end
 -- }}}
 
@@ -492,50 +495,26 @@ clientkeys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "d",      function (c) debug_client = c end)
 )
 
--- Bind all key numbers to tags.
+-- Tag numeric bindings
 bindings.tags = utils.flatmap(
-   utils.range(tags.count),
+   utils.range(tags.count * screen.count()),
    function (i)
       return awful.util.table.join(
-         -- View tag only.
          awful.key({ modkey }, i,
-            function ()
-               local screen = mouse.screen
-               local tag = awful.tag.gettags(screen)[i]
-               if tag then
-                  awful.tag.viewonly(tag)
-               end
-            end
-         ),
-         -- Toggle tag.
+            function () awful.tag.viewonly(tags[i]) end),
          awful.key({ modkey, "Control" }, i,
-            function ()
-               local screen = mouse.screen
-               local tag = awful.tag.gettags(screen)[i]
-               if tag then
-                  awful.tag.viewtoggle(tag)
-               end
-            end
-         ),
-         -- Move client to tag.
+            function () awful.tag.viewtoggle(tags[i]) end),
          awful.key({ modkey, "Shift" }, i,
             function ()
                if client.focus then
-                  local tag = awful.tag.gettags(client.focus.screen)[i]
-                  if tag then
-                     awful.client.movetotag(tag)
-                  end
+                  awful.client.movetotag(tags[i])
                end
             end
          ),
-         -- Toggle tag.
          awful.key({ modkey, "Control", "Shift" }, i,
             function ()
                if client.focus then
-                  local tag = awful.tag.gettags(client.focus.screen)[i]
-                  if tag then
-                     awful.client.toggletag(tag)
-                  end
+                  awful.client.toggletag(tags[i])
                end
             end
       ))
@@ -571,9 +550,6 @@ awful.rules.rules = {
      properties = { floating = true } },
    { rule = { class = "Plugin-container" }, -- flash fullscreen e.g. youtube
      properties = { floating = true } },
-   -- Set Firefox to always map on tags number 2 of screen 1.
-   -- { rule = { class = "Firefox" },
-   --   properties = { tag = tags[1][2] } },
 }
 -- }}}
 
