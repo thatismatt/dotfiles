@@ -240,7 +240,7 @@ function icon_file(...)
    return string.format("/home/matt/Pictures/material-design-icons/%s/1x_web/ic_%s_white_18dp.png", ...)
 end
 
-function bottom_widget (icon_or_fn, update, data)
+function status_widget (icon_or_fn, update, data)
    local w = data or {}
    w.widget = wibox.widget.textbox()
    function w.widget:fit (w, h) return 70, h end
@@ -259,7 +259,7 @@ function bottom_widget (icon_or_fn, update, data)
    return w
 end
 
-local wifi = bottom_widget(
+local wifi = status_widget(
    function (wifi)
       local icon = "signal_wifi_off"
       if wifi.strength > 80 then icon = "signal_wifi_4_bar"
@@ -294,19 +294,19 @@ function bandwidth_update (bandwidth)
    return string.format("%.2f", d / 131072)
 end
 
-local bandwidth_rx = bottom_widget(
+local bandwidth_rx = status_widget(
    icon_file("file", "file_download"),
    bandwidth_update,
    { previous = 0, interface = "wlan0", direction = "rx" }
 )
 
-local bandwidth_tx = bottom_widget(
+local bandwidth_tx = status_widget(
    icon_file("file", "file_upload"),
    bandwidth_update,
    { previous = 0, interface = "wlan0", direction = "tx" }
 )
 
-local cpu = bottom_widget(
+local cpu = status_widget(
    icon_file("action", "settings"),
    function (cpu)
       local user, system, idle = string.match(io.lines("/proc/stat")(), "cpu +(%d+) +%d+ +(%d+) +(%d+)")
@@ -322,7 +322,7 @@ local cpu = bottom_widget(
    {}
 )
 
-local memory = bottom_widget(
+local memory = status_widget(
    icon_file("hardware", "memory"),
    function (memory)
       local total, used = string.match(awful.util.pread("free -m"), "Mem: +(%d+) +(%d+)")
@@ -330,7 +330,7 @@ local memory = bottom_widget(
    end
 )
 
-local battery = bottom_widget(
+local battery = status_widget(
    function (battery)
       local charge = "20"
       if battery.charge > 0.9 then charge = "90"
@@ -360,7 +360,7 @@ local battery = bottom_widget(
    { identifier = "BAT1" }
 )
 
-local volume = bottom_widget(
+local volume = status_widget(
    icon_file("hardware", "speaker"),
    function (volume)
       local fd = io.popen("amixer -D pulse sget Master")
