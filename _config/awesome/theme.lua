@@ -3,7 +3,7 @@
 --------------------------------
 
 -- load the default theme to use it as the base for this custom theme
-local success, theme = pcall(function() return dofile("/usr/share/awesome/themes/default/theme.lua") end)
+local success, theme = pcall(function () return dofile("/usr/share/awesome/themes/default/theme.lua") end)
 
 theme.font          = "Liberation Sans 12"
 
