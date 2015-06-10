@@ -233,22 +233,6 @@ end
 -- {{{ Bottom wibox
 bottom_wibox = awful.wibox({ position = "bottom", screen = screen.count(), height = 25 })
 
-function imagebox_centered ()
-   local img = wibox.widget.imagebox(nil, false)
-   -- patch wibox.widget.imagebox.draw to center the image vertically
-   function img:draw(wibox, cr, width, height)
-      if not self._image then return end
-      if width == 0 or height == 0 then return end
-      cr:save()
-      -- vertically center image
-      local h = (height - self._image.height) / 2
-      cr:set_source_surface(self._image, 0, h)
-      cr:paint()
-      cr:restore()
-   end
-   return img
-end
-
 function icon_file(...)
    return string.format("/home/matt/Pictures/material-design-icons/%s/1x_web/ic_%s_white_18dp.png", ...)
 end
@@ -256,12 +240,14 @@ end
 function bottom_widget (icon_or_fn, update, data)
    local w = data or {}
    w.widget = wibox.widget.textbox()
-   w.icon = imagebox_centered()
+   function w.widget:fit (w, h) return 70, h end
+   local img = wibox.widget.imagebox()
+   w.icon = wibox.layout.margin(img, 3, 3, 3, 3)
    w.update = function ()
       local text = update(w)
-      w.widget:set_text(" " .. text .. "  ")
+      w.widget:set_text(text)
       local icon = type(icon_or_fn) == "function" and icon_or_fn(w) or icon_or_fn
-      w.icon:set_image(icon)
+      img:set_image(icon)
    end
    w.timer = timer({ timeout = 2 })
    w.timer:connect_signal("timeout", w.update)
