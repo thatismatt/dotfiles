@@ -89,28 +89,38 @@ end
 -- }}}
 
 -- {{{ Menu
--- Create a laucher widget and a main menu
-myawesomemenu = {
+menu = {}
+
+menu.icon = function (dir, name)
+   return string.format("/usr/share/icons/Faenza/%s/32/%s.png", dir, name)
+end
+
+menu.awesome = {
    { "Manual",  terminal .. " -e man awesome" },
    { "Restart", awesome.restart },
    { "Quit",    awesome.quit }
 }
 
-mymainmenu = awful.menu({
-      items = {
-         { "Awesome",      myawesomemenu,   beautiful.awesome_icon },
-         { "Emacs",        emacs,           "/usr/share/icons/Faenza/apps/32/emacs.png" },
-         { "Firefox",      "firefox",       "/usr/share/icons/Faenza/apps/32/firefox.png" },
-         { "Chrome",       "google-chrome", "/usr/share/icons/Faenza/apps/32/google-chrome.png" },
-         { "Thunar",       "thunar",        "/usr/share/icons/Faenza/apps/32/thunar.png" },
-         { "LXAppearance", "lxappearance",  "/usr/share/icons/Faenza/categories/32/preferences-desktop.png" },
-         { "Terminal",     terminal,        "/usr/share/icons/Faenza/apps/32/xterm.png" },
-         { "Quit",         awesome.quit }
-}})
+menu.power = {
+   { "Power Off", "systemctl poweroff" },
+   { "Suspend",   "systemctl suspend" },
+   { "Restart",   "systemctl restart" }
+}
 
-mylauncher = awful.widget.launcher({
+menu.main = awful.menu({
+      { "Awesome",      menu.awesome,    beautiful.awesome_icon },
+      { "Emacs",        emacs,           menu.icon("apps", "emacs") },
+      { "Firefox",      "firefox",       menu.icon("apps", "firefox") },
+      { "Chrome",       "google-chrome", menu.icon("apps", "google-chrome") },
+      { "Thunar",       "thunar",        menu.icon("apps", "thunar") },
+      { "LXAppearance", "lxappearance",  menu.icon("categories", "preferences-desktop") },
+      { "Terminal",     terminal,        menu.icon("apps", "xterm") },
+      { "Power",        menu.power,      menu.icon("actions", "system-shutdown") }
+})
+
+menu.launcher = awful.widget.launcher({
       image = beautiful.awesome_icon,
-      menu = mymainmenu
+      menu = menu.main
 })
 
 -- Menubar configuration
@@ -214,7 +224,7 @@ for s = 1, screen.count() do
 
    -- Widgets that are aligned to the left
    local left_layout = wibox.layout.fixed.horizontal()
-   left_layout:add(mylauncher)
+   left_layout:add(menu.launcher)
    left_layout:add(mytaglist[s])
 
    -- Widgets that are aligned to the right
@@ -413,7 +423,7 @@ bottom_wibox:set_widget(bottom_layout)
 
 -- {{{ Mouse bindings
 bindings.mouse = awful.util.table.join(
-   awful.button({ }, 3, function () mymainmenu:toggle() end),
+   awful.button({ }, 3, function () menu.main:toggle() end),
    awful.button({ }, 4, awful.tag.viewprev),
    awful.button({ }, 5, awful.tag.viewnext)
 )
