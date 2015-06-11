@@ -255,7 +255,7 @@ end
 function status_widget (icon_or_fn, update, data)
    local w = data or {}
    w.widget = wibox.widget.textbox()
-   function w.widget:fit (w, h) return 70, h end
+   function w.widget:fit (w, h) return 60, h end
    local img = wibox.widget.imagebox()
    w.icon = wibox.layout.margin(img, 3, 3, 3, 3)
    w.update = function ()
