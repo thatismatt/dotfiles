@@ -19,10 +19,10 @@ theme.bg_urgent     = "#ff0000"
 theme.fg_minimize   = "#dddddd"
 theme.bg_minimize   = "#444444"
 
-theme.border_width  = "2"
+theme.border_width  = "5"
 theme.border_normal = "#444444"
-theme.border_focus  = "#3333dd"
-theme.border_marked = "#ff0000"
+theme.border_focus  = "#9900ff"
+theme.border_marked = "#ff00ff"
 
 -- There are other variable sets overriding the default one when defined, the sets are:
 -- [taglist|tasklist]_[bg|fg]_[focus|urgent]
