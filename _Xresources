@@ -11,6 +11,14 @@ Xterm*saveLines:  10000
 XTerm*Foreground: #aaaaaa
 XTerm*Background: #001111
 
+! urxvt
+URxvt.foreground: #aaaaaa
+URxvt.background: #001111
+URxvt.scrollBar:  false
+URxvt.font:       xft:Inconsolata:size=11
+URxvt.iconFile:   /usr/share/icons/Faenza/apps/scalable/Terminal.svg
+URxvt.letterSpace: -1
+
 ! colours
 ! black
 *color0:     #444444
