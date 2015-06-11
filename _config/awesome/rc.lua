@@ -42,7 +42,6 @@ end
 -- }}}
 
 -- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
 beautiful.init("/home/matt/.config/awesome/theme.lua")
 
 terminal = "x-terminal-emulator"
