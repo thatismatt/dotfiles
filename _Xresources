@@ -1,15 +1,17 @@
 ! -*- mode: conf-xdefaults -*-
 
 ! xterm
-XTerm*faceName: Bitstream Vera Serif Mono
-!XTerm*faceName: Inconsolata
-XTerm*faceSize: 10
+!XTerm*faceName:   Bitstream Vera Serif Mono
+XTerm*faceName:   Inconsolata
+XTerm*faceSize:   11
 XTerm*renderFont: true
 XTerm*metaSendsEscape: true
-Xterm*saveLines: 10000
+Xterm*saveLines:  10000
 !XTerm*reverseVideo: off
 XTerm*Foreground: #aaaaaa
 XTerm*Background: #001111
+
+! colours
 ! black
 *color0:     #444444
 *color8:     #666666
