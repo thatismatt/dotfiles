@@ -41,9 +41,13 @@ utils.concat = function (tbls)
    return r
 end
 
-utils.range = function (to)
+utils.range = function (from, to)
+   if not to then
+      to = from
+      from = 1
+   end
    local r = {}
-   for i = 1, to do
+   for i = from, to do
       table.insert(r, i)
    end
    return r
