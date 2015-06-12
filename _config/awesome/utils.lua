@@ -60,7 +60,7 @@ end
 utils.intr = function (tbl)
    local format_key = function (k)
       local tabs = 2
-      if string.len(k) > 7 then
+      if string.len(tostring(k)) > 7 then
          tabs = 1
       end
       return k .. string.rep("\t", tabs) .. tostring(tbl[k])
