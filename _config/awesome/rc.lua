@@ -625,12 +625,16 @@ client.connect_signal(
 )
 
 function decorate_client (c)
+   c.border_color = beautiful.border_normal
+   c.opacity = 0.85
+
+   if client.focus == c then
+      c.border_color = beautiful.border_focus
+      c.opacity = 1
+   end
+
    if awful.client.ismarked(c) then
       c.border_color = beautiful.border_marked
-   elseif client.focus == c then
-      c.border_color = beautiful.border_focus
-   else
-      c.border_color = beautiful.border_normal
    end
 end
 
