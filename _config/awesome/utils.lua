@@ -1,3 +1,7 @@
+--------------------------------
+-- thatismatt's awesome utils --
+--------------------------------
+
 local naughty = require("naughty")
 local awful = require("awful")
 
