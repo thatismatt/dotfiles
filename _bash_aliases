@@ -80,3 +80,22 @@ alias emacs-daemon="emacs --daemon=${EMACS_SERVER:-server}"
 alias emacs-kill="emacsclient -s ${EMACS_SERVER:-server} -eval \"(kill-emacs)\""
 EMACSCLIENT_NO_WAIT="-n" && [[ -z "$DISPLAY" ]] && EMACSCLIENT_NO_WAIT=""
 alias e='emacsclient -s ${EMACS_SERVER:-server} $EMACSCLIENT_NO_WAIT'
+
+# Show current command in title
+# http://www.davidpashley.com/articles/xterm-titles-with-bash.html
+# http://stackoverflow.com/q/10546217
+function show_command_in_title_bar () {
+    if [[ ! "$BASH_COMMAND" =~ .*\033]0.* ]] # ignore other commands that are setting the title
+    then
+        __tilde="~"
+        printf "\033]0;${USER}@${HOSTNAME}: ${PWD/#$HOME/$__tilde} - ${BASH_COMMAND}\007"
+    fi
+}
+
+case "$TERM" in
+    xterm*|rxvt*)
+        trap show_command_in_title_bar DEBUG
+        ;;
+    *)
+        ;;
+esac
