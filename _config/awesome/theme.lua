@@ -14,7 +14,7 @@ theme.fg_focus      = "#dddddd"
 theme.bg_focus      = "#555555"
 
 theme.fg_urgent     = "#dddddd"
-theme.bg_urgent     = "#ff0000"
+theme.bg_urgent     = "#ff00ff"
 
 theme.fg_minimize   = "#dddddd"
 theme.bg_minimize   = "#444444"
