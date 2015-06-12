@@ -5,6 +5,10 @@ eval `ssh-agent`
 
 emacs --daemon=server &
 
+nm-applet &
+
 compton &
+
+syndaemon -t &
 
 exec awesome
