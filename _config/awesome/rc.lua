@@ -1,17 +1,17 @@
--- Standard awesome library
-gears = require("gears")
-awful = require("awful")
-awful.rules = require("awful.rules")
-require("awful.autofocus")
--- Widget and layout library
-wibox = require("wibox")
--- Theme handling library
-beautiful = require("beautiful")
--- Notification library
-naughty = require("naughty")
-menubar = require("menubar")
+---------------------------------
+-- thatismatt's awesome config --
+---------------------------------
 
-utils = require("utils")
+gears       = require("gears")
+awful       = require("awful")
+awful.rules = require("awful.rules")
+              require("awful.autofocus")
+wibox       = require("wibox")
+beautiful   = require("beautiful")
+naughty     = require("naughty")
+menubar     = require("menubar")
+
+utils       = require("utils")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
