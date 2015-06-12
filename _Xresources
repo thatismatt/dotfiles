@@ -1,22 +1,22 @@
 ! -*- mode: conf-xdefaults -*-
 
 ! xterm
-!XTerm*faceName:   Bitstream Vera Serif Mono
-XTerm*faceName:   Inconsolata
-XTerm*faceSize:   11
-XTerm*renderFont: true
+!XTerm*faceName:    Bitstream Vera Serif Mono
+XTerm*faceName:    Inconsolata
+XTerm*faceSize:    11
+XTerm*renderFont:  true
 XTerm*metaSendsEscape: true
-Xterm*saveLines:  10000
+Xterm*saveLines:   10000
 !XTerm*reverseVideo: off
-XTerm*Foreground: #aaaaaa
-XTerm*Background: #001111
+XTerm*Foreground:  #aaaaaa
+XTerm*Background:  #001111
 
 ! urxvt
-URxvt.foreground: #aaaaaa
-URxvt.background: #001111
-URxvt.scrollBar:  false
-URxvt.font:       xft:Inconsolata:size=11
-URxvt.iconFile:   /usr/share/icons/Faenza/apps/scalable/Terminal.svg
+URxvt.foreground:  #aaaaaa
+URxvt.background:  #001111
+URxvt.scrollBar:   false
+URxvt.font:        xft:Inconsolata:size=11
+URxvt.iconFile:    /usr/share/icons/Faenza/apps/scalable/Terminal.svg
 URxvt.letterSpace: -1
 URxvt.saveLines:   10000
 URxvt.iso14755:    false
