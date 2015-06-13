@@ -12,6 +12,7 @@ naughty     = require("naughty")
 menubar     = require("menubar")
 
 utils       = require("utils")
+agate       = require("agate")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -147,13 +148,6 @@ function cycle_master (direction)
          awful.client.setmaster(client.focus)
       end
       client.focus = awful.client.getmaster()
-      client.focus:raise()
-   end
-end
-
-function previous_client ()
-   awful.client.focus.history.previous()
-   if client.focus then
       client.focus:raise()
    end
 end
@@ -444,7 +438,7 @@ bindings.keys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "Tab",    awful.tag.viewprev),
    awful.key({ modkey, "Control" }, "Up",     cycle_master(false)),
    awful.key({ modkey, "Control" }, "Down",   cycle_master(true)),
-   awful.key({ altkey,           }, "Tab",    previous_client),
+   awful.key({ altkey,           }, "Tab",    agate.switch),
    awful.key({ modkey            }, "o",      function () awful.screen.focus_relative(1) end),
    awful.key({ modkey            }, "p",      menubar.show),
    awful.key({ modkey            }, "u",      awful.client.urgent.jumpto),

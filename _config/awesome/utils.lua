@@ -4,11 +4,20 @@
 
 local naughty = require("naughty")
 local awful = require("awful")
+local table = table
+local pairs = pairs
+local string = string
+local tostring = tostring
+local tonumber = tonumber
+local type = type
+local timer = timer
+
+module("utils")
 
 local utils = {}
 
 utils.log = function (msg)
-   naughty.notify({ text = msg, timeout = 0 })
+   naughty.notify({ text = tostring(msg), timeout = 0 })
 end
 
 utils.map = function (tbl, f)
@@ -55,6 +64,12 @@ utils.range = function (from, to)
       table.insert(r, i)
    end
    return r
+end
+
+utils.async = function (f)
+   local x = timer({ timeout = 0 })
+   x:connect_signal("timeout", function() f(); x:stop() end)
+   x:start()
 end
 
 utils.intr = function (tbl)
