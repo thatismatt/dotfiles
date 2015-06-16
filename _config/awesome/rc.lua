@@ -281,6 +281,7 @@ local wifi = status_widget(
    function (wifi)
       for line in io.lines("/proc/net/wireless") do
          local match = string.match(line, "^ *" .. wifi.interface .. ": +%d+ +(%d+)")
+         wifi.strength = 0
          if match then
             wifi.strength = 100 * tonumber(match) / 70
             return string.format("%.0f%%", wifi.strength)
