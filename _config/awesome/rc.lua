@@ -112,6 +112,12 @@ menu.power = {
    { "Restart",   "systemctl restart",   menu.icon("apps", "system-restart") }
 }
 
+menu.screens = {
+   { "Single", "/home/matt/scripts/screen-single.sh" },
+   { "Dual",   "/home/matt/scripts/screen-dual.sh" },
+   { "Arandr", "arandr"}
+}
+
 menu.main = awful.menu({
       { "Awesome",      menu.awesome,    beautiful.awesome_icon },
       { "Emacs",        emacs,           menu.icon("apps", "emacs") },
@@ -120,6 +126,7 @@ menu.main = awful.menu({
       { "Thunar",       "thunar",        menu.icon("apps", "thunar") },
       { "LXAppearance", "lxappearance",  menu.icon("categories", "preferences-desktop") },
       { "Terminal",     terminal,        menu.icon("apps", "xterm") },
+      { "Screens",      menu.screens },
       { "Power",        menu.power,      menu.icon("actions", "system-shutdown") }
 })
 
