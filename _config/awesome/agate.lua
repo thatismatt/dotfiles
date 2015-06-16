@@ -112,7 +112,7 @@ thumbnail.draw = function (t, wbox, cr, width, height)
    local target_size = math.min(width, height) * thumbnail_factor
 
    local cg = captures[t.client] and captures[t.client].geometry
-   if t.client:isvisible() then
+   if t.client:isvisible() or not cg then
       cg = t.client:geometry()
    end
 
@@ -136,10 +136,13 @@ thumbnail.draw = function (t, wbox, cr, width, height)
                 cg.width + 2 * scaled_width, cg.height + 2 * scaled_width)
    cr:fill()
 
-   if (t.client:isvisible()) then
+   if t.client:isvisible() then
       cr:set_source_surface(gears.surface(t.client.content), 0, 0)
-   else
+   elseif captures[t.client] then
       cr:set_source_surface(gears.surface(captures[t.client].surface), 0, 0)
+   else
+      -- offscreen and never been focussed, so we fallback to a grey box
+      cr:set_source_rgba(0.3, 0.3, 0.3, 1)
    end
    cr:rectangle(0, 0, cg.width, cg.height)
    cr:fill()
@@ -174,7 +177,7 @@ local function open ()
 
    -- TODO: add all other windows, that currently are in the focus stack
    -- i.e. cs should be the union of client.get() & focus.stack
-   local cs = focus.stack
+   local cs = utils.union(focus.stack, client.get())
 
    local thumbnail_geometry = { width = w / #cs, height = h }
 

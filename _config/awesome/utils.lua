@@ -54,6 +54,18 @@ utils.concat = function (tbls)
    return r
 end
 
+utils.union = function (...)
+   local set = {}
+   local ret = {}
+   for k, v in pairs(utils.concat({...})) do
+      if not set[v] then
+         table.insert(ret, v)
+         set[v] = true
+      end
+   end
+   return ret
+end
+
 utils.range = function (from, to)
    if not to then
       to = from
