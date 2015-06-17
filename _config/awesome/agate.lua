@@ -87,20 +87,19 @@ thumbnail.fit = function (t, width, height)
 end
 
 thumbnail.draw = function (t, wbox, cr, width, height)
-
    local active = thumbnails[thumbnails.active_index] == t
    local thumbnail_factor = 0.7
    if active then
       thumbnail_factor = 0.9
    end
 
-   local text = t.client.name
-
    -- TODO: make configurable
+   -- TODO: use pango?
    cr:select_font_face("sans", "italic", "normal")
    cr:set_font_face(cr:get_font_face())
    cr:set_font_size(12)
 
+   local text = t.client.name
    -- TODO: fade to wide text, with a gradient source perhaps?
    cr:set_source_rgba(1, 1, 1, 1)
    local text_extents = cr:text_extents(text)
@@ -109,17 +108,15 @@ thumbnail.draw = function (t, wbox, cr, width, height)
    cr:show_text(text)
    cr:stroke()
 
-   local target_size = math.min(width, height) * thumbnail_factor
 
    local cg = captures[t.client] and captures[t.client].geometry
    if t.client:isvisible() or not cg then
       cg = t.client:geometry()
    end
 
+   local target_size = math.min(width, height) * thumbnail_factor
    local source_size = math.max(cg.width, cg.height)
-
    local scale = target_size / source_size
-
    local tx = (width - (cg.width * scale)) / 2
    local ty = (height - (cg.height * scale)) / 2
 
@@ -146,7 +143,6 @@ thumbnail.draw = function (t, wbox, cr, width, height)
    end
    cr:rectangle(0, 0, cg.width, cg.height)
    cr:fill()
-
 end
 
 thumbnail.new = function (client, geometry, active)
@@ -250,17 +246,19 @@ end
 
 -- TODO: allow mouse click - left click to choose and right click to mark
 
--- TODO: highlight the active thumbnail
+-- TODO: highlight the focussed thumbnail
 
 -- TODO: highlight marked thumbnails
 
 -- TODO: set a max height (for small numbers of clients)
 
--- TODO: wrap thumbnails when there are lots
+-- TODO: multiple rows of thumbnails when there are lots
 
 -- TODO: make configurable - font, colours, sizes etc.
 
 -- TODO: indicate which screen & tag the client is on
+
+-- TODO: Add cycle through marked only clients
 
 return {
    switch = switch,
