@@ -78,6 +78,7 @@ local thumbnails = {}
 
 -- overlay size as protion of screen
 local height_portion = 0.5
+local height_max = 500
 local width_portion = 0.8
 local active_border_width = 5
 local thumbnail = {}
@@ -162,7 +163,7 @@ local function open ()
    overlay:set_bg("#000000")
 
    local sg = screen[mouse.screen].geometry
-   local h = sg.height * height_portion
+   local h = math.min(sg.height * height_portion, height_max)
    local w = sg.width * width_portion
    overlay:geometry({
          x = sg.x + (sg.width - w) / 2,
@@ -249,8 +250,6 @@ end
 -- TODO: highlight the focussed thumbnail
 
 -- TODO: highlight marked thumbnails
-
--- TODO: set a max height (for small numbers of clients)
 
 -- TODO: multiple rows of thumbnails when there are lots
 
