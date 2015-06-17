@@ -4,6 +4,8 @@
 
 local naughty = require("naughty")
 local awful = require("awful")
+local io = io
+local os = os
 local table = table
 local pairs = pairs
 local string = string
@@ -16,8 +18,16 @@ module("utils")
 
 local utils = {}
 
-utils.log = function (msg)
+utils.notify = function (msg)
    naughty.notify({ text = tostring(msg), timeout = 0 })
+end
+
+utils.log = function (msg)
+   local date = os.date("%Y-%m-%d")
+   local filename = os.getenv("HOME") .. "/tmp/awesome-" .. date .. ".log"
+   local f = io.open(filename, "a")
+   f:write(os.date("[%H:%M:%S]") .. " " .. msg .. "\n")
+   f:close()
 end
 
 utils.map = function (tbl, f)
@@ -109,10 +119,6 @@ utils.dump = function (o, indent)
    else
       return tostring(o)
    end
-end
-
-utils.pp = function (o)
-   utils.log(utils.dump(o))
 end
 
 return utils
