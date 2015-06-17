@@ -261,6 +261,5 @@ end
 
 return {
    switch = switch,
-   keys = keys,
-   focus = focus -- DEBUG
+   keys = keys
 }
