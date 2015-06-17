@@ -88,7 +88,9 @@ function show_command_in_title_bar () {
     if [[ ! "$BASH_COMMAND" =~ .*\033]0.* ]] # ignore other commands that are setting the title
     then
         __tilde="~"
-        printf "\033]0;${USER}@${HOSTNAME}: ${PWD/#$HOME/$__tilde} - ${BASH_COMMAND}\007"
+        printf "\033]0;${USER}@${HOSTNAME}: ${PWD/#$HOME/$__tilde} - "
+        echo -n "${BASH_COMMAND}"
+        printf "\007"
     fi
 }
 
