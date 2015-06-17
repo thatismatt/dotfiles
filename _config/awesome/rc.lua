@@ -109,7 +109,7 @@ menu.awesome = {
 menu.power = {
    { "Power Off", "systemctl poweroff",  menu.icon("actions", "system-shutdown") },
    { "Suspend",   "systemctl suspend",   menu.icon("apps", "system-suspend") },
-   { "Restart",   "systemctl restart",   menu.icon("apps", "system-restart") }
+   { "Restart",   "systemctl reboot",    menu.icon("apps", "system-restart") }
 }
 
 menu.screens = {
