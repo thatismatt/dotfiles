@@ -7,17 +7,17 @@ local success, theme = pcall(function () return dofile("/usr/share/awesome/theme
 
 theme.font          = "Liberation Sans 12"
 
-theme.fg_normal     = "#aaaaaa"
+theme.fg_normal     = "#999999"
 theme.bg_normal     = "#222222"
 
-theme.fg_focus      = "#dddddd"
-theme.bg_focus      = "#555555"
+theme.fg_focus      = "#eeeeee"
+theme.bg_focus      = "#444444"
 
 theme.fg_urgent     = "#dddddd"
 theme.bg_urgent     = "#ff00ff"
 
-theme.fg_minimize   = "#dddddd"
-theme.bg_minimize   = "#444444"
+theme.fg_minimize   = "#222222"
+theme.bg_minimize   = "#777777"
 
 theme.border_width  = "5"
 theme.border_normal = "#444444"
