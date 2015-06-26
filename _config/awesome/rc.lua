@@ -11,6 +11,7 @@ beautiful   = require("beautiful")
 naughty     = require("naughty")
 menubar     = require("menubar")
 
+prime       = require("prime")
 utils       = require("utils")
 agate       = require("agate")
 
@@ -32,6 +33,22 @@ do
       end
    )
 end
+-- }}}
+
+-- {{{ Prime - extra commands
+prime.add_commands({
+      d = {
+         name = "dump",
+         handle = utils.dump
+      },
+      l = {
+         name = "log",
+         handle = function (v)
+            utils.log(tostring(v))
+            return "LOGGED"
+         end
+      }
+})
 -- }}}
 
 -- {{{ Variable definitions

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+tty 2>&1 > /dev/null
+ISATTY=$?
+
+if [ "$ISATTY" = 1 ]
+then
+    echo "E: must be a tty, use awesome-client instead."
+    exit 1
+fi
+
+DBUS_SEND=$(which dbus-send 2> /dev/null)
+if [ "$DBUS_SEND" = "" ]
+then
+    echo "E: Unable to find" ${DBUS_SEND}
+    exit 1
+fi
+
+RLWRAP=$(which rlwrap 2>/dev/null)
+if [ "$RLWRAP" = "" ]
+then
+    echo "E: Unable to find" ${RLWRAP}
+    exit 1
+fi
+
+# wrap with rlwrap, if we haven't already, as indicated by $A_RERUN
+if [ "$A_RERUN" = "" ]
+then
+    A_RERUN="no" exec $RLWRAP -pmagenta -m -M .lua $0
+fi
+
+DBUS_PATH=/
+DBUS_DEST=org.naquadah.awesome.awful
+DBUS_METHOD=${DBUS_DEST}.Prime.Eval
+
+a_dbus_send()
+{
+    $DBUS_SEND --dest=$DBUS_DEST \
+               --type=method_call \
+               --reply-timeout=1000 \
+               --print-reply \
+               $DBUS_PATH \
+               $DBUS_METHOD string:"$1" | tail -n +3 | head -n -1
+}
+
+while read -r -p "$> " LINE
+do
+    a_dbus_send "$LINE"
+done
