@@ -475,12 +475,19 @@ function toggle_maximized (c)
    c.maximized_vertical   = not c.maximized_vertical
 end
 
+opaque = {}
+opaque.clients = {}
+opaque.toggle = function (c)
+   opaque.clients[c] = not opaque.clients[c] or nil
+end
+
 clientkeys = awful.util.table.join(
    awful.key({ altkey            }, "F4",     function (c) c:kill() end),
    awful.key({ modkey, "Shift"   }, "f",      awful.client.floating.toggle),
    awful.key({ modkey            }, "Return", function (c) c:swap(awful.client.getmaster()) end),
    awful.key({ modkey, "Shift"   }, "o",      awful.client.movetoscreen),
-   awful.key({ modkey, "Shift"   }, "t",      function (c) c.ontop = not c.ontop end),
+   -- awful.key({ modkey, "Shift"   }, "t",      function (c) c.ontop = not c.ontop end),
+   awful.key({ modkey, "Shift"   }, "t",      opaque.toggle),
    -- awful.key({ modkey, "Shift"   }, "f",      function (c) c.fullscreen = not c.fullscreen end),
    awful.key({ modkey, "Shift"   }, "n",      function (c) c.minimized = true end),
    awful.key({ modkey, "Shift"   }, "m",      toggle_maximized),
@@ -621,6 +628,9 @@ client.connect_signal(
 function decorate_client (c)
    c.border_color = beautiful.border_normal
    c.opacity = 0.85
+   if opaque.clients[c] then
+      c.opacity = 1
+   end
 
    if client.focus == c then
       c.border_color = beautiful.border_focus
