@@ -98,17 +98,22 @@ thumbnail.draw = function (t, wbox, cr, width, height)
    -- TODO: use pango?
    cr:select_font_face("sans", "italic", "normal")
    cr:set_font_face(cr:get_font_face())
+   cr:set_source_rgba(1, 1, 1, 1)
    cr:set_font_size(12)
 
    local text = t.client.name
-   -- TODO: fade to wide text, with a gradient source perhaps?
-   cr:set_source_rgba(1, 1, 1, 1)
    local text_extents = cr:text_extents(text)
+   -- TODO: fade out wide text (gradient source?)
    local text_x = math.max(width - text_extents.width, 30) / 2
-   cr:move_to(text_x, height * 0.9)
+   cr:move_to(text_x, height - 16)
    cr:show_text(text)
    cr:stroke()
-
+   if active then
+      cr:set_font_size(16)
+   end
+   cr:move_to(text_x, height - 32)
+   cr:show_text(t.client.class)
+   cr:stroke()
 
    local cg = captures[t.client] and captures[t.client].geometry
    if t.client:isvisible() or not cg then
