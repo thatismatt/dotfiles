@@ -481,7 +481,8 @@ opaque.toggle = function (c)
    opaque.clients[c] = not opaque.clients[c] or nil
 end
 
-clientkeys = awful.util.table.join(
+bindings.client = {}
+bindings.client.keys = awful.util.table.join(
    awful.key({ altkey            }, "F4",     function (c) c:kill() end),
    awful.key({ modkey, "Shift"   }, "f",      awful.client.floating.toggle),
    awful.key({ modkey            }, "Return", function (c) c:swap(awful.client.getmaster()) end),
@@ -521,7 +522,7 @@ bindings.tags = utils.flatmap(
    end
 )
 
-clientbuttons = awful.util.table.join(
+bindings.client.buttons = awful.util.table.join(
    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
    awful.button({ modkey }, 1, awful.mouse.client.move),
    awful.button({ modkey }, 3, awful.mouse.client.resize))
@@ -540,8 +541,8 @@ awful.rules.rules = {
                     border_color = beautiful.border_normal,
                     focus = awful.client.focus.filter,
                     raise = true,
-                    keys = clientkeys,
-                    buttons = clientbuttons } },
+                    keys = bindings.client.keys,
+                    buttons = bindings.client.buttons } },
    { rule = { class = "MPlayer" },
      properties = { floating = true } },
    { rule = { class = "pinentry" },
