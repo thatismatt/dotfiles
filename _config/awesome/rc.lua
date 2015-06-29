@@ -127,12 +127,13 @@ menu.screens = {
 
 menu.main = awful.menu({
       { "Awesome",      menu.awesome,    beautiful.awesome_icon },
+      { "Terminal",     terminal,        menu.icon("apps", "xterm") },
+      { "Thunar",       "thunar",        menu.icon("apps", "thunar") },
       { "Emacs",        emacs,           menu.icon("apps", "emacs") },
       { "Firefox",      "firefox",       menu.icon("apps", "firefox") },
       { "Chrome",       "google-chrome", menu.icon("apps", "google-chrome") },
-      { "Thunar",       "thunar",        menu.icon("apps", "thunar") },
+      { "Gimp",         "gimp",          menu.icon("apps", "gimp") },
       { "LXAppearance", "lxappearance",  menu.icon("categories", "preferences-desktop") },
-      { "Terminal",     terminal,        menu.icon("apps", "xterm") },
       { "Screens",      menu.screens },
       { "Power",        menu.power,      menu.icon("actions", "system-shutdown") }
 })
