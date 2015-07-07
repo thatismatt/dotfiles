@@ -103,16 +103,21 @@ thumbnail.draw = function (t, wbox, cr, width, height)
    local text = t.client.name
    local text_extents = cr:text_extents(text)
    -- TODO: fade out wide text (gradient source?)
-   local text_x = math.max(width - text_extents.width, 30) / 2
+   local text_x = 30
    cr:move_to(text_x, height - 16)
    cr:show_text(text)
-   cr:stroke()
+
+   -- TODO: right align
+   cr:move_to(3 * width / 4, height - 32)
+   -- TODO: optionally show t.client.screen
+   -- TODO: show all tags
+   cr:show_text("[" .. t.client:tags()[1].name .. "]")
+
    if active then
       cr:set_font_size(16)
    end
    cr:move_to(text_x, height - 32)
    cr:show_text(t.client.class)
-   cr:stroke()
 
    local cg = captures[t.client] and captures[t.client].geometry
    if t.client:isvisible() or not cg then
@@ -257,8 +262,6 @@ end
 -- TODO: multiple rows of thumbnails when there are lots
 
 -- TODO: make configurable - font, colours, sizes etc.
-
--- TODO: indicate which screen & tag the client is on
 
 -- TODO: Add cycle through marked only clients
 
