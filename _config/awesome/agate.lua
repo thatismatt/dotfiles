@@ -110,8 +110,8 @@ thumbnail.draw = function (t, wbox, cr, width, height)
    -- TODO: right align
    cr:move_to(3 * width / 4, height - 32)
    -- TODO: optionally show t.client.screen
-   -- TODO: show all tags
-   cr:show_text("[" .. t.client:tags()[1].name .. "]")
+   local tags = table.concat(utils.map(t.client:tags(), function (t) return t.name end), ", ")
+   cr:show_text("[" .. tags .. "]")
 
    if active then
       cr:set_font_size(16)
