@@ -255,7 +255,9 @@ end
 
 -- TODO: allow mouse click - left click to choose and right click to mark
 
--- TODO: highlight the focussed thumbnail
+-- TODO: highlight focussed thumbnail
+
+-- TODO: highlight minimized thumbnails
 
 -- TODO: highlight marked thumbnails
 
