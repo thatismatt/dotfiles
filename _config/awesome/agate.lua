@@ -151,7 +151,7 @@ thumbnail.draw = function (t, wbox, cr, width, height)
    cr:fill()
 end
 
-thumbnail.new = function (client, geometry, active)
+thumbnail.new = function (client, geometry)
    local ret = wibox.widget.base.make_widget()
    for k, v in pairs(thumbnail) do
       if type(v) == "function" then
@@ -160,7 +160,6 @@ thumbnail.new = function (client, geometry, active)
    end
    ret.client = client
    ret.geometry = geometry
-   ret.active = active
    return ret
 end
 
