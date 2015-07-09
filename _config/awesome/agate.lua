@@ -1,8 +1,7 @@
 ------------------------------------------------------------
--- AGATE
+-- AGATE - Awesome Global Alt Tab Extension
 -- @author Matt Lee
 -- @copyright Matt Lee
--- awesome global alt tab extension
 ------------------------------------------------------------
 
 local awful = require("awful")

@@ -1,5 +1,5 @@
 ------------------------------------------------------------
--- Awesome Prime - An improved remote repl for Awesome WM
+-- Awesome Prime - An improved remote REPL for Awesome WM
 -- @author Matt Lee
 -- @copyright Matt Lee
 -- Based on awful.remote, by Julien Danjou
