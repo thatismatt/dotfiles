@@ -1,7 +1,9 @@
---------------------------------------
---              AGATE               --
--- awesome global alt tab extension --
---------------------------------------
+------------------------------------------------------------
+-- AGATE
+-- @author Matt Lee
+-- @copyright Matt Lee
+-- awesome global alt tab extension
+------------------------------------------------------------
 
 local awful = require("awful")
 local cairo = require("lgi").cairo

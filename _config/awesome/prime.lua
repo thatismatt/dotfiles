@@ -1,9 +1,9 @@
----------------------------------------------------------------------------
+------------------------------------------------------------
 -- Awesome Prime - An improved remote repl for Awesome WM
 -- @author Matt Lee
--- @copyright 2015 Matt Lee
+-- @copyright Matt Lee
 -- Based on awful.remote, by Julien Danjou
----------------------------------------------------------------------------
+------------------------------------------------------------
 
 local dbus     = dbus
                  require("awful.dbus")
