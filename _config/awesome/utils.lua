@@ -26,7 +26,7 @@ utils.log = function (msg)
    local date = os.date("%Y-%m-%d")
    local filename = os.getenv("HOME") .. "/tmp/awesome-" .. date .. ".log"
    local f = io.open(filename, "a")
-   f:write(os.date("[%H:%M:%S]") .. " " .. msg .. "\n")
+   f:write(os.date("[%H:%M:%S]") .. " " .. tostring(msg) .. "\n")
    f:close()
 end
 
