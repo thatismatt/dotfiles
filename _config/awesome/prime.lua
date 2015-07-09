@@ -20,6 +20,8 @@ module("prime")
 
 local prime = {}
 
+prime.default_command_id = "r"
+
 prime.commands = {
    r = {
       name = "raw return",
@@ -57,7 +59,7 @@ function parse_request (request)
    local command_id, code = string.match(request, "^:([a-z]?) ?(.*)$")
    if command_id then
       if command_id == "" then
-         command_id = "d"
+         command_id = prime.default_command_id
       end
       code = "return " .. code
    else
