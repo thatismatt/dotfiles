@@ -8,9 +8,9 @@
 local dbus     = dbus
                  require("awful.dbus")
 local error    = error
-local ipairs   = ipairs
 local load     = loadstring or load -- v5.1 - loadstring, v5.2 - load
 local pairs    = pairs
+local select   = select
 local string   = string
 local table    = table
 local tostring = tostring
@@ -75,9 +75,10 @@ function process_request (command, code)
    else
       local f, e = load(code)
       if f then
-         local results = { f() }
+         local results = capture_nils(f())
          local responses = {}
-         for _, v in ipairs(results) do
+         for k = 1, results.n do
+            local v = results[k]
             table.insert(responses, command.handle(v))
          end
          return table.concat(responses, "\n")
@@ -85,6 +86,11 @@ function process_request (command, code)
          return tostring(e or "unknown error")
       end
    end
+end
+
+function capture_nils (...)
+   -- explicitly capture the length as n, see http://lua-users.org/wiki/StoringNilsInTables
+   return { n = select('#', ...), ... }
 end
 
 function initialise ()
