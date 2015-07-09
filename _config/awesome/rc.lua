@@ -49,6 +49,7 @@ prime.add_commands({
          end
       }
 })
+prime.default_command_id = "d"
 -- }}}
 
 -- {{{ Variable definitions
