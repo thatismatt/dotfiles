@@ -116,6 +116,10 @@ utils.dump = function (o, indent)
          s = s .. indent .. " " .. tostring(k) .. ' = ' .. utils.dump(v, indent .. " ") .. '\n'
       end
       return s .. indent .. "}"
+   elseif type(o) == "string" then
+      return "\"" .. o .. "\""
+   elseif o == nil then
+      return "nil"
    else
       return tostring(o)
    end
