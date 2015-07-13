@@ -14,6 +14,7 @@ menubar     = require("menubar")
 prime       = require("prime")
 utils       = require("utils")
 agate       = require("agate")
+mpd         = require("mpd")
 
 -- {{{ Error handling
 -- Handle runtime errors after startup
@@ -416,6 +417,22 @@ bottom_widgets_layout:add(cpu.widget)
 bottom_widgets_layout:add(memory.icon)
 bottom_widgets_layout:add(memory.widget)
 
+local mpd_layout = wibox.layout.fixed.horizontal()
+
+function mpd_button (icon, action)
+   local mpd_icon = wibox.widget.imagebox(icon_file("av", icon))
+   local mpd_widget = wibox.layout.margin(mpd_icon, 0, 0, 2, 2)
+   mpd_widget:buttons(awful.util.table.join(awful.button({ }, 1, action)))
+   mpd_layout:add(mpd_widget)
+end
+
+local mpd_client = mpd.new()
+mpd_button("skip_previous", function () mpd_client:command("previous") end)
+mpd_button("fast_rewind", function () mpd_client:command("seekcur -30") end)
+mpd_button("play_arrow", function () mpd_client:toggle() end)
+mpd_button("fast_forward", function () mpd_client:command("seekcur +30") end)
+mpd_button("skip_next", function () mpd_client:command("next") end)
+
 mypromptbox = awful.widget.prompt()
 
 mypromptbox.lua = function ()
@@ -431,7 +448,7 @@ end
 local bottom_layout = wibox.layout.align.horizontal()
 bottom_layout:set_left(mypromptbox)
 bottom_layout:set_middle(bottom_widgets_layout)
--- layout:set_right()
+bottom_layout:set_right(mpd_layout)
 
 bottom_wibox:set_widget(bottom_layout)
 -- }}}
@@ -483,10 +500,11 @@ bindings.keys = awful.util.table.join(
 function volume_key(action)
    return function () awful.util.spawn("amixer -q -D pulse set Master " .. action, false) end
 end
-bindings.volume = awful.util.table.join(
+bindings.audio = awful.util.table.join(
    awful.key({ }, "XF86AudioMute",        volume_key("toggle")),
    awful.key({ }, "XF86AudioRaiseVolume", volume_key("5%+")),
-   awful.key({ }, "XF86AudioLowerVolume", volume_key("5%-"))
+   awful.key({ }, "XF86AudioLowerVolume", volume_key("5%-")),
+   awful.key({ }, "XF86AudioPlay",        function () mpd_client:toggle() end)
 )
 
 function toggle_maximized (c)
@@ -547,7 +565,7 @@ bindings.client.buttons = awful.util.table.join(
    awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- Set Key/Mouse Bindings
-root.keys(awful.util.table.join(bindings.keys, bindings.tags, bindings.volume))
+root.keys(awful.util.table.join(bindings.keys, bindings.tags, bindings.audio))
 root.buttons(bindings.mouse)
 -- }}}
 
