@@ -277,7 +277,7 @@ function status_widget (icon_or_fn, update, data)
       local icon = type(icon_or_fn) == "function" and icon_or_fn(w) or icon_or_fn
       img:set_image(icon)
    end
-   w.timer = timer({ timeout = 2 })
+   w.timer = timer({ timeout = 1 })
    w.timer:connect_signal("timeout", w.update)
    w.timer:start()
    w.update(w)
