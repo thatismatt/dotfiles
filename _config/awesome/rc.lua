@@ -426,7 +426,7 @@ function mpd_button (icon, action)
    mpd_layout:add(mpd_widget)
 end
 
-local mpd_client = mpd.new()
+mpd_client = mpd.new()
 mpd_button("skip_previous", function () mpd_client:command("previous") end)
 mpd_button("fast_rewind", function () mpd_client:command("seekcur -30") end)
 mpd_button("play_arrow", function () mpd_client:toggle() end)
