@@ -136,7 +136,7 @@ menu.main = awful.menu({
       { "Chrome",       "google-chrome", menu.icon("apps", "google-chrome") },
       { "Gimp",         "gimp",          menu.icon("apps", "gimp") },
       { "LXAppearance", "lxappearance",  menu.icon("categories", "preferences-desktop") },
-      { "Screens",      menu.screens },
+      { "Screens",      menu.screens,    menu.icon("devices", "monitor") },
       { "Power",        menu.power,      menu.icon("actions", "system-shutdown") }
 })
 
