@@ -495,6 +495,15 @@ bindings.keys = awful.util.table.join(
    awful.key({ modkey            }, "x",      mypromptbox.lua)
 )
 
+-- Brightness
+function brightness_key (action)
+   return function () awful.util.spawn("xbacklight " .. action, false) end
+end
+bindings.brightness = awful.util.table.join(
+   awful.key({ }, "XF86MonBrightnessUp",   brightness_key("+10")),
+   awful.key({ }, "XF86MonBrightnessDown", brightness_key("-10"))
+)
+
 -- Volume keys
 function volume_key (action)
    return function () awful.util.spawn("amixer -q -D pulse set Master " .. action, false) end
@@ -565,7 +574,7 @@ bindings.client.buttons = awful.util.table.join(
 )
 
 -- Set Key/Mouse Bindings
-root.keys(awful.util.table.join(bindings.keys, bindings.tags, bindings.audio))
+root.keys(awful.util.table.join(bindings.keys, bindings.tags, bindings.audio, bindings.brightness))
 root.buttons(bindings.mouse)
 -- }}}
 
