@@ -496,7 +496,7 @@ bindings.keys = awful.util.table.join(
 )
 
 -- Volume keys
-function volume_key(action)
+function volume_key (action)
    return function () awful.util.spawn("amixer -q -D pulse set Master " .. action, false) end
 end
 bindings.audio = awful.util.table.join(
@@ -561,7 +561,8 @@ bindings.tags = utils.flatmap(
 bindings.client.buttons = awful.util.table.join(
    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
    awful.button({ modkey }, 1, awful.mouse.client.move),
-   awful.button({ modkey }, 3, awful.mouse.client.resize))
+   awful.button({ modkey }, 3, awful.mouse.client.resize)
+)
 
 -- Set Key/Mouse Bindings
 root.keys(awful.util.table.join(bindings.keys, bindings.tags, bindings.audio))
