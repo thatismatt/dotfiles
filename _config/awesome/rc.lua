@@ -359,11 +359,11 @@ local memory = status_widget(
 local battery = status_widget(
    function (battery)
       local charge = "20"
-      if battery.charge > 0.9 then charge = "90"
-      elseif battery.charge > 0.8 then charge = "80"
-      elseif battery.charge > 0.6 then charge = "60"
-      elseif battery.charge > 0.5 then charge = "50"
-      elseif battery.charge > 0.3 then charge = "30"
+      if battery.charge > 90 then charge = "90"
+      elseif battery.charge > 80 then charge = "80"
+      elseif battery.charge > 60 then charge = "60"
+      elseif battery.charge > 50 then charge = "50"
+      elseif battery.charge > 30 then charge = "30"
       end
       local status = io.lines("/sys/class/power_supply/" .. battery.identifier .. "/status")()
       local status_mapping = {
@@ -372,7 +372,6 @@ local battery = status_widget(
          Charging = "battery_charging_%s"
       }
       local icon_fmt = status_mapping[status] or "battery_unknown"
-
       local icon = string.format(icon_fmt, charge)
       return icon_file("device", icon)
    end,
