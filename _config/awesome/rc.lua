@@ -597,6 +597,8 @@ awful.rules.rules = {
      properties = { floating = true } },
    { rule = { class = "Plugin-container" }, -- flash fullscreen e.g. youtube
      properties = { floating = true } },
+   { rule = { name = "Google+ Hangouts is sharing your screen with plus.google.com." },
+     properties = { floating = true } },
 }
 -- }}}
 
