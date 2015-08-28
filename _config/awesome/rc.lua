@@ -145,7 +145,6 @@ menu.launcher = awful.widget.launcher({
       menu = menu.main
 })
 
--- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
@@ -563,12 +562,13 @@ bindings.tags = utils.flatmap(
                   awful.client.toggletag(tags[i])
                end
             end
-      ))
+         )
+      )
    end
 )
 
 bindings.client.buttons = awful.util.table.join(
-   awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+   awful.button({        }, 1, function (c) client.focus = c; c:raise() end),
    awful.button({ modkey }, 1, awful.mouse.client.move),
    awful.button({ modkey }, 3, awful.mouse.client.resize)
 )
