@@ -150,10 +150,22 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Utils
-function focus_raise (idx)
+function focus_raise (direction)
    return function ()
-      awful.client.focus.byidx(idx)
-      if client.focus then client.focus:raise() end
+      local screen_id = mouse.screen
+      local cls = utils.filter(
+         utils.flatmap(utils.range(screen.count()), awful.client.visible),
+         function (c) return awful.client.focus.filter(c) or c == client.focus end)
+      local client_to_focus = nil
+      for idx, c in ipairs(cls) do
+         if c == client.focus then
+            client_to_focus = cls[awful.util.cycle(#cls, idx + direction)]
+         end
+      end
+      if client_to_focus then
+         client.focus = client_to_focus
+         client.focus:raise()
+      end
    end
 end
 
