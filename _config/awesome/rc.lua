@@ -79,6 +79,7 @@ layouts = {
    awful.layout.suit.magnifier,
    awful.layout.suit.floating
 }
+layouts.max = awful.layout.suit.max
 -- }}}
 
 -- {{{ Wallpaper
@@ -515,8 +516,11 @@ bindings.audio = awful.util.table.join(
 )
 
 function toggle_maximized (c)
-   c.maximized_horizontal = not c.maximized_horizontal
-   c.maximized_vertical   = not c.maximized_vertical
+   local screen_id = c.screen
+   local layout = awful.layout.get(screen_id)
+   local layout_new = layout == layouts.max and layouts[1] or layouts.max
+   local tag = awful.tag.selected(screen_id)
+   awful.layout.set(layout_new, tag)
 end
 
 opaque = {}
