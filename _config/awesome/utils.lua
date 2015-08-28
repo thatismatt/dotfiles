@@ -33,7 +33,7 @@ end
 utils.map = function (tbl, f)
    local r = {}
    for k, v in pairs(tbl) do
-      r[#r + 1] = f(v)
+      r[k] = f(v)
    end
    return r
 end
