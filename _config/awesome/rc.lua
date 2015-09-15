@@ -141,6 +141,10 @@ menu.main = awful.menu({
       { "Power",        menu.power,      menu.icon("actions", "system-shutdown") }
 })
 
+menu.main.toggle_at_corner = function ()
+   menu.main:toggle({ coords = { x = 0, y = 0 } })
+end
+
 menu.launcher = awful.widget.launcher({
       image = beautiful.awesome_icon,
       menu = menu.main
@@ -473,7 +477,7 @@ bottom_wibox:set_widget(bottom_layout)
 
 -- {{{ Mouse bindings
 bindings.mouse = awful.util.table.join(
-   awful.button({ }, 3, function () menu.main:toggle() end),
+   awful.button({ }, 3, menu.main.toggle_at_corner),
    awful.button({ }, 4, awful.tag.viewprev),
    awful.button({ }, 5, awful.tag.viewnext)
 )
@@ -481,7 +485,7 @@ bindings.mouse = awful.util.table.join(
 
 -- {{{ Key bindings
 bindings.keys = awful.util.table.join(
-   awful.key({ modkey            }, "m",      function () menu.main:toggle() end),
+   awful.key({ modkey            }, "m",      menu.main.toggle_at_corner),
    awful.key({ modkey            }, "Escape", awful.tag.history.restore),
    awful.key({ modkey            }, "Up",     focus_raise(-1)),
    awful.key({ modkey            }, "Down",   focus_raise(1)),
