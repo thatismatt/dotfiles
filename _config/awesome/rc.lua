@@ -169,6 +169,13 @@ function focus_raise (direction)
    end
 end
 
+function restore_and_focus ()
+   local restored = awful.client.restore(mouse.screen)
+   if restored then
+      client.focus = restored
+   end
+end
+
 function cycle_master (direction)
    return function ()
       if client.focus == awful.client.getmaster() then
@@ -502,7 +509,7 @@ bindings.keys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "Left",   function () awful.tag.incncol(-1) end),
    awful.key({ modkey            }, "space",  function () awful.layout.inc(layouts, 1) end),
    awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1) end),
-   awful.key({ modkey, "Control" }, "n",      function () awful.client.restore(mouse.screen) end),
+   awful.key({ modkey, "Control" }, "n",      restore_and_focus),
    awful.key({ modkey            }, "r",      function () mypromptbox:run() end),
    awful.key({ modkey            }, "x",      mypromptbox.lua)
 )
