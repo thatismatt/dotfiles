@@ -481,6 +481,7 @@ bindings.mouse = awful.util.table.join(
 
 -- {{{ Key bindings
 bindings.keys = awful.util.table.join(
+   awful.key({ modkey            }, "m",      function () menu.main:toggle() end),
    awful.key({ modkey            }, "Escape", awful.tag.history.restore),
    awful.key({ modkey            }, "Up",     focus_raise(-1)),
    awful.key({ modkey            }, "Down",   focus_raise(1)),
