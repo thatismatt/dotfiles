@@ -16,7 +16,7 @@ mpd = {}
 
 mpd.hostname = "localhost"
 mpd.port = 6600
-mpd.timeout = 1
+mpd.timeout = 1000 -- milliseconds
 mpd.debug = false
 
 function log (msg)
