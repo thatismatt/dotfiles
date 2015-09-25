@@ -455,20 +455,7 @@ mpd_button("play_arrow", function () mpd_client:toggle() end)
 mpd_button("fast_forward", function () mpd_client:command("seekcur +30") end)
 mpd_button("skip_next", function () mpd_client:command("next") end)
 
-mypromptbox = awful.widget.prompt()
-
-mypromptbox.lua = function ()
-   awful.prompt.run(
-      { prompt = "Lua: " },
-      mypromptbox.widget,
-      awful.util.eval,
-      nil,
-      awful.util.getdir("cache") .. "/history_eval"
-   )
-end
-
 local bottom_layout = wibox.layout.align.horizontal()
-bottom_layout:set_left(mypromptbox)
 bottom_layout:set_middle(bottom_widgets_layout)
 bottom_layout:set_right(mpd_layout)
 
@@ -514,9 +501,7 @@ bindings.keys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "Left",   function () awful.tag.incncol(-1) end),
    awful.key({ modkey            }, "space",  function () awful.layout.inc(layouts, 1) end),
    awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1) end),
-   awful.key({ modkey, "Control" }, "n",      restore_and_focus),
-   awful.key({ modkey            }, "r",      function () mypromptbox:run() end),
-   awful.key({ modkey            }, "x",      mypromptbox.lua)
+   awful.key({ modkey, "Control" }, "n",      restore_and_focus)
 )
 
 -- Brightness
