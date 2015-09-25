@@ -50,16 +50,19 @@ end
 function mpd:receive_response ()
    local response = {}
    while true do
-      local line = self.socket:receive("*l")
-      if not line then -- occassionally the line is nil, no idea why this happens
+      local line, err = self.socket:receive("*l")
+      log(utils.dump(line))
+      if line then -- occassionally the line is nil, no idea why this happens
+         if string.match(line, "^OK$") then
+            log(utils.dump(response))
+            return response
+         end
+         local k, v = string.match(line, "^([^:]+):%s(.+)$")
+         response[k] = v
+      else
+         log("Receive error: " .. utils.dump(err))
          return
       end
-      if string.match(line, "^OK$") then
-         log(utils.dump(response))
-         return response
-      end
-      local k, v = string.match(line, "^([^:]+):%s(.+)$")
-      response[k] = v
    end
 end
 
