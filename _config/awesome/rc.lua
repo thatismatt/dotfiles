@@ -464,7 +464,7 @@ bottom_wibox:set_widget(bottom_layout)
 
 -- {{{ Mouse bindings
 bindings.mouse = awful.util.table.join(
-   awful.button({ }, 3, menu.main.toggle_at_corner),
+   awful.button({ }, 3, function () menu.main:toggle() end),
    awful.button({ }, 4, awful.tag.viewprev),
    awful.button({ }, 5, awful.tag.viewnext)
 )
