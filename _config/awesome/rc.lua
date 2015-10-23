@@ -214,14 +214,12 @@ mytasklist.buttons = awful.util.table.join(
          if c == client.focus then
             c.minimized = true
          else
-            -- Without this, the following
-            -- :isvisible() makes no sense
+            -- Without this, the following :isvisible() makes no sense
             c.minimized = false
             if not c:isvisible() then
                awful.tag.viewonly(c:tags()[1])
             end
-            -- This will also un-minimize
-            -- the client, if needed
+            -- This will also un-minimize the client, if needed
             client.focus = c
             c:raise()
          end
@@ -544,9 +542,7 @@ bindings.client.keys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "f",      awful.client.floating.toggle),
    awful.key({ modkey            }, "Return", function (c) c:swap(awful.client.getmaster()) end),
    awful.key({ modkey, "Shift"   }, "o",      awful.client.movetoscreen),
-   -- awful.key({ modkey, "Shift"   }, "t",      function (c) c.ontop = not c.ontop end),
    awful.key({ modkey, "Shift"   }, "t",      opaque.toggle),
-   -- awful.key({ modkey, "Shift"   }, "f",      function (c) c.fullscreen = not c.fullscreen end),
    awful.key({ modkey, "Shift"   }, "n",      function (c) c.minimized = true end),
    awful.key({ modkey, "Shift"   }, "m",      toggle_maximized),
    awful.key({ modkey, "Shift"   }, "k",      awful.client.togglemarked),
