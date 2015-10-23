@@ -93,7 +93,7 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = { by_screen = {} }
-tags.count = 4 -- per screen
+tags.count = 8 / screen.count() -- per screen
 for s = 1, screen.count() do
    local names = utils.range((s - 1) * tags.count + 1, tags.count * s)
    tags.by_screen[s] = awful.tag(names, s, layouts[1])
