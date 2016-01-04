@@ -56,7 +56,7 @@ function mvt () {
 
 alias timestamp="date +%Y%m%d-%H%M%S"
 
-alias l='ls -1'
+alias l="ls -1"
 alias la="ls -la"
 alias lx="ls -lX"
 
@@ -77,8 +77,8 @@ alias json="python -mjson.tool"
 # Emacs - Server Socket (for multiple daemons)
 # NOTES: - default = server
 #        - see /tmp/emacs1000/ (emacs variable server-socket-dir)
-alias emacs-daemon="emacs --daemon=${EMACS_SERVER:-server}"
-alias emacs-kill="emacsclient -s ${EMACS_SERVER:-server} -eval \"(kill-emacs)\""
+alias emacs-daemon='emacs --daemon=${EMACS_SERVER:-server}'
+alias emacs-kill='emacsclient -s ${EMACS_SERVER:-server} -eval \"(kill-emacs)\"'
 EMACSCLIENT_NO_WAIT="-n" && [[ -z "$DISPLAY" ]] && EMACSCLIENT_NO_WAIT=""
 alias e='emacsclient -s ${EMACS_SERVER:-server} $EMACSCLIENT_NO_WAIT'
 
