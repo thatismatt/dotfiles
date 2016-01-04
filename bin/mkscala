@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SCALA_VERSION="2.10.4"
+SCALA_VERSION="2.10.5"
 PACKAGEROOT="com.example"
 
 # TODO: Remove trailing slash from name
