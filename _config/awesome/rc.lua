@@ -558,10 +558,13 @@ bindings.tags = utils.flatmap(
    utils.range(tags.count * screen.count()),
    function (i)
       return awful.util.table.join(
+         -- view only tag i
          awful.key({ modkey }, i,
             function () awful.tag.viewonly(tags[i]) end),
+         -- also view tag i
          awful.key({ modkey, "Control" }, i,
             function () awful.tag.viewtoggle(tags[i]) end),
+         -- move client to tag i
          awful.key({ modkey, "Shift" }, i,
             function ()
                if client.focus then
@@ -569,6 +572,7 @@ bindings.tags = utils.flatmap(
                end
             end
          ),
+         -- also include client on tag i
          awful.key({ modkey, "Control", "Shift" }, i,
             function ()
                if client.focus then
