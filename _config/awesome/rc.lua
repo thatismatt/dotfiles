@@ -550,6 +550,16 @@ bindings.client.keys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "n",      function (c) c.minimized = true end),
    awful.key({ modkey, "Shift"   }, "m",      toggle_maximized),
    awful.key({ modkey, "Shift"   }, "k",      awful.client.togglemarked),
+   awful.key({ modkey, "Shift"   }, "Right",  function (c)
+         awful.tag.viewnext()
+         c:tags({ awful.tag.selected() })
+         client.focus = c
+   end),
+   awful.key({ modkey, "Shift"   }, "Left",   function (c)
+         awful.tag.viewprev()
+         c:tags({ awful.tag.selected() })
+         client.focus = c
+   end),
    awful.key({ modkey, "Shift"   }, "d",      function (c) debug_client = c end)
 )
 
