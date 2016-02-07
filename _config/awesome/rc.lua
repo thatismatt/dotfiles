@@ -16,6 +16,10 @@ utils       = require("utils")
 agate       = require("agate")
 mpd         = require("mpd")
 
+local config = {
+   hostname = utils.read_all("uname -a"):gsub("%s+", "")
+}
+
 -- {{{ Error handling
 -- Handle runtime errors after startup
 do
@@ -409,9 +413,7 @@ local battery = status_widget(
 local volume = status_widget(
    icon_file("hardware", "speaker"),
    function (volume)
-      local fd = io.popen("amixer -D pulse sget Master")
-      local status = fd:read("*all")
-      fd:close()
+      local status = utils.read_all("amixer -D pulse sget Master")
       local on = string.match(status, "%[(o[^%]]*)%]") == "on"
       local text = "mute"
       if on then
