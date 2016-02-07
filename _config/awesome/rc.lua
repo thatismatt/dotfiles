@@ -493,8 +493,6 @@ bindings.keys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
    awful.key({ modkey            }, "Right",  awful.tag.viewnext),
    awful.key({ modkey            }, "Left",   awful.tag.viewprev),
-   awful.key({ modkey, "Shift"   }, "Right",  awful.tag.viewnext),
-   awful.key({ modkey, "Shift"   }, "Left",   awful.tag.viewprev),
    awful.key({ modkey            }, "]",      function () awful.tag.incmwfact( 0.05) end),
    awful.key({ modkey            }, "[",      function () awful.tag.incmwfact(-0.05) end),
    awful.key({ modkey, "Control" }, "]",      function () awful.tag.incnmaster(1) end),
