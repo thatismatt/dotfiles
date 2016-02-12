@@ -6,6 +6,7 @@
 
 local socket = require("socket")
 local utils = require("utils")
+local error = error
 local setmetatable = setmetatable
 local string = string
 local tostring = tostring
@@ -35,15 +36,20 @@ function mpd:connect ()
    log("connect")
    self.socket = socket.tcp()
    self.socket:settimeout(mpd.timeout, "t")
-   local connected = self.socket:connect(mpd.hostname, mpd.port)
-   local line = self.socket:receive("*l")
-   if line:match("^OK MPD") then
-      self.connected = true
-      local _, _, version = string.find(line, "^OK MPD ([0-9.]+)")
-      log("connected: " .. version)
+   local connected, err = self.socket:connect(mpd.hostname, mpd.port)
+   if err then
+      log("MPD connect failed: " .. utils.dump(err))
+      error("MPD connect failed: " .. utils.dump(err))
    else
-      self.connected = false
-      log("not connected: " .. line)
+      local line = self.socket:receive("*l")
+      if line:match("^OK MPD") then
+         self.connected = true
+         local _, _, version = string.find(line, "^OK MPD ([0-9.]+)")
+         log("connected: " .. version)
+      else
+         self.connected = false
+         log("not connected: " .. line)
+      end
    end
 end
 
