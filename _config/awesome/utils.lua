@@ -135,8 +135,8 @@ utils.dump = function (o, indent)
    end
 end
 
-utils.read_all = function ()
-   local fd = io.popen("uname -n")
+utils.read_all = function (cmd)
+   local fd = io.popen(cmd)
    local line = fd:read("*all")
    fd:close()
    return line
