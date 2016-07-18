@@ -198,7 +198,7 @@ end
 -- }}}
 
 -- {{{ Wibox
-mytextclock = awful.widget.textclock()
+mytextclock = awful.widget.textclock(" %a %d %b %Y, %H:%M ")
 mytextclock:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("gsimplecal") end)))
 
 mywibox = {}
@@ -297,6 +297,10 @@ function status_widget (icon_or_fn, update, data)
    local img = wibox.widget.imagebox()
    w.icon = wibox.layout.margin(img, 3, 3, 3, 3)
    w.update = function ()
+      -- TODO: make elapsed time available to widget's update function
+      -- local now = os.time()
+      -- w.elapsed = now - w.last_update
+      -- w.last_update = now
       local text = update(w)
       w.widget:set_text(text)
       local icon = type(icon_or_fn) == "function" and icon_or_fn(w) or icon_or_fn
@@ -422,6 +426,8 @@ local volume = status_widget(
       return text
    end
 )
+
+-- TODO: Weather Widget http://api.wunderground.com/api/21222d201ae38abb/forecast/q/UK/Fairford.json
 
 local bottom_widgets_layout = wibox.layout.fixed.horizontal()
 bottom_widgets_layout:add(wifi.icon)
