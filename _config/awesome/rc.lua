@@ -489,8 +489,12 @@ bindings.keys = awful.util.table.join(
    awful.key({ modkey            }, "Escape", awful.tag.history.restore),
    awful.key({ modkey            }, "Up",     focus_raise(-1)),
    awful.key({ modkey            }, "Down",   focus_raise(1)),
+   awful.key({ modkey            }, "k",      focus_raise(-1)),
+   awful.key({ modkey            }, "j",      focus_raise(1)),
    awful.key({ modkey, "Shift"   }, "Up",     function () awful.client.swap.byidx(-1) end),
    awful.key({ modkey, "Shift"   }, "Down",   function () awful.client.swap.byidx(1) end),
+   awful.key({ modkey, "Shift"   }, "k",      function () awful.client.swap.byidx(-1) end),
+   awful.key({ modkey, "Shift"   }, "j",      function () awful.client.swap.byidx(1) end),
    awful.key({ modkey            }, "Tab",    awful.tag.viewnext),
    awful.key({ modkey, "Shift"   }, "Tab",    awful.tag.viewprev),
    awful.key({ modkey, "Control" }, "Up",     cycle_master(false)),
@@ -508,6 +512,8 @@ bindings.keys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
    awful.key({ modkey            }, "Right",  awful.tag.viewnext),
    awful.key({ modkey            }, "Left",   awful.tag.viewprev),
+   awful.key({ modkey            }, "l",      awful.tag.viewnext),
+   awful.key({ modkey            }, "h",      awful.tag.viewprev),
    awful.key({ modkey            }, "]",      function () awful.tag.incmwfact( 0.05) end),
    awful.key({ modkey            }, "[",      function () awful.tag.incmwfact(-0.05) end),
    awful.key({ modkey, "Control" }, "]",      function () awful.tag.incnmaster(1) end),
@@ -553,6 +559,16 @@ opaque.toggle = function (c)
    opaque.clients[c] = not opaque.clients[c] or nil
 end
 
+function tag_next (c)
+   awful.tag.viewnext()
+   c:tags({ awful.tag.selected() })
+   client.focus = c
+end
+function tag_prev (c)
+   awful.tag.viewprev()
+   c:tags({ awful.tag.selected() })
+   client.focus = c
+end
 bindings.client = {}
 bindings.client.keys = awful.util.table.join(
    awful.key({ altkey            }, "F4",     function (c) c:kill() end),
@@ -562,17 +578,11 @@ bindings.client.keys = awful.util.table.join(
    awful.key({ modkey, "Shift"   }, "t",      opaque.toggle),
    awful.key({ modkey, "Shift"   }, "n",      function (c) c.minimized = true end),
    awful.key({ modkey, "Shift"   }, "m",      toggle_maximized),
-   awful.key({ modkey, "Shift"   }, "k",      awful.client.togglemarked),
-   awful.key({ modkey, "Shift"   }, "Right",  function (c)
-         awful.tag.viewnext()
-         c:tags({ awful.tag.selected() })
-         client.focus = c
-   end),
-   awful.key({ modkey, "Shift"   }, "Left",   function (c)
-         awful.tag.viewprev()
-         c:tags({ awful.tag.selected() })
-         client.focus = c
-   end),
+   awful.key({ modkey, "Shift"   }, "x",      awful.client.togglemarked),
+   awful.key({ modkey, "Shift"   }, "Right",  tag_next),
+   awful.key({ modkey, "Shift"   }, "Left",   tag_prev),
+   awful.key({ modkey, "Shift"   }, "l",      tag_next),
+   awful.key({ modkey, "Shift"   }, "h",      tag_prev),
    awful.key({ modkey, "Shift"   }, "d",      function (c) debug_client = c end)
 )
 
