@@ -97,13 +97,20 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = { by_screen = {} }
-tags.count = 8 / screen.count() -- per screen
-for s = 1, screen.count() do
-   local names = utils.range((s - 1) * tags.count + 1, tags.count * s)
+tags.count = 9
+
+function screen_tags (s, names)
    tags.by_screen[s] = awful.tag(names, s, layouts[1])
    for k, v in pairs(names) do
       tags[v] = tags.by_screen[s][k]
    end
+end
+
+if screen.count() == 2 then
+   screen_tags(1, utils.range(1, 3))
+   screen_tags(2, utils.range(4, tags.count))
+else
+   screen_tags(1, utils.range(1, tags.count))
 end
 -- }}}
 
@@ -571,7 +578,7 @@ bindings.client.keys = awful.util.table.join(
 
 -- Tag numeric bindings
 bindings.tags = utils.flatmap(
-   utils.range(tags.count * screen.count()),
+   utils.range(tags.count),
    function (i)
       return awful.util.table.join(
          -- view only tag i
