@@ -98,6 +98,12 @@ utils.range = function (from, to)
    return r
 end
 
+utils.tail = function (tbl)
+   return utils.map(
+      utils.range(2, #tbl),
+      function (i) return tbl[i] end)
+end
+
 utils.async = function (f)
    local x = timer({ timeout = 0 })
    x:connect_signal("timeout", function() f(); x:stop() end)
