@@ -8,5 +8,8 @@ else
     RESOLUTION=$1
 fi
 
-xrandr --output eDP1  --mode $RESOLUTION --pos 0x0 \
-       --output HDMI1 --mode $RESOLUTION --pos 0x0
+xrandr --output eDP-1  --mode $RESOLUTION --pos 0x0 \
+       --output HDMI-1 --mode $RESOLUTION --pos 0x0
+
+DEVICE="SYNAPTICS Synaptics Large Touch Screen"
+xinput set-prop "$DEVICE"  --type=float "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 1
