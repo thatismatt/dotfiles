@@ -344,7 +344,7 @@ local wifi = status_widget(
       end
       return "off"
    end,
-   { interface = "wlan0" }
+   { interface = "wlp6s0" }
 )
 
 function bandwidth_update (bandwidth)
@@ -361,13 +361,13 @@ end
 local bandwidth_rx = status_widget(
    icon_file("file", "file_download"),
    bandwidth_update,
-   { previous = 0, interface = "wlan0", direction = "rx" }
+   { previous = 0, interface = "wlp6s0", direction = "rx" }
 )
 
 local bandwidth_tx = status_widget(
    icon_file("file", "file_upload"),
    bandwidth_update,
-   { previous = 0, interface = "wlan0", direction = "tx" }
+   { previous = 0, interface = "wlp6s0", direction = "tx" }
 )
 
 local cpu = status_widget(
