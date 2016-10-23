@@ -13,6 +13,7 @@ menubar     = require("menubar")
 
 prime       = require("prime")
 utils       = require("utils")
+-- matilla     = require("matilla")
 agate       = require("agate")
 mpd         = require("mpd")
 
@@ -71,6 +72,7 @@ local bindings = {};
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts = {
    awful.layout.suit.tile,
+   -- matilla,
    awful.layout.suit.tile.left,
    awful.layout.suit.tile.bottom,
    -- awful.layout.suit.tile.top,

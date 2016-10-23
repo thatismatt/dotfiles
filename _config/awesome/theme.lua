@@ -38,6 +38,8 @@ theme.menu_width  = "150"
 
 theme.wallpaper = "/home/matt/Pictures/wallpaper"
 
+-- theme.layout_matilla = "/usr/share/awesome/themes/default/layouts/tilew.png"
+
 theme.awesome_icon = "/home/matt/.config/awesome/awesome_icon.png"
 
 -- theme.tasklist_plain_task_name = true
