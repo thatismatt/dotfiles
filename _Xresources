@@ -49,4 +49,4 @@ URxvt.keysym.C-equal: command:\033]710;xft:VL Gothic:size=18\007
 *color14:    #00aaaa
 ! white
 *color7:     #aaaaaa
-*color15:    #FFFFFF
+*color15:    #ffffff
