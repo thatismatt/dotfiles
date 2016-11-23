@@ -510,6 +510,7 @@ bindings.keys = awful.util.table.join(
    awful.key({ modkey            }, "f",      function () awful.util.spawn("thunar") end),
    awful.key({ modkey            }, "w",      function () awful.util.spawn("x-www-browser") end),
    awful.key({ modkey            }, "v",      function () awful.util.spawn("pavucontrol") end),
+   awful.key({ modkey            }, "s",      function () awful.util.spawn("xfce4-screenshooter") end),
    awful.key({ modkey, "Control" }, "r",      awesome.restart),
    awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
    awful.key({ modkey            }, "Right",  awful.tag.viewnext),
