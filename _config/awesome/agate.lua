@@ -77,7 +77,7 @@ overlay.visible = false
 overlay.opacity = 0.8
 local thumbnails = {}
 
--- overlay size as protion of screen
+-- overlay size as portion of screen
 local height_portion = 0.5
 local width_portion = 0.8
 local active_border_width = 5
