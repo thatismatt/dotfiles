@@ -185,7 +185,8 @@ local function open ()
    -- i.e. cs should be the union of client.get() & focus.stack
    local cs = utils.union(focus.stack, client.get())
 
-   local thumbnail_geometry = { width = w / #cs, height = h }
+   -- math.floor to ensure we are dealing in whole pixels
+   local thumbnail_geometry = { width = math.floor(w / #cs), height = h }
 
    local layout = wibox.layout.fixed.horizontal()
    overlay:set_widget(layout)
