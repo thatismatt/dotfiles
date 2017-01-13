@@ -595,10 +595,16 @@ bindings.tags = utils.flatmap(
       return awful.util.table.join(
          -- view only tag i
          awful.key({ modkey }, i,
-            function () awful.tag.viewonly(tags[i]) end),
+            function ()
+               awful.tag.viewonly(tags[i])
+            end
+         ),
          -- also view tag i
          awful.key({ modkey, "Control" }, i,
-            function () awful.tag.viewtoggle(tags[i]) end),
+            function ()
+               awful.tag.viewtoggle(tags[i])
+            end
+         ),
          -- move client to tag i
          awful.key({ modkey, "Shift" }, i,
             function ()
