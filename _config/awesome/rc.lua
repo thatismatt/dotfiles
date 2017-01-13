@@ -597,6 +597,7 @@ bindings.tags = utils.flatmap(
          awful.key({ modkey }, i,
             function ()
                awful.tag.viewonly(tags[i])
+               awful.screen.focus(awful.tag.getscreen(tags[i])) -- move mouse to tag's screen
             end
          ),
          -- view toggle tag i
