@@ -599,7 +599,7 @@ bindings.tags = utils.flatmap(
                awful.tag.viewonly(tags[i])
             end
          ),
-         -- also view tag i
+         -- view toggle tag i
          awful.key({ modkey, "Control" }, i,
             function ()
                awful.tag.viewtoggle(tags[i])
@@ -613,7 +613,7 @@ bindings.tags = utils.flatmap(
                end
             end
          ),
-         -- also include client on tag i
+         -- client toggle tag i
          awful.key({ modkey, "Control", "Shift" }, i,
             function ()
                if client.focus then
