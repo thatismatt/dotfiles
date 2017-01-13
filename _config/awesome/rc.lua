@@ -31,7 +31,6 @@ do
          -- Make sure we don't go into an endless error loop
          if in_error then return end
          in_error = true
-
          naughty.notify({ preset = naughty.config.presets.critical,
                           title = "Oops, an error happened!",
                           text = err })
