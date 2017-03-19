@@ -40,6 +40,7 @@ function mpd:connect ()
    if err then
       log("MPD connect failed: " .. utils.dump(err))
       error("MPD connect failed: " .. utils.dump(err))
+      self.connected = false
    else
       local line = self.socket:receive("*l")
       if line:match("^OK MPD") then
