@@ -2,5 +2,5 @@
 
 emacsclient -n +$2:$3 $1
 
-# NOTE: Use the following to specify a specific xgEmacs server
+# NOTE: Use the following to specify a specific Emacs server
 # emacsclient -s <emacs-server-name> -n +$2:$3 $1
