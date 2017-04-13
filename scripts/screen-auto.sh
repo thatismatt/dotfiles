@@ -4,7 +4,7 @@ cd $( dirname $0 )
 
 echo "[SCREEN AUTO] Detecting screens..."
 
-SCREEN_COUNT=$( xrandr | grep ' connected ' | wc -l )
+SCREEN_COUNT=$( xrandr | grep ' connected' | wc -l )
 
 case "$SCREEN_COUNT" in
 
