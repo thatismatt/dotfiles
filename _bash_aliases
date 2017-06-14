@@ -9,6 +9,7 @@ path_add() {
 
 path_add /home/matt/bin
 path_add /home/matt/opt/gradle/latest/bin
+path_add /home/matt/opt/maven/latest/bin
 
 function bash-reload () {
     . ~/.bash_aliases
