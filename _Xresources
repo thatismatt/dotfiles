@@ -15,15 +15,16 @@ XTerm*Background:  #001111
 URxvt.foreground:  #aaaaaa
 URxvt.background:  #001111
 URxvt.scrollBar:   false
-URxvt.font:        xft:VL Gothic:size=11
+URxvt.font:        xft:M+ 1m:size=11
+!URxvt.font:        xft:VL Gothic:size=11
 !URxvt.font:        xft:Inconsolata:size=11
 URxvt.iconFile:    /usr/share/icons/Faenza/apps/scalable/Terminal.svg
 URxvt.letterSpace: -1
 URxvt.saveLines:   10000
 URxvt.iso14755:    false
 URxvt.iso14755_52: false
-URxvt.keysym.C-minus: command:\033]710;xft:VL Gothic:size=11\007
-URxvt.keysym.C-equal: command:\033]710;xft:VL Gothic:size=18\007
+URxvt.keysym.C-minus: command:\033]710;xft:M+ 1m:size=11\007
+URxvt.keysym.C-equal: command:\033]710;xft:M+ 1m:size=18\007
 
 ! colours
 ! black
