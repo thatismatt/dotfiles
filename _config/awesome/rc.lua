@@ -457,6 +457,12 @@ bottom_widgets_layout:add(cpu.widget)
 bottom_widgets_layout:add(memory.icon)
 bottom_widgets_layout:add(memory.widget)
 
+local bottom_left_widgets_layout = wibox.layout.fixed.horizontal()
+local user_details_textbox = wibox.widget.textbox()
+local user_details_widget = wibox.layout.margin(user_details_textbox, 5, 3, 3, 3)
+user_details_textbox:set_text(config.user .. "@" .. config.hostname)
+bottom_left_widgets_layout:add(user_details_widget)
+
 local mpd_layout = wibox.layout.fixed.horizontal()
 
 function mpd_button (icon, action)
@@ -474,6 +480,7 @@ mpd_button("fast_forward", function () mpd_client:command("seekcur +30") end)
 mpd_button("skip_next", function () mpd_client:command("next") end)
 
 local bottom_layout = wibox.layout.align.horizontal()
+bottom_layout:set_left(bottom_left_widgets_layout)
 bottom_layout:set_middle(bottom_widgets_layout)
 bottom_layout:set_right(mpd_layout)
 
