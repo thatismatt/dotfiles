@@ -52,10 +52,11 @@ utils.flatmap = function (tbl, f)
    return utils.concat(utils.map(tbl, f))
 end
 
-utils.map_values = function (tbl, f)
+utils.map_kv = function (tbl, f)
    local r = {}
    for k, v in pairs(tbl) do
-      r[k] = f(v)
+      local k1, v1 = f(k, v)
+      r[k1] = v1
    end
    return r
 end
