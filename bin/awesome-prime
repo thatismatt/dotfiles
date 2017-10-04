@@ -30,7 +30,7 @@ then
 fi
 
 DBUS_PATH=/
-DBUS_DEST=org.naquadah.awesome.awful
+DBUS_DEST=thatismatt.awesome
 DBUS_METHOD=${DBUS_DEST}.Prime.Eval
 
 a_dbus_send()

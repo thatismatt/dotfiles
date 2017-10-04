@@ -94,8 +94,9 @@ function capture_nils (...)
 end
 
 function initialise ()
+   dbus.request_name("session", "thatismatt.awesome")
    dbus.connect_signal(
-      "org.naquadah.awesome.awful.Prime",
+      "thatismatt.awesome.Prime",
       function (data, request)
          if data.member == "Eval" then
             local command_id, code = parse_request(request)
