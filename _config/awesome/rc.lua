@@ -18,7 +18,10 @@ agate       = require("agate")
 mpd         = require("mpd")
 
 local config = {
-   hostname = utils.read_all("uname -a"):gsub("%s+", "")
+   user = utils.read_all("whoami"):gsub("%s+", ""),
+   hostname = utils.read_all("hostname"):gsub("%s+", ""),
+   network = utils.read_all("nmcli device status")
+   -- TODO: battery
 }
 
 -- {{{ Error handling
