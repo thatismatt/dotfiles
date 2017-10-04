@@ -15,6 +15,7 @@ local string   = string
 local table    = table
 local tostring = tostring
 local type     = type
+local pcall    = pcall
 
 module("prime")
 
@@ -75,7 +76,8 @@ function process_request (command, code)
    else
       local f, e = load(code)
       if f then
-         local results = capture_nils(f())
+         local results = capture_nils(pcall(f))
+         -- TODO: make use of results.ok
          local responses = {}
          for k = 1, results.n do
             local v = results[k]
@@ -88,9 +90,9 @@ function process_request (command, code)
    end
 end
 
-function capture_nils (...)
+function capture_nils (ok, ...)
    -- explicitly capture the length as n, see http://lua-users.org/wiki/StoringNilsInTables
-   return { n = select('#', ...), ... }
+   return { ok = ok, n = select('#', ...), ... }
 end
 
 function initialise ()
