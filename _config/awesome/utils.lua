@@ -48,6 +48,14 @@ utils.filter = function (tbl, f)
    return r
 end
 
+utils.find = function (tbl, f)
+   for k, v in pairs(tbl) do
+      if f(v) then
+         return v
+      end
+   end
+end
+
 utils.flatmap = function (tbl, f)
    return utils.concat(utils.map(tbl, f))
 end

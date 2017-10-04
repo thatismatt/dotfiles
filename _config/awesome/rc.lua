@@ -17,13 +17,6 @@ utils       = require("utils")
 agate       = require("agate")
 mpd         = require("mpd")
 
-local config = {
-   user = utils.read_all("whoami"):gsub("%s+", ""),
-   hostname = utils.read_all("hostname"):gsub("%s+", ""),
-   network = utils.read_all("nmcli device status")
-   -- TODO: battery
-}
-
 -- {{{ Error handling
 -- Handle runtime errors after startup
 do
@@ -59,6 +52,33 @@ prime.add_commands({
 })
 prime.default_command_id = "d"
 -- }}}
+
+function network_details ()
+   local r = {}
+   local lines = io.popen("nmcli device status"):lines()
+   lines() -- ignore titles
+   for line in lines do
+      local device, kind, state = string.match(line, "^([%a%d]*)%s+([%a%d]*)%s+([%a%d]*)%s+.*$")
+      table.insert(r, { kind = kind, device = device, state = state })
+   end
+   function is_primary (n)
+      return n.state == "connected" and
+         n.kind ~= "bridge"
+   end
+   function is_wifi (n)
+      return n.kind == "wifi"
+   end
+   r.primary = utils.find(r, is_primary)
+   r.wifi = utils.find(r, is_wifi)
+   return r
+end
+
+local config = {
+   user = utils.read_all("whoami"):gsub("%s+", ""),
+   hostname = utils.read_all("hostname"):gsub("%s+", ""),
+   network = network_details()
+   -- TODO: battery
+}
 
 -- {{{ Variable definitions
 beautiful.init("/home/matt/.config/awesome/theme.lua")
@@ -347,7 +367,7 @@ local wifi = status_widget(
       end
       return "off"
    end,
-   { interface = "wlp6s0" }
+   { interface = config.network.wifi.device }
 )
 
 function bandwidth_update (bandwidth)
@@ -364,13 +384,13 @@ end
 local bandwidth_rx = status_widget(
    icon_file("file", "file_download"),
    bandwidth_update,
-   { previous = 0, interface = "wlp6s0", direction = "rx" }
+   { previous = 0, interface = config.network.primary.device, direction = "rx" }
 )
 
 local bandwidth_tx = status_widget(
    icon_file("file", "file_upload"),
    bandwidth_update,
-   { previous = 0, interface = "wlp6s0", direction = "tx" }
+   { previous = 0, interface = config.network.primary.device, direction = "tx" }
 )
 
 local cpu = status_widget(
