@@ -578,11 +578,13 @@ function tag_next (c)
    c:tags({ awful.tag.selected() })
    client.focus = c
 end
+
 function tag_prev (c)
    awful.tag.viewprev()
    c:tags({ awful.tag.selected() })
    client.focus = c
 end
+
 bindings.client = {}
 bindings.client.keys = awful.util.table.join(
    awful.key({ altkey            }, "F4",     function (c) c:kill() end),
