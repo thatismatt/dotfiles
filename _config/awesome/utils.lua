@@ -30,6 +30,14 @@ utils.log = function (msg)
    f:close()
 end
 
+utils.iter_to_tbl = function (iter)
+   local r = {}
+   for i in iter do
+      table.insert(r, i)
+   end
+   return r
+end
+
 utils.map = function (tbl, f)
    local r = {}
    for k, v in pairs(tbl) do

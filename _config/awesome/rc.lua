@@ -73,11 +73,30 @@ function network_details ()
    return r
 end
 
+function power_details ()
+   local power_paths = utils.iter_to_tbl(io.popen("upower --enumerate"):lines())
+   local r = utils.map(
+      power_paths,
+      function (path)
+         local d = { path = path }
+         for line in io.popen("upower --show-info " .. path):lines() do
+            local k, v = string.match(line, "^%s*([^:]*):%s*(.*)$")
+            if k then
+               d[k == "native-path" and "id" or k] = v
+            end
+         end
+         return d
+      end
+   )
+   r.battery = utils.find(r, function (p) return p.model == "BAT" end)
+   return r
+end
+
 local config = {
    user = utils.read_all("whoami"):gsub("%s+", ""),
    hostname = utils.read_all("hostname"):gsub("%s+", ""),
-   network = network_details()
-   -- TODO: battery
+   network = network_details(),
+   power = power_details()
 }
 
 -- {{{ Variable definitions
@@ -443,7 +462,7 @@ local battery = status_widget(
       local text = string.format("%.0f%%", battery.charge)
       return text
    end,
-   { identifier = "BAT1" }
+   { identifier = config.power.battery.id }
 )
 
 local volume = status_widget(
