@@ -456,8 +456,10 @@ local battery = status_widget(
       return icon_file("device", icon)
    end,
    function (battery)
-      local full = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_full")())
-      local now = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_now")())
+      -- local full = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_full")())
+      -- local now = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/energy_now")())
+      local full = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/charge_full")())
+      local now = tonumber(io.lines("/sys/class/power_supply/" .. battery.identifier .. "/charge_now")())
       battery.charge = 100 * now / full
       local text = string.format("%.0f%%", battery.charge)
       return text
