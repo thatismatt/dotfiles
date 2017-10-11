@@ -62,8 +62,7 @@ function network_details ()
       table.insert(r, { kind = kind, device = device, state = state })
    end
    function is_primary (n)
-      return n.state == "connected" and
-         n.kind ~= "bridge"
+      return (n.state == "connected" or n.state == "connecting") and n.kind ~= "bridge"
    end
    function is_wifi (n)
       return n.kind == "wifi"
