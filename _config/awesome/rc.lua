@@ -363,7 +363,8 @@ function status_widget (icon_or_fn, update, data)
    return w
 end
 
-local wifi = status_widget(
+local widgets = {}
+widgets.wifi = status_widget(
    function (wifi)
       local icon = "signal_wifi_off"
       if wifi.strength > 80 then icon = "signal_wifi_4_bar"
@@ -399,19 +400,20 @@ function bandwidth_update (bandwidth)
    return string.format("%.2f", d / 131072)
 end
 
-local bandwidth_rx = status_widget(
-   icon_file("file", "file_download"),
-   bandwidth_update,
-   { previous = 0, interface = config.network.primary.device, direction = "rx" }
-)
+function bandwidth_status_widget (interface, direction)
+   return status_widget(
+      icon_file("file", "file_download"),
+      bandwidth_update,
+      { previous = 0, interface = interface.device, direction = direction }
+   )
+end
 
-local bandwidth_tx = status_widget(
-   icon_file("file", "file_upload"),
-   bandwidth_update,
-   { previous = 0, interface = config.network.primary.device, direction = "tx" }
-)
+if config.network.primary then
+   widgets.bandwidth_tx = bandwidth_status_widget(config.network.primary, "tx")
+   widgets.bandwidth_rx = bandwidth_status_widget(config.network.primary, "rx")
+end
 
-local cpu = status_widget(
+widgets.cpu = status_widget(
    icon_file("action", "settings"),
    function (cpu)
       local user, system, idle = string.match(io.lines("/proc/stat")(), "cpu +(%d+) +%d+ +(%d+) +(%d+)")
@@ -427,7 +429,7 @@ local cpu = status_widget(
    {}
 )
 
-local memory = status_widget(
+widgets.memory = status_widget(
    icon_file("hardware", "memory"),
    function (memory)
       local total, used = string.match(awful.util.pread("free -m"), "Mem: +(%d+) +(%d+)")
@@ -435,7 +437,7 @@ local memory = status_widget(
    end
 )
 
-local battery = status_widget(
+widgets.battery = status_widget(
    function (battery)
       local charge = "20"
       if battery.charge > 90 then charge = "90"
@@ -466,7 +468,7 @@ local battery = status_widget(
    { identifier = config.power.battery.id }
 )
 
-local volume = status_widget(
+widgets.volume = status_widget(
    icon_file("hardware", "speaker"),
    function (volume)
       local status = utils.read_all("amixer -D pulse sget Master")
@@ -482,20 +484,21 @@ local volume = status_widget(
 -- TODO: Weather Widget http://api.wunderground.com/api/21222d201ae38abb/forecast/q/UK/Fairford.json
 
 local bottom_widgets_layout = wibox.layout.fixed.horizontal()
-bottom_widgets_layout:add(wifi.icon)
-bottom_widgets_layout:add(wifi.widget)
-bottom_widgets_layout:add(bandwidth_rx.icon)
-bottom_widgets_layout:add(bandwidth_rx.widget)
-bottom_widgets_layout:add(bandwidth_tx.icon)
-bottom_widgets_layout:add(bandwidth_tx.widget)
-bottom_widgets_layout:add(battery.icon)
-bottom_widgets_layout:add(battery.widget)
-bottom_widgets_layout:add(volume.icon)
-bottom_widgets_layout:add(volume.widget)
-bottom_widgets_layout:add(cpu.icon)
-bottom_widgets_layout:add(cpu.widget)
-bottom_widgets_layout:add(memory.icon)
-bottom_widgets_layout:add(memory.widget)
+
+function add_status_widget (widget)
+   if widget then
+      bottom_widgets_layout:add(widget.icon)
+      bottom_widgets_layout:add(widget.widget)
+   end
+end
+
+add_status_widget(widgets.wifi)
+add_status_widget(widgets.bandwidth_rx)
+add_status_widget(widgets.bandwidth_tx)
+add_status_widget(widgets.battery)
+add_status_widget(widgets.volume)
+add_status_widget(widgets.cpu)
+add_status_widget(widgets.memory)
 
 local bottom_left_widgets_layout = wibox.layout.fixed.horizontal()
 local user_details_textbox = wibox.widget.textbox()
