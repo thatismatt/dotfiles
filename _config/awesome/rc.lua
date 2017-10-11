@@ -87,7 +87,7 @@ function power_details ()
          return d
       end
    )
-   r.battery = utils.find(r, function (p) return p.model == "BAT" end)
+   r.battery = utils.find(r, function (p) return string.match(p.id, "^BAT%d+$") end)
    return r
 end
 
