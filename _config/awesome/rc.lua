@@ -400,17 +400,17 @@ function bandwidth_update (bandwidth)
    return string.format("%.2f", d / 131072)
 end
 
-function bandwidth_status_widget (interface, direction)
+function bandwidth_status_widget (interface, direction, icon)
    return status_widget(
-      icon_file("file", "file_download"),
+      icon_file("file", icon),
       bandwidth_update,
       { previous = 0, interface = interface.device, direction = direction }
    )
 end
 
 if config.network.primary then
-   widgets.bandwidth_tx = bandwidth_status_widget(config.network.primary, "tx")
-   widgets.bandwidth_rx = bandwidth_status_widget(config.network.primary, "rx")
+   widgets.bandwidth_tx = bandwidth_status_widget(config.network.primary, "tx", "file_upload")
+   widgets.bandwidth_rx = bandwidth_status_widget(config.network.primary, "rx", "file_download")
 end
 
 widgets.cpu = status_widget(
