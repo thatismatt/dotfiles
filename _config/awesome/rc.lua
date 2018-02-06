@@ -364,6 +364,7 @@ function status_widget (icon_or_fn, update, data)
 end
 
 local widgets = {}
+-- TODO: when connected by ethernet display wired network connection widget
 widgets.wifi = status_widget(
    function (wifi)
       local icon = "signal_wifi_off"
