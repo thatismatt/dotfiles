@@ -115,6 +115,12 @@ utils.range = function (from, to)
    return r
 end
 
+utils.head = function (tbl)
+   for k, v in pairs(tbl) do
+      return v
+   end
+end
+
 utils.tail = function (tbl)
    return utils.map(
       utils.range(2, #tbl),
