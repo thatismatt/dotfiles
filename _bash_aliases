@@ -67,12 +67,6 @@ alias ......="cd ../../../../.."
 
 alias cdi='~/bin/cdi/cdi.py /tmp/cdi.out && cd `cat /tmp/cdi.out`'
 
-alias agi="sudo apt-get install"
-alias acs="apt-cache show"
-alias acr="apt-cache search"
-
-alias json="python -mjson.tool"
-
 # Emacs - Server Socket (for multiple daemons)
 # NOTES: - default = server
 #        - see /tmp/emacs1000/ (emacs variable server-socket-dir)
