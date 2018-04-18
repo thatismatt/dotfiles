@@ -1,16 +1,16 @@
 #!/bin/bash
 
-path_add() {
+path-add() {
     if [ -d "$1" ] && [[ ! $PATH =~ (^|:)$1(:|$) ]];
     then
         PATH+=:$1
     fi
 }
 
-path_add /home/matt/bin
-path_add /home/matt/.local/bin
-path_add /home/matt/opt/gradle/latest/bin
-path_add /home/matt/opt/maven/latest/bin
+path-add /home/matt/bin
+path-add /home/matt/.local/bin
+path-add /home/matt/opt/gradle/latest/bin
+path-add /home/matt/opt/maven/latest/bin
 
 function bash-reload () {
     . ~/.bash_aliases
