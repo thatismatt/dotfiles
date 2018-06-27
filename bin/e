@@ -1,0 +1,17 @@
+#!/bin/bash
+
+CMD=$(basename $0)
+
+EMACSCLIENT_NO_WAIT="-n"
+[[ -z "$DISPLAY" ]] && EMACSCLIENT_NO_WAIT=""
+
+case $CMD in
+    et)
+        EMACSCLIENT_ARGS="-t"
+        ;;
+    *)
+        EMACSCLIENT_ARGS=$EMACSCLIENT_NO_WAIT
+        ;;
+esac
+
+emacsclient -s ${EMACS_SERVER:-server} $EMACSCLIENT_ARGS $@
