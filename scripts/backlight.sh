@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# NOTE: add this script to the sudoers as a NOPASSWD entry
+# - from https://askubuntu.com/q/149054#comment1359699_469040
+
 BACKLIGHT_PATH="/sys/class/backlight/intel_backlight"
 
 while [[ ! -z "$@" ]] ; do
