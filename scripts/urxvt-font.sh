@@ -1,7 +1,8 @@
 #!/bin/bash
 
-FONT_NAME="M+ 1m"
-FONT_SIZE="11"
+#FONT_NAME="M+ 1m"
+FONT_NAME="Iosevka"
+FONT_SIZE="14"
 
 while getopts "f:s:" OPT; do
     case $OPT in
