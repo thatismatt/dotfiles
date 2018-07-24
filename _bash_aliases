@@ -53,7 +53,7 @@ function mvt () {
     done
 }
 
-alias timestamp="date +%Y%m%d-%H%M%S"
+alias timestamp="date +%Y-%m-%d_%H-%M-%S"
 alias datestamp="date +%Y-%m-%d"
 
 alias l="ls -1"
