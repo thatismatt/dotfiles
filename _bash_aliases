@@ -83,8 +83,8 @@ function show_command_in_title_bar () {
     if [[ ! "$BASH_COMMAND" =~ .*\033]0.* ]] # ignore other commands that are setting the title
     then
         __tilde="~"
-        printf "\033]0;${USER}@${HOSTNAME}: ${PWD/#$HOME/$__tilde} - "
-        echo -n "${BASH_COMMAND}"
+        printf "\033]0;"
+        echo -n "${BASH_COMMAND} - ${USER}@${HOSTNAME}: ${PWD/#$HOME/$__tilde}"
         printf "\007"
     fi
 }
@@ -97,4 +97,4 @@ case "$TERM" in
         ;;
 esac
 
-PS1="\[\e]0;\u@\h: \w\a\]\[\033[0;34m\]\u@\h\[\033[00m\]:\[\033[0;32m\]\w\[\033[00m\]\$ "
+PS1="\[\033]0;\u@\h: \w\a\]\[\033[0;34m\]\u@\h\[\033[00m\]:\[\033[0;32m\]\w\[\033[00m\]\$ "
