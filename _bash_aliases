@@ -7,11 +7,11 @@ path-add() {
     fi
 }
 
-path-add /home/matt/bin
-path-add /home/matt/.local/bin
-path-add /home/matt/opt/gradle/latest/bin
-path-add /home/matt/opt/maven/latest/bin
-path-add /home/matt/code/fennel
+path-add ~/bin
+path-add ~/.local/bin
+path-add ~/opt/gradle/latest/bin
+path-add ~/opt/maven/latest/bin
+path-add ~/code/fennel
 
 function bash-reload () {
     . ~/.bash_aliases
