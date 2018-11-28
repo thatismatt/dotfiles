@@ -10,10 +10,6 @@
 
 ## Requirements
 
-    # mpd
-    sudo apt-get install mpd
-    sudo apt-get install lua-socket
-
     # Icons
     sudo apt-get install faenza-icon-theme
     cd Pictures
