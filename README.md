@@ -18,6 +18,7 @@
     # fonts
     sudo apt-get install fonts-inconsolata
     sudo apt-get install fonts-vlgothic
+    # Iosevka - https://github.com/be5invis/Iosevka
 
 ## Other Software
 
