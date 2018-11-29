@@ -15,7 +15,7 @@ else
 fi
 
 cd ~/projects
-PROJECT_DIRS=`find . -name .git -exec dirname {} \;`
+PROJECT_DIRS=`find . -name .git -exec dirname {} \; | sort`
 
 for PROJECT_DIR in $PROJECT_DIRS
 do
