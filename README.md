@@ -11,7 +11,7 @@
 ## Requirements
 
     # Icons
-    sudo apt-get install faenza-icon-theme
+    sudo apt install faenza-icon-theme
     cd Pictures
     git clone https://github.com/google/material-design-icons.git
 
@@ -23,7 +23,7 @@
 ## Other Software
 
     # urxvt
-    sudo apt-get install rxvt-unicode-256color
+    sudo apt install rxvt-unicode-256color
 
     # Java - https://launchpad.net/~webupd8team/+archive/ubuntu/java
     sudo add-apt-repository ppa:webupd8team/java
