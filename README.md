@@ -10,28 +10,30 @@
 
 ## Requirements
 
-    # Icons
+    # icons
     sudo apt install faenza-icon-theme
     cd Pictures
     git clone https://github.com/google/material-design-icons.git
 
     # fonts
-    sudo apt-get install fonts-inconsolata
-    sudo apt-get install fonts-vlgothic
+    sudo apt install fonts-inconsolata
+    sudo apt install fonts-vlgothic
     # Iosevka - https://github.com/be5invis/Iosevka
+
+    # theme
+    apt install greybird-gtk-theme
 
 ## Other Software
 
-    # urxvt
-    sudo apt install rxvt-unicode-256color
-
-    # Java - https://launchpad.net/~webupd8team/+archive/ubuntu/java
+    # java - https://launchpad.net/~webupd8team/+archive/ubuntu/java
     sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java7-installer
-    sudo apt-get install oracle-java8-installer
+    sudo apt update
+    sudo apt install oracle-java7-installer
+    sudo apt install oracle-java8-installer
 
     # lein - http://leiningen.org/
-    cd bin
-    wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
-    sudo chmod +x lein
+    wget -qO- https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > ~/bin/lein
+    chmod +x ~/bin/lein
+
+    # apt packages
+    sudo apt install rxvt-unicode-256color thunar evince feh arandr lxappearance tmux
