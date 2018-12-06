@@ -19,10 +19,10 @@ case "$HOSTNAME" in
 
         ;;
 
-    sallee)
+    jellee)
 
-        xrandr --output eDP-1-1 --mode 1920x1080 --pos 0x0 \
-               --output HDMI-1-2 --mode 1920x1080 --pos 1920x0
+        xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 \
+               --output HDMI-1 --mode 1920x1080 --pos 1920x0
 
         ;;
 esac
