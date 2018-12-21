@@ -2,7 +2,7 @@
 
 #FONT_NAME="M+ 1m"
 FONT_NAME="Iosevka"
-FONT_SIZE="14"
+FONT_SIZE="11"
 USAGE=true
 
 usage() {
