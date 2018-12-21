@@ -4,7 +4,7 @@
 FONT_NAME="Iosevka"
 FONT_SIZE="14"
 
-while getopts "f:s:" OPT; do
+while getopts ":f:s:" OPT; do
     case $OPT in
         f)
             FONT_NAME=$OPTARG
