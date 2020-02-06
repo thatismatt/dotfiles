@@ -36,4 +36,4 @@
     chmod +x ~/bin/lein
 
     # apt packages
-    sudo apt install rxvt-unicode-256color thunar evince feh arandr lxappearance tmux gsimplecal
+    sudo apt install rxvt-unicode-256color thunar evince feh arandr lxappearance tmux
