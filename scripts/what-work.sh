@@ -14,7 +14,7 @@ else
     TIME_RANGE="--after=$AFTER --before=$BEFORE"
 fi
 
-cd ~/projects
+cd ~/work
 PROJECT_DIRS=`find . -name .git -exec dirname {} \; | sort`
 
 for PROJECT_DIR in $PROJECT_DIRS
