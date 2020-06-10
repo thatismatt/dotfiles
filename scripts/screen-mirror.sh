@@ -23,7 +23,7 @@ case "$HOSTNAME" in
     jellee)
 
         xrandr --output eDP-1  --mode $RESOLUTION --pos 0x0 \
-               --output HDMI-2 --mode $RESOLUTION --pos 0x0
+               --output HDMI-1 --mode $RESOLUTION --pos 0x0
 
         ;;
 esac
