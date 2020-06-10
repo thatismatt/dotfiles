@@ -1,4 +1,5 @@
-{:user {:figwheel {:open-file-command "figwheel-open"}
+{:user {:repl-options {:init-ns user}
+        :figwheel {:open-file-command "figwheel-open"}
         :plugins [;; [lein-pprint "1.1.2"]
                   ;; [lein-auto "0.1.3"]
                   ;; [lein-eftest "0.5.8"]
