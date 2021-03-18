@@ -9,5 +9,8 @@ function e
         # emacs daemon isn't running or there's no visible frame, NOTE: there is always the invisible "initial_frame"
         set emacsclient_args $emacsclient_args "--create-frame"
     end
+    if not count $argv > /dev/null
+        set emacsclient_args $emacsclient_args -e "(select-frame-set-input-focus (selected-frame))"
+    end
     emacsclient -a= -s $emacs_server $emacsclient_args $argv
 end
