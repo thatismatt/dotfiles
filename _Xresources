@@ -2,7 +2,8 @@
 
 ! urxvt
 URxvt.foreground:  #aaaaaa
-URxvt.background:  #001111
+!URxvt.background:  #001111
+URxvt.background:  #0a0d0e
 URxvt.scrollBar:   false
 URxvt.font:        xft:Iosevka:size=11:antialias=true
 !URxvt.font:        xft:M+ 1m:size=14
