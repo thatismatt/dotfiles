@@ -2,16 +2,31 @@
 
 CMD=$(basename $0)
 
-EMACSCLIENT_NO_WAIT="-n"
+EMACS_FRAME_COUNT=$(emacsclient --socket-name ${EMACS_SERVER:-server} -e "(length (frame-list))")
+
+if [[ -z "$EMACS_FRAME_COUNT" ]] || [[ -z "$EMACS_FRAME_COUNT" ]]
+then
+    # emacs daemon isn't running or there's no visible frame, NOTE: there is always the invisible "initial_frame"
+    EMACSCLIENT_ARGS="--create-frame"
+fi
+
+EMACSCLIENT_NO_WAIT=" -n"
 [[ -z "$DISPLAY" ]] && EMACSCLIENT_NO_WAIT=""
 
+# FIX: this currently fails
+# if [[ $# -eq 0 ]]
+# then
+#     EMACSCLIENT_ARGS+=" -e \"(select-frame-set-input-focus (selected-frame))\""
+# fi
+
 case $CMD in
-    et)
-        EMACSCLIENT_ARGS="-t"
-        ;;
+    # FIX: this currently hangs
+    # et)
+    #     EMACSCLIENT_ARGS+=" -t"
+    #     ;;
     *)
-        EMACSCLIENT_ARGS=$EMACSCLIENT_NO_WAIT
+        EMACSCLIENT_ARGS+=$EMACSCLIENT_NO_WAIT
         ;;
 esac
 
-emacsclient -s ${EMACS_SERVER:-server} $EMACSCLIENT_ARGS $@
+emacsclient -a= -s ${EMACS_SERVER:-server} $EMACSCLIENT_ARGS $@
