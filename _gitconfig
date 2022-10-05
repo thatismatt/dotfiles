@@ -9,3 +9,5 @@
         default = current
 [alias]
         l = log --pretty=format:'%C(auto)%h %Cgreen%an%Creset %Cblue%ar%Creset %s %C(auto)%d' --graph
+[init]
+        defaultBranch = main
