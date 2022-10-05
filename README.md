@@ -12,7 +12,7 @@
 
     # icons
     sudo apt install faenza-icon-theme
-    cd Pictures
+    cd ~/Pictures
     git clone https://github.com/google/material-design-icons.git
 
     # fonts
@@ -25,15 +25,18 @@
 
 ## Other Software
 
-    # java - https://launchpad.net/~webupd8team/+archive/ubuntu/java
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt update
+    # java
     sudo apt install oracle-java7-installer
     sudo apt install oracle-java8-installer
+
+    # clojure - https://clojure.org/guides/getting_started
+    curl -O https://download.clojure.org/install/linux-install.sh
+    chmod +x linux-install.sh
+    sudo ./linux-install.sh
 
     # lein - http://leiningen.org/
     wget -qO- https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > ~/bin/lein
     chmod +x ~/bin/lein
 
     # apt packages
-    sudo apt install rxvt-unicode-256color thunar evince feh arandr lxappearance tmux
+    sudo apt install rxvt-unicode-256color thunar evince feh arandr lxappearance
