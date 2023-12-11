@@ -10,4 +10,5 @@
         :dependencies [;; [com.cemerick/pomegranate "1.1.0"]
                        ;; [gnuplot "0.1.0"]
                        ;; [vvvvalvalval/scope-capture "0.3.2"]
+                       ;; [djblue/portal "0.32.0"]
                        ]}}
