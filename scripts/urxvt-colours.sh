@@ -2,8 +2,9 @@
 
 # https://unix.stackexchange.com/questions/232881/urxvt-change-background-color-on-the-fly
 
+# see ~/.Xresources
 # URxvt.foreground:  #aaaaaa
-# URxvt.background:  #001111
+# URxvt.background:  #0a0d0e
 
 case $1 in
 
@@ -14,7 +15,7 @@ case $1 in
 
     d|dark)
         printf '\033]10;#aaaaaa\007'
-        printf '\033]11;#001111\007'
+        printf '\033]11;#0a0d0e\007'
         ;;
 
     *)
