@@ -8,11 +8,6 @@ path-add() {
 }
 
 path-add ~/bin
-path-add ~/.local/bin
-path-add ~/scripts
-path-add ~/opt/gradle/latest/bin
-path-add ~/opt/maven/latest/bin
-path-add ~/code/fennel
 
 function bash-reload () {
     . ~/.bash_aliases
